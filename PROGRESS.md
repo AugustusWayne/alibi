@@ -70,8 +70,40 @@ Start M1 (world generator + audit engine + scripted suspects). Read `PROJECT_RUL
 and `PROGRESS.md`, then **only** sections 4 and 5 of the spec. Write the tests
 first. No LLM calls in M1.
 
-## Naming discrepancy to settle
+## Carried into M1 (decided after the M0 gate)
 
-`PROJECT_RULES.md` and `BUILD_PLAYBOOK.md` both reference `ALIBI_SPEC.md`, but the file
-on disk is `FalkorDB Alibi Spec (1).md`. Left alone this session — renaming your
-spec is your call. Worth fixing before the repo goes public.
+**Q8 gets a `self_contradictions` column.** The spec 5.12 rule — a contradiction
+counts once per suspect who made either claim — flattens a suspect who
+contradicts *themselves* into the same score as one contradicted by someone
+else. Internal inconsistency is the stronger signal, so it gets its own column
+and a heavier weight in the single ranking function.
+
+This needs the other claim's speaker bound, which spec 5.12's query does not do
+(it matches `(c)-[x:CONTRADICTS]-(:Claim)` anonymously). **Checked against
+v4.22.1 after the gate — `CASE` inside `collect(DISTINCT ...)` works, and
+`collect` skips the nulls:**
+
+```cypher
+OPTIONAL MATCH (c)-[x:CONTRADICTS]-(o:Claim)-[:BY]->(os:Suspect)
+WITH s, collect(DISTINCT c.id) AS claim_ids,
+     collect(DISTINCT CASE WHEN os.id  = s.id THEN x.pair_id END) AS self_ids,
+     collect(DISTINCT CASE WHEN os.id <> s.id THEN x.pair_id END) AS other_ids
+```
+
+Fixture: s1 contradicts itself (c1/c2) and is contradicted by s2 (c3/c4).
+Result `s1 -> claims=3, self=1, other=1`; `s2 -> claims=1, self=0, other=1`.
+So this is a verified construct, not an assumption M1 has to take on faith.
+
+**A Hypothesis property test on `coverage()`**: for any random interval set,
+`covered + sum(gap lengths) == claim duration`. That is exactly the invariant
+that breaks when overlapping spans are summed without merging, which would
+silently promote a partial alibi to `SUPPORTED`. Adds `hypothesis` to
+`requirements.txt`.
+
+## Spec edits made after the gate
+
+- Renamed `FalkorDB Alibi Spec (1).md` -> **`ALIBI_SPEC.md`**, so the name
+  `PROJECT_RULES.md` and `BUILD_PLAYBOOK.md` use is the name on disk.
+- Patched the build-time `algo.SPpaths` snippet in 5.10 to the verified working
+  form (MATCH the Place nodes, pass bound node values), with a note recording
+  why. The audit-time query in 5.10 was already correct and is untouched.

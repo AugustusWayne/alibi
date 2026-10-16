@@ -359,11 +359,18 @@ Strict inequalities, per the time contract. `pair_id` exists so the scoreboard c
 *Build time, once per world:* compute the all-pairs travel matrix with `algo.SPpaths` over the floor plan (10–12 places, so at most ~144 one-off calls) and store it as `TRAVEL_TIME` edges in the case graph.
 
 ```cypher
-CALL algo.SPpaths({sourceNode: $la, targetNode: $lb, relTypes: ['ADJACENT_TO'],
+MATCH (la:Place {id:$a}), (lb:Place {id:$b})
+CALL algo.SPpaths({sourceNode: la, targetNode: lb, relTypes: ['ADJACENT_TO'],
                    weightProp: 'minutes', relDirection: 'both'})
 YIELD path, pathWeight
 RETURN pathWeight, [n IN nodes(path) | n.id] AS route
 ```
+
+> **Corrected at M0 (spike 8).** This snippet originally passed `sourceNode: $la`
+> as a string parameter, which FalkorDB v4.22.1 rejects with
+> `sourceNode and targetNode must be of type Node`. The `MATCH` prefix above is
+> required: `algo.SPpaths` takes bound node values, not ids. Verified working
+> form: `SPPATHS_MATCHED` in `scripts/spikes.py`.
 
 *Audit time:* a single query with no per-row procedure call.
 
