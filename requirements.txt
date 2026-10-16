@@ -6,3 +6,8 @@ uvicorn[standard]==0.38.0
 # Test and lint. Kept in one file because the gate (`make verify`) needs both.
 pytest==8.4.2
 ruff==0.14.1
+
+# Property-based testing. M1 uses it for the coverage() invariant
+# (covered + sum(gaps) == claim duration), which is the bug class that
+# summing unmerged spans would silently hide.
+hypothesis==6.140.3
