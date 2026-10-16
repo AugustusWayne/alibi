@@ -1,0 +1,8 @@
+# Runtime + test dependencies, pinned. Python 3.12+.
+falkordb==1.8.0
+fastapi==0.120.4
+uvicorn[standard]==0.38.0
+
+# Test and lint. Kept in one file because the gate (`make verify`) needs both.
+pytest==8.4.2
+ruff==0.14.1

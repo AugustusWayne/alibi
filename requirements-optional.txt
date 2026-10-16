@@ -1,0 +1,12 @@
+# Optional. MCP is an extension (spec section 3) and is on the cut list
+# (spec section 11), so it is NOT part of the core install. Spike 9 reports
+# SKIP unless this is installed:
+#
+#   .venv/bin/pip install -r requirements-optional.txt
+#
+# Version matters. fastmcp 4.x pulls mcp 2.x, which pulls starlette 1.8.0, and
+# fastapi 0.120.4 requires starlette<0.50 — installing it breaks the FastAPI
+# app outright (TypeError: Router.__init__() got an unexpected keyword argument
+# 'on_startup'). fastmcp 3.4.0 resolves to starlette 0.49.3 and coexists.
+fastmcp==3.4.0
+starlette<0.50,>=0.40

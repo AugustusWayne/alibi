@@ -1,0 +1,28 @@
+# FalkorDB for Alibi.
+#
+# The tag AND the digest are pinned on purpose. An unpinned tag means FalkorDB
+# behaviour can change under you mid-build, which would silently invalidate
+# every spike result recorded in PROGRESS.md. If you bump this, re-run
+# `make spikes` and re-record the table.
+#
+#   falkordb/falkordb:v4.22.1 — published 2026-10-15, multi-arch (arm64 + x64)
+#
+# Host ports default to 6379/3000, which is what a clean clone should get.
+# Override them in a local .env (see .env.example) when something else on the
+# machine already holds 6379 — the container port never changes.
+services:
+  falkordb:
+    image: falkordb/falkordb:v4.22.1@sha256:b0bdcac2cbaff989e77cb0610439b7a9289e86de033ccbbd4368b66fb680ae7a
+    container_name: alibi-falkordb
+    ports:
+      - "${FALKOR_HOST_PORT:-6379}:6379"   # redis protocol — the Python client talks here
+      - "${FALKOR_UI_PORT:-3000}:3000"     # FalkorDB browser UI, for eyeballing a mind graph
+    healthcheck:
+      test: ["CMD", "redis-cli", "PING"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+      start_period: 2s
+    # No volume, on purpose. Every graph in this project is regenerated from a
+    # seed, so a persisted /data would only let a stale graph leak into a later
+    # run and make a result irreproducible.
