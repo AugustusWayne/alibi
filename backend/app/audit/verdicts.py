@@ -15,9 +15,9 @@ what the UI is permitted to say:
                     depends on someone else's memory.
 
 None of the five means a claim is false, and none of them is a judgement about
-the speaker. A claim can be UNSUPPORTED because the witness blinked. Deception
-labels exist only in `backend/app/referee/`, only for scoring against ground
-truth, and never reach the API or the UI.
+the speaker. A claim can be UNSUPPORTED because the witness blinked. The
+ground-truth labels used for scoring live only in `backend/app/referee/` and
+never reach the API or the UI.
 """
 
 from __future__ import annotations

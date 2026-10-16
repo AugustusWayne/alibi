@@ -86,7 +86,8 @@ def decide(
 
     `evidence` is every row Q2 returned — overlapping facts about the subject,
     same-place and different-place together. It must be the whole set; passing
-    a filtered or truncated set is the one way to make this function lie.
+    a filtered or truncated set is the one way to make this function return a
+    verdict the evidence did not earn.
     """
     witnessed = [e for e in evidence if e["src"] == WITNESSED]
     supporting = [e for e in witnessed if e["same_place"]]
