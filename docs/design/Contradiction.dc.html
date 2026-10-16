@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>The impossible walk</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+body { margin: 0; font-family: Archivo, sans-serif; }
+a { color: #1C4E5A; } a:hover { color: #16242B; }
+</style>
+</helmet>
+
+<div style="width: 1280px; height: 640px; box-sizing: border-box; padding: 40px 48px; background: #E9EDEC; color: #16242B; display: flex; flex-direction: column">
+
+  <div style="display: flex; align-items: baseline; gap: 16px; border-bottom: 1px solid #16242B; padding-bottom: 12px">
+    <h2 style="margin: 0; font-size: 23px; font-weight: 500; letter-spacing: -0.01em">The impossible walk</h2>
+    <p style="margin: 0; font-size: 13px; color: #5A6B70">A weighted shortest path decides this, and the route is drawn rather than summarised.</p>
+  </div>
+
+  <div style="display: flex; gap: 64px; padding-top: 28px">
+
+    <div style="width: 520px; flex: none">
+      <div style="position: relative; width: 520px; height: 280px">
+
+        <div style="position: absolute; left: 100px; top: 148px; width: 40px; height: 3px; background: #1C4E5A"></div>
+        <div style="position: absolute; left: 240px; top: 148px; width: 40px; height: 3px; background: #1C4E5A"></div>
+        <div style="position: absolute; left: 380px; top: 148px; width: 40px; height: 3px; background: #1C4E5A"></div>
+        <div style="position: absolute; left: 188px; top: 80px; width: 1px; height: 45px; background: #C3CECB"></div>
+        <div style="position: absolute; left: 328px; top: 175px; width: 1px; height: 45px; background: #C3CECB"></div>
+
+        <div style="position: absolute; left: 106px; top: 126px; font-family: 'Geist Mono', monospace; font-size: 10.5px; color: #1C4E5A">3</div>
+        <div style="position: absolute; left: 246px; top: 126px; font-family: 'Geist Mono', monospace; font-size: 10.5px; color: #1C4E5A">4</div>
+        <div style="position: absolute; left: 386px; top: 126px; font-family: 'Geist Mono', monospace; font-size: 10.5px; color: #1C4E5A">2</div>
+        <div style="position: absolute; left: 194px; top: 96px; font-family: 'Geist Mono', monospace; font-size: 10.5px; color: #5A6B70">2</div>
+        <div style="position: absolute; left: 334px; top: 191px; font-family: 'Geist Mono', monospace; font-size: 10.5px; color: #5A6B70">3</div>
+
+        <div style="position: absolute; left: 0; top: 125px; width: 100px; height: 50px; border: 2px solid #1C4E5A; box-sizing: border-box; background: #1C4E5A; color: #E9EDEC; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 500">gallery</div>
+        <div style="position: absolute; left: 140px; top: 125px; width: 100px; height: 50px; border: 2px solid #1C4E5A; box-sizing: border-box; display: flex; align-items: center; justify-content: center; font-size: 13px">hall</div>
+        <div style="position: absolute; left: 280px; top: 125px; width: 100px; height: 50px; border: 2px solid #1C4E5A; box-sizing: border-box; display: flex; align-items: center; justify-content: center; font-size: 13px">landing</div>
+        <div style="position: absolute; left: 420px; top: 125px; width: 100px; height: 50px; border: 2px solid #1C4E5A; box-sizing: border-box; background: #1C4E5A; color: #E9EDEC; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 500">study</div>
+        <div style="position: absolute; left: 140px; top: 30px; width: 100px; height: 50px; border: 1px solid #C3CECB; box-sizing: border-box; display: flex; align-items: center; justify-content: center; font-size: 13px; color: #5A6B70">pantry</div>
+        <div style="position: absolute; left: 280px; top: 220px; width: 100px; height: 50px; border: 1px solid #C3CECB; box-sizing: border-box; display: flex; align-items: center; justify-content: center; font-size: 13px; color: #5A6B70">stair</div>
+
+      </div>
+      <p style="margin: 18px 0 0; font-size: 13px; line-height: 1.55; color: #3D4F55; max-width: 460px">Heavy edges are the shortest route the floor plan allows. Thin edges exist but do not help.</p>
+    </div>
+
+    <div style="flex: 1; min-width: 0">
+
+      <div style="position: relative; height: 16px; margin-bottom: 4px">
+        <div style="position: absolute; left: 0; font-family: 'Geist Mono', monospace; font-size: 10.5px; color: #5A6B70">21:00</div>
+        <div style="position: absolute; left: 50%; font-family: 'Geist Mono', monospace; font-size: 10.5px; color: #5A6B70">21:15</div>
+        <div style="position: absolute; right: 0; font-family: 'Geist Mono', monospace; font-size: 10.5px; color: #5A6B70">21:30</div>
+      </div>
+
+      <div style="position: relative; height: 34px; background: #DCE3E1; background-image: repeating-linear-gradient(to right, #C3CECB 0 1px, rgba(0,0,0,0) 1px 16.667%)">
+        <div style="position: absolute; left: 0%; width: 33.3%; top: 5px; height: 24px; background: #1C4E5A"></div>
+        <div style="position: absolute; left: 50%; width: 30%; top: 5px; height: 24px; background: #1C4E5A"></div>
+        <div style="position: absolute; left: 33.3%; width: 16.7%; top: 5px; height: 24px; border-top: 1px dashed #8A2B20; border-bottom: 1px dashed #8A2B20; box-sizing: border-box"></div>
+      </div>
+
+      <div style="display: flex; gap: 32px; padding: 14px 0 26px">
+        <p style="margin: 0; font-size: 13px; line-height: 1.5; color: #3D4F55">left the gallery<br><span style="font-family: 'Geist Mono', monospace; font-size: 14px; color: #16242B">21:10</span></p>
+        <p style="margin: 0; font-size: 13px; line-height: 1.5; color: #3D4F55">reached the study<br><span style="font-family: 'Geist Mono', monospace; font-size: 14px; color: #16242B">21:15</span></p>
+      </div>
+
+      <div style="border-top: 1px solid #C3CECB; padding-top: 24px">
+
+        <div style="display: flex; align-items: center; gap: 16px; padding-bottom: 20px">
+          <div style="width: 118px; flex: none; font-size: 13px; color: #3D4F55">time available</div>
+          <div style="position: relative; width: 100px; flex: none; height: 14px">
+            <div style="position: absolute; left: 0; top: 6px; right: 0; height: 2px; background: #16242B"></div>
+            <div style="position: absolute; left: 0; top: 0; width: 2px; height: 14px; background: #16242B"></div>
+            <div style="position: absolute; right: 0; top: 0; width: 2px; height: 14px; background: #16242B"></div>
+          </div>
+          <div style="font-family: 'Geist Mono', monospace; font-size: 14px">5 min</div>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 16px; padding-bottom: 22px">
+          <div style="width: 118px; flex: none; font-size: 13px; color: #3D4F55">shortest path</div>
+          <div style="position: relative; width: 180px; flex: none; height: 14px">
+            <div style="position: absolute; left: 0; top: 6px; right: 0; height: 2px; background: #16242B"></div>
+            <div style="position: absolute; left: 0; top: 0; width: 2px; height: 14px; background: #16242B"></div>
+            <div style="position: absolute; right: 0; top: 0; width: 2px; height: 14px; background: #16242B"></div>
+          </div>
+          <div style="font-family: 'Geist Mono', monospace; font-size: 14px">9 min</div>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 16px; border-top: 2px solid #8A2B20; padding-top: 16px">
+          <div style="width: 118px; flex: none; font-size: 15px; font-weight: 500; color: #8A2B20">short by</div>
+          <div style="position: relative; width: 80px; flex: none; height: 14px">
+            <div style="position: absolute; left: 0; top: 6px; right: 0; height: 3px; background: #8A2B20"></div>
+            <div style="position: absolute; left: 0; top: 0; width: 3px; height: 14px; background: #8A2B20"></div>
+            <div style="position: absolute; right: 0; top: 0; width: 3px; height: 14px; background: #8A2B20"></div>
+          </div>
+          <div style="font-family: 'Geist Mono', monospace; font-size: 17px; font-weight: 500; color: #8A2B20">4 min</div>
+        </div>
+
+      </div>
+
+      <p style="margin: 26px 0 0; font-size: 13.5px; line-height: 1.55; color: #16242B; max-width: 470px">Both statements cannot hold. The graph says which pair, by how much, and along which corridors &mdash; so the detective asks about the four minutes rather than guessing.</p>
+
+    </div>
+
+  </div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":640}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>
