@@ -1,109 +1,80 @@
 # Progress
 
-This file is the handoff between sessions. It survives context compaction when
-chat does not. the coding assistant: update it at the end of every session, before you stop.
-Keep it under 80 lines — delete detail that no longer matters.
+The handoff between sessions; it survives context compaction when chat does
+not. Update it at the end of every session, before stopping. Keep it under 80
+lines — delete detail that no longer matters.
 
 ## Current state
 
-- **Milestone:** M0 — spikes and infrastructure. **Gate passed.**
-- **Last verified by:** 2026-10-16, `make up` + `make spikes` (9/9 PASS) + `make verify` (VERIFY OK).
-- FalkorDB `v4.22.1` (module graph v42201), client `falkordb 1.8.0`, Python 3.12.1.
-- Next: M1. Nothing in M1 is blocked by a spike.
+- **Milestone:** M1 — world generator, mind writer, audit engine. **Gate passed.**
+- **Last verified by:** 2026-10-16, `make verify` → ruff clean, **61 passed**, `VERIFY OK`.
+- Zero LLM calls in M1. No xfail, no skip, no mocked graph in the suite.
+- FalkorDB `v4.22.1`, `falkordb 1.8.0`, Python 3.12.1, host port **6380**. Next: M2.
 
-## Spike results (spec section 12)
+## What M1 built
 
-All nine run against FalkorDB v4.22.1. **No fallback was taken — every assumption holds.**
+`audit/` — `time_contract`, `coverage` (5.4 verbatim, merges before summing),
+`verdicts`, `decide` (the 5.5 table), `engine` (gather → decide → materialize).
+`minds/` — Q1 writes, Q2 gather, recall; `MindAccess` binds one mind at
+construction, so a suspect cannot express a request for another's memory.
+`case/` — Q4–Q8, 5.6 materialization, SPpaths matrix, `scoreboard.py` (the one
+ranking function). `world/` — `plan_world` (pure data) + `generate` (writes
+world/minds/case). `agents/scripted.py` — `ScriptedSuspect` +
+`FabricationPolicy`, no LLM.
 
-| # | Assumption | Result | Note / fallback taken |
-|---|---|---|---|
-| 1 | MERGE rel with property map, then SET | **PASS** | MERGE created 1, re-MERGE 0, SET readable. No duplicate rel. |
-| 2 | MERGE ... ON CREATE SET on nodes | **PASS** | Created once; ON CREATE did not re-fire and did not overwrite a mutated field. |
-| 3 | String concat in MERGE property map | **PASS** | `a.id + '\|' + b.id` = `c1\|c2` in-query. No Python fallback needed. |
-| 4 | collect(DISTINCT) + size(), id(rel) | **PASS** | Q8 verbatim: (claims=2, contradictions=1, gaps=2). Contradiction counted once from both endpoints. `id()` works on nodes *and* relationships inside `collect(DISTINCT)`. |
-| 5 | Boolean expression in RETURN projection | **PASS** | `(l.id = $place)` returns a real Python `bool`; unmatched OPTIONAL MATCH yields `None`. |
-| 6 | Client params, GRAPH.RO_QUERY, graph.copy() | **PASS** | params ok for str/int/float/bool/null/list; `ro_query` **refuses writes** (ResponseError) so it is a real read path; `copy()` clones and the clone is independent. |
-| 7 | ~10 mind graphs + case graph concurrently | **PASS** | 10 minds x 200 facts + 140 claims = 2140 writes in 0.10s wall (~20k rows/s), 11 threads, 11 connections, all counts exact. Throughput is not a risk. |
-| 8 | algo.SPpaths standalone per pair, path shape | **PASS** | p0→p9 weight 21 via `['p0','p1','p2','p7','p8','p9']`; 90 ordered pairs in 0.04s (0.5ms/call); symmetric under `relDirection:'both'`. **See spec correction below.** |
-| 9 | FastMCP round trip | **PASS** | fastmcp 3.4.0 in-memory client/server round trip. **Version-sensitive, see below.** the model vendor-SDK half NOT tested (needs an API key; M3). |
+All Cypher is in `**/queries.py`: 42 named constants, each with a one-line
+comment. No `LIMIT` in any query. The deception vocabulary appears nowhere
+outside `referee/` (which does not exist yet).
 
-### Two findings that change what M1/M3 must write
+Seed 7777 (11 places, 7 people, 146 facts, 42 transmissions) gives **SUPPORTED
+95, HEARSAY 23, INDETERMINATE 6, CONTRADICTED 1** over 125 claims, with 6
+exclusive-presence and 4 impossible-travel pairs. The innocent-repeater moment
+is asserted by a test: `p2 says p4 at hall [102,122) heard from p4` → `HEARSAY`.
 
-1. **Spec 5.10's `algo.SPpaths` snippet does not run as written.** `sourceNode: $la`
-   with a string parameter fails: `sourceNode and targetNode must be of type Node`.
-   M1 must `MATCH (a:Place {id:$a}), (b:Place {id:$b})` first and pass the bound
-   node values. Working form is in `scripts/spikes.py:SPPATHS_MATCHED`. This does
-   not affect the design — the travel matrix is still precomputed once per world.
-2. **fastmcp 4.x breaks FastAPI.** It pulls `mcp` 2.x → `starlette` 1.8.0, while
-   `fastapi` 0.120.4 requires `starlette<0.50`; importing the app then dies with
-   `TypeError: Router.__init__() got an unexpected keyword argument 'on_startup'`.
-   `fastmcp==3.4.0` + `starlette<0.50` coexist. Pinned in `requirements-optional.txt`.
-   MCP is still an extension and still on the cut list.
+## Two findings M2 must know
 
-## Decisions made
+1. **The scoreboard's top row is not an accusation, and here it is often not the
+   culprit.** On seed 7777 the honest repeater `p2` outscores the culprit `p4`
+   (16.0 vs 15.0): repeating the fabrication in good faith genuinely leaves `p2`
+   with testimony its own memory cannot account for. Correct for a grounding
+   measure, and **not** to be fixed by retuning weights — that is the rigged
+   benchmark spec 8.4 warns against. Telling "carries a contradiction" from
+   "originated it" is what the provenance trace (5.7) is for, and this is now the
+   strongest argument for building it. The ranking docstring says so; keep it.
+2. **`UNSUPPORTED` does not arise in a generated world**, since every scripted
+   claim derives from some memory. It is demonstrated against a hand-built graph
+   in `test_audit.py` and is reachable in the engine. LLM suspects (M3) would
+   produce it naturally; if M3 is cut, the eval should say so rather than imply
+   the state is dead.
 
-- Backend is Python 3.12 + FastAPI. Frontend React + TS + Vite, no Tailwind.
-- **Image pinned by tag AND digest** in `docker-compose.yml`:
-  `falkordb/falkordb:v4.22.1@sha256:b0bdcac2cbaff989e77cb0610439b7a9289e86de033ccbbd4368b66fb680ae7a`.
-  Bumping it means re-running `make spikes` and re-recording this table.
-- **Host port is configurable, default 6379.** This machine already runs another
-  project's redis on 6379, so a gitignored `.env` publishes FalkorDB on **6380**
-  (`.env.example` is committed). The Makefile `-include .env` + `export` so docker
-  compose and the Python client can never disagree about the port.
-- **Makefile uses literal tabs, not `.RECIPEPREFIX`.** macOS ships GNU Make 3.81,
-  where `.RECIPEPREFIX` is a hard syntax error. The original file said to do this.
-- MCP left out of `requirements.txt`; it is an extension, in `requirements-optional.txt`.
+## Decisions made (do not re-litigate)
+
+- **`Gap` nodes go to the partial-support row only** (5.5 literal). An
+  `UNSUPPORTED` claim records `uncovered` but gets no `Gap` nodes — it is already
+  its own signal, so Q8's gaps mean "holes in claims that had some backing".
+- **Hearsay support is materialized as `SUPPORTED_BY`** with `src='hearsay'` on
+  the Evidence shadow, carrying `heard_from` and the transmission tick. That
+  keeps a HEARSAY verdict walkable without the case graph holding a fact.
+- **`plan_world` is pure data, `generate` writes it**, so determinism is provable
+  by diffing two plans. `generate` cross-checks its own Floyd-Warshall matrix
+  against the graph's `algo.SPpaths` matrix and raises on disagreement.
+- **The claim cap samples the evening evenly, it does not truncate it.** Taking
+  the earliest N dropped the back half of every suspect's evening and was
+  silently losing the innocent-repeater claim. `testify(window=…)` is never
+  capped — an interview about a span deserves every claim bearing on it.
+- Q8 splits `self_contradictions` / `other_contradictions`, weighted 5.0 / 2.0 /
+  1.0 (gaps). The fixture M0 recorded is now a test.
 
 ## Known issues
 
-- `make spikes` run *without* `make` (so without the exported `FALKOR_PORT`) would
-  dial 6379 and reach the other project's plain redis. `scripts/spikes.py` now
-  preflights for the graph module and exits 2 with instructions rather than
-  reporting nine confusing failures. Same hazard applies to any future script.
-- `backend/tests/test_time_contract.py` is 4 xfail(strict=True). M1 implements
-  `backend/app/audit/time_contract.py` and **deletes the markers** — strict means
-  the suite goes red the moment they pass, so they cannot be silently left on.
+- A bare `pytest` dials 6379 and hits another project's redis. Use `make test`;
+  `conftest.py` fails with that instruction rather than skipping.
+- `scripts/{seed,run_case,run_eval,record_demo}.py` do not exist; `make eval`
+  and `make demo` fail until M4/M5.
+- This branch was fast-forwarded onto M0's branch (tag `m0`) at the start of M1.
 
 ## Next action
 
-Start M1 (world generator + audit engine + scripted suspects). Read `PROJECT_RULES.md`
-and `PROGRESS.md`, then **only** sections 4 and 5 of the spec. Write the tests
-first. No LLM calls in M1.
-
-## Carried into M1 (decided after the M0 gate)
-
-**Q8 gets a `self_contradictions` column.** The spec 5.12 rule — a contradiction
-counts once per suspect who made either claim — flattens a suspect who
-contradicts *themselves* into the same score as one contradicted by someone
-else. Internal inconsistency is the stronger signal, so it gets its own column
-and a heavier weight in the single ranking function.
-
-This needs the other claim's speaker bound, which spec 5.12's query does not do
-(it matches `(c)-[x:CONTRADICTS]-(:Claim)` anonymously). **Checked against
-v4.22.1 after the gate — `CASE` inside `collect(DISTINCT ...)` works, and
-`collect` skips the nulls:**
-
-```cypher
-OPTIONAL MATCH (c)-[x:CONTRADICTS]-(o:Claim)-[:BY]->(os:Suspect)
-WITH s, collect(DISTINCT c.id) AS claim_ids,
-     collect(DISTINCT CASE WHEN os.id  = s.id THEN x.pair_id END) AS self_ids,
-     collect(DISTINCT CASE WHEN os.id <> s.id THEN x.pair_id END) AS other_ids
-```
-
-Fixture: s1 contradicts itself (c1/c2) and is contradicted by s2 (c3/c4).
-Result `s1 -> claims=3, self=1, other=1`; `s2 -> claims=1, self=0, other=1`.
-So this is a verified construct, not an assumption M1 has to take on faith.
-
-**A Hypothesis property test on `coverage()`**: for any random interval set,
-`covered + sum(gap lengths) == claim duration`. That is exactly the invariant
-that breaks when overlapping spans are summed without merging, which would
-silently promote a partial alibi to `SUPPORTED`. Adds `hypothesis` to
-`requirements.txt`.
-
-## Spec edits made after the gate
-
-- Renamed `FalkorDB Alibi Spec (1).md` -> **`ALIBI_SPEC.md`**, so the name
-  `PROJECT_RULES.md` and `BUILD_PLAYBOOK.md` use is the name on disk.
-- Patched the build-time `algo.SPpaths` snippet in 5.10 to the verified working
-  form (MATCH the Place nodes, pass bound node values), with a note recording
-  why. The audit-time query in 5.10 was already correct and is untouched.
+Start M2 (case graph API + detective tools, spec 5.7 and section 7). Read
+`PROJECT_RULES.md` and this file, then only the spec sections M2 needs. The provenance
+trace is the priority — see finding 1.
