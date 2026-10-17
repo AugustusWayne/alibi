@@ -4,8 +4,9 @@
 it exists so the referee can score the audit against the truth, and so the
 `PlantedFabrication` records make ground-truth scoring possible without guessing.
 
-**Only the generator creates provenance** (PROJECT_RULES.md rule 5). Every write here
-belongs to the generator. The audit engine imports nothing from this module.
+**Only the generator creates provenance** (project rules, rule 5). Every write
+here belongs to the generator. The audit engine imports nothing from this
+module.
 """
 
 # A room on the floor plan.

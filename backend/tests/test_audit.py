@@ -280,7 +280,7 @@ def test_touching_memory_does_not_support_a_claim(world):
 def test_audit_never_invents_a_link(world):
     """An UNSUPPORTED claim gets no evidence edges of any kind.
 
-    The audit materializes only what it proved (PROJECT_RULES.md rule 5). A claim
+    The audit materializes only what it proved (project rules, rule 5). A claim
     nothing accounts for must end up with an empty path, not a manufactured one.
     """
     world.claim(claim_id="c1", t0=0, t1=15)

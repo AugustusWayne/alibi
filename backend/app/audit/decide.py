@@ -97,7 +97,7 @@ def decide(
     over zero examined minutes. That is the same vacuous arithmetic as
     summing unmerged spans. A malformed window is a data error, not an
     epistemic state, so it is raised loudly rather than given one of the five
-    verdicts (PROJECT_RULES.md rule 8).
+    verdicts (project rules, rule 8).
     """
     if claim_t0 >= claim_t1:
         raise ValueError(

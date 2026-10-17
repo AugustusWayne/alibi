@@ -14,8 +14,8 @@ The audit is audited against the speaker's *own* memory. That is the whole
 idea: the question is never "is this true" but "does this agent's own record
 account for what it said".
 
-**The audit never invents a link** (PROJECT_RULES.md rule 5). Every edge written here
-corresponds to a fact the gather step actually returned.
+**The audit never invents a link** (project rules, rule 5). Every edge written
+here corresponds to a fact the gather step actually returned.
 """
 
 from __future__ import annotations
@@ -64,7 +64,7 @@ class AuditEngine:
 
         The engine is part of the referee's trust boundary, not an agent tool:
         it is the one component that legitimately opens a mind by name, and it
-        is never exposed to a suspect (PROJECT_RULES.md rule 6).
+        is never exposed to a suspect (project rules, rule 6).
         """
         if agent not in self._minds:
             self._minds[agent] = MindAccess(self._db, self._seed, agent)

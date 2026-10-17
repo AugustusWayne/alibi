@@ -515,7 +515,7 @@ def test_the_scoring_vocabulary_does_not_escape_the_referee_package():
 
 
 def test_the_eval_package_contains_no_inline_cypher():
-    """All Cypher lives in `**/queries.py` (project rules), and the eval adds none.
+    """All Cypher lives in `**/queries.py` (project rules); the eval adds none.
 
     It scores through the existing readers, so there is nothing to put in a
     queries.py — and this asserts it stayed that way rather than growing a

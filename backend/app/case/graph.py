@@ -55,7 +55,7 @@ class CaseGraph:
 
         Raises if a pair is unreachable: a disconnected floor plan would make
         the travel check silently vacuous for those pairs, and a world
-        generator that produced one is broken (PROJECT_RULES.md rule 8).
+        generator that produced one is broken (project rules, rule 8).
         """
         written = 0
         for a, b in permutations(sorted(place_ids), 2):

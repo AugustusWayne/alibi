@@ -15,8 +15,9 @@ unsorted set or a dict whose insertion order depends on anything but the seed.
 Every collection that feeds a decision is sorted first. The whole demo and the
 whole benchmark replay exactly because of this.
 
-**Only the generator creates provenance** (PROJECT_RULES.md rule 5). Transmissions,
-hearsay facts and `PlantedFabrication` records are written here and nowhere
+**Only the generator creates provenance** (project rules, rule 5).
+Transmissions, hearsay facts and `PlantedFabrication` records are written here
+and nowhere
 else. The audit engine reads them; it never adds one.
 """
 

@@ -1,7 +1,7 @@
 """Cypher for the referee. Reads a mind other than the caller's own.
 
-This is the only module permitted to do that (PROJECT_RULES.md rule 6). Nothing here
-is reachable from a tool exposed to an agent: the referee is not an agent, it
+This is the only module permitted to do that (project rules, rule 6). Nothing
+here is reachable from a tool exposed to an agent: the referee is not an agent, it
 is the scoring and provenance authority that stands outside the case.
 
 `Transmission.src_fact_id` points at a fact in *another* graph. FalkorDB graphs

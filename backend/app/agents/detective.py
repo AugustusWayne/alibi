@@ -4,7 +4,7 @@ Seven tools over the **public case graph**: `interview`, `list_contradictions`,
 `list_gaps`, `check_travel`, `rank_suspects`, `polygraph`, `accuse`. The graph
 computes every check; the model only chooses what to ask.
 
-**Why none of these breaks the isolation rule (PROJECT_RULES.md rule 6).** Several
+**Why none of these breaks the isolation rule (project rules, rule 6).** Several
 take a `suspect` argument, which is a party named in the public case file, not
 a memory store. The seed is bound when this object is constructed, by the
 orchestrator; the suspects are a roster bound the same way. No parameter here
@@ -53,7 +53,7 @@ class BudgetExhausted(RuntimeError):
 
     Raised rather than answered with an empty report. An empty report would be
     indistinguishable from a claim with nothing behind it, which is the one
-    confusion this system cannot afford (PROJECT_RULES.md rule 8).
+    confusion this system cannot afford (project rules, rule 8).
     """
 
 

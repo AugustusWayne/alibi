@@ -42,7 +42,7 @@ def load_weights(path: Path | None = None) -> dict[str, float]:
 
     Raises if a term is missing rather than defaulting it to zero. A weight
     that quietly vanished would drop a whole signal out of the ranking while
-    every score still looked plausible (PROJECT_RULES.md rule 8).
+    every score still looked plausible (project rules, rule 8).
     """
     source = path or WEIGHTS_PATH
     data = json.loads(source.read_text())["weights"]

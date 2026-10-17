@@ -216,7 +216,7 @@ def test_the_polygraph_refuses_a_suspect_who_did_not_make_the_claim(case):
 
     The claim's own public `BY` edge decides that. Passing someone else's name
     is refused rather than quietly honoured, so there is no reading of this
-    tool in which the detective chooses a mind (PROJECT_RULES.md rule 6).
+    tool in which the detective chooses a mind (project rules, rule 6).
     """
     target = _hearsay_claims(case.case)[0]
     other = next(s["id"] for s in case.case.suspects() if s["id"] != target["speaker"])
@@ -237,7 +237,7 @@ def test_the_polygraph_refuses_a_claim_that_is_not_in_the_case(case):
 
 
 def test_no_detective_tool_takes_a_graph_name_or_a_seed(case):
-    """PROJECT_RULES.md rule 6, asserted against the actual signatures.
+    """Project rules, rule 6, asserted against the actual signatures.
 
     A suspect id is a party in the public case file, not a memory store: the
     tools resolve it against a roster bound at construction, and no parameter

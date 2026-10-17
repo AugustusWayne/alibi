@@ -9,7 +9,7 @@ repeats until the chain resolves or fails.
 **Why only the referee can do this.** `src_fact_id` names a fact in another
 graph, and FalkorDB graphs have no edges between them. Resolving the reference
 means switching graphs, which no tool exposed to an agent is permitted to do
-(PROJECT_RULES.md rule 6). The isolation is the architecture; the referee standing
+(project rules, rule 6). The isolation is the architecture; the referee standing
 outside it is what makes the trace meaningful rather than a self-report.
 
 **What the trace is careful not to claim.** An origin is the end of the chain
@@ -17,8 +17,8 @@ the referee can *see*. `CHAIN_BROKEN` is ambiguous — the cited agent may have
 had nothing to record, or may never have recorded what it was told — so it is
 reported as its own state and never as an origin. See `terminals.py`.
 
-**Nothing here invents provenance** (PROJECT_RULES.md rule 5). The walk reads links
-the generator created and records what it found. Where a link is missing, that
+**Nothing here invents provenance** (project rules, rule 5). The walk reads
+links the generator created and records what it found. Where a link is missing, that
 absence is the finding.
 """
 

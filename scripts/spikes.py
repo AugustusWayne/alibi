@@ -4,11 +4,12 @@ Each numbered spike runs the real query shape the engine will depend on, against
 a throwaway graph, and prints PASS or FAIL. On failure it prints the exact error
 text and the fallback recorded in the spec, and nothing is worked around here:
 an assumption that does not hold is a planning input, not a bug to patch
-(PROJECT_RULES.md: "On a spike or assumption failure, stop and report").
+(the project rules: "On a spike or assumption failure, stop and report").
 
-The broad `except` in the runner is deliberate and is the opposite of PROJECT_RULES.md
-rule 8: probing is the whole purpose of this file, and every caught error is
-re-printed in full rather than swallowed. No production code may do this.
+The broad `except` in the runner is deliberate and is the opposite of the
+project rules' rule 8: probing is the whole purpose of this file, and every
+caught error is re-printed in full rather than swallowed. No production code
+may do this.
 
     make spikes            # all spikes
     python -m scripts.spikes --only 3 8
@@ -700,7 +701,7 @@ def spike_fastmcp_round_trip(ctx: Ctx) -> str:
 
     @server.tool
     def recall(subject: str, t0: int, t1: int) -> list[dict]:
-        """Mind-graph recall. Note: no graph name, no agent id (PROJECT_RULES.md rule 6)."""
+        """Mind-graph recall. No graph name, no agent id (project rules, 6)."""
         return [{"subject": subject, "t0": t0, "t1": t1, "src": "witnessed"}]
 
     async def round_trip():

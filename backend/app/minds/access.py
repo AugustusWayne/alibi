@@ -5,10 +5,11 @@ there is no edge from one mind to another; what this class adds is that the
 *choice* of graph is made here, at construction, and never from an argument
 supplied by a caller further down.
 
-PROJECT_RULES.md rule 6: no tool exposed to an agent accepts a graph name or an agent
-id. A scripted or LLM suspect is handed a `MindAccess` already bound to its own
-mind, so "read someone else's memory" is not a malformed request — it is not a
-request the type system can express. Only the referee constructs a second one.
+Project rules, rule 6: no tool exposed to an agent accepts a graph name or an
+agent id. A scripted or LLM suspect is handed a `MindAccess` already bound to
+its own mind, so "read someone else's memory" is not a malformed request — it
+is not a request the type system can express. Only the referee constructs a
+second one.
 """
 
 from __future__ import annotations
@@ -191,8 +192,8 @@ def _rows(result: Any) -> list[dict]:
     """Zip a FalkorDB result set into dicts keyed by the RETURN aliases.
 
     Deliberately not wrapped in try/except. A query that fails must raise
-    (PROJECT_RULES.md rule 8) — an audit that silently sees no evidence would report
-    UNSUPPORTED for a claim it never actually examined, which is the worst
+    (project rules, rule 8) — an audit that silently sees no evidence would
+    report UNSUPPORTED for a claim it never actually examined, which is the worst
     failure this system can have.
     """
     header = [h[1] if isinstance(h, (list, tuple)) else h for h in result.header]

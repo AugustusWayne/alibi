@@ -1,7 +1,7 @@
 """The five verdict states, and what each one is allowed to mean.
 
-**A verdict describes grounding, not intent** (PROJECT_RULES.md rule 2). Every string
-in this module is user-visible, so read these definitions as the contract for
+**A verdict describes grounding, not intent** (project rules, rule 2). Every
+string in this module is user-visible, so read these definitions as the contract for
 what the UI is permitted to say:
 
 - `SUPPORTED`     — the speaker's own witnessed memory accounts for the claim.
