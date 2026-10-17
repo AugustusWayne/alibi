@@ -1,0 +1,24 @@
+/* DESIGN_BRIEF.md section 3, defined once. Sixteen colours, fixed. No component
+   invents a colour, and there is no light theme. */
+
+:root {
+  --black: #000000; /* the ground, outlines, the void */
+  --night: #1d2b53; /* window fill */
+  --plum: #7e2553;
+  --forest: #008751;
+  --brown: #ab5236;
+  --stone: #5f574f; /* corridors, dashed outlines; never small text */
+  --silver: #c2c3c7; /* secondary text, the recorder body */
+  --cream: #fff1e8; /* grounded evidence, primary text */
+  --red: #ff004d; /* conflict: marks, and text on black only */
+  --orange: #ffa300; /* hearsay */
+  --yellow: #ffec27; /* the playhead, focus, window titles */
+  --lime: #00e436; /* the recorder's LCD and lamps */
+  --sky: #29adff;
+  --lav: #83769c; /* inner window rule */
+  --pink: #ff77a8;
+  --peach: #ffccaa; /* skin */
+
+  --pixel: "Press Start 2P", monospace; /* labels, names, numerals, keys */
+  --text: "VT323", monospace; /* sentences */
+}

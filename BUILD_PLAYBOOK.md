@@ -1,4 +1,4 @@
-# Driving the coding assistant on Alibi — a playbook
+# Driving an AI coding assistant on Alibi — a playbook
 
 Hour 0 was Oct 15, 00:01 IST. This playbook was written at hour 14.4.
 
@@ -6,7 +6,7 @@ Hour 0 was Oct 15, 00:01 IST. This playbook was written at hour 14.4.
 
 ## 1. The operating model
 
-the coding assistant is very good at producing code and bad at knowing when it is done.
+The assistant is very good at producing code and bad at knowing when it is done.
 **You supply "done."** That is the whole job.
 
 So the unit of work is not a task, it is a **gate**: a command whose output you
@@ -26,8 +26,8 @@ Three things follow from the hackathon rules, and they shape everything:
 And one thing follows from how the tool works:
 
 - **Chat messages do not survive context compaction. Files do.** Over 80 hours
-  the coding assistant will compact many times. Anything you need to still be true at hour
-  70 goes in `PROJECT_RULES.md`, `PROGRESS.md` or a spec — never in a chat message.
+  The assistant will compact many times. Anything you need to still be true at hour
+  70 goes in the project rules, `PROGRESS.md` or a spec — never in a chat message.
 
 ---
 
@@ -36,15 +36,15 @@ And one thing follows from how the tool works:
 ```bash
 mkdir alibi && cd alibi && git init
 # drop in: ALIBI_SPEC.md, DESIGN_BRIEF.md, BUILD_PLAYBOOK.md
-# from bootstrap/: PROJECT_RULES.md, PROGRESS.md, AI-USE.md, Makefile
+# from bootstrap/: the project rules, PROGRESS.md, AI-USE.md, Makefile
 mkdir -p docs/design docs/explain
 # copy the six artboard .dc.html files into docs/design/
 git add -A && git commit -m "spec, design brief, rules, bootstrap"
 ```
 
-Commit before the coding assistant touches anything. You want a clean point to roll back to.
+Commit before the assistant touches anything. You want a clean point to roll back to.
 
-`PROJECT_RULES.md` is deliberately short. It is loaded into every session, so it is
+The project rules file is deliberately short. It is loaded into every session, so it is
 precious context — if it were 400 lines it would get skimmed. It states the rules
 and points at the specs for detail. Resist the urge to grow it; add to
 `PROGRESS.md` instead.
@@ -59,7 +59,7 @@ cheap to abandon.
 
 Every session follows the same shape:
 
-1. the coding assistant reads `PROJECT_RULES.md`, then `PROGRESS.md`, then **only the spec
+1. The assistant reads the project rules, then `PROGRESS.md`, then **only the spec
    sections that milestone needs**. Reading the whole 722-line spec every session
    wastes the context you need for code.
 2. It states the plan in a few lines. You read it. If it is building more than the
@@ -80,7 +80,7 @@ build, and what the gate is.
 
 ### M0 — spikes and infrastructure
 
-> Read `PROJECT_RULES.md`, then `ALIBI_SPEC.md` in full. This is the only session where
+> Read the project rules, then `ALIBI_SPEC.md` in full. This is the only session where
 > you read all of it.
 >
 > Implement M0 only: `docker-compose.yml` with a **pinned** falkordb image tag, a
@@ -100,7 +100,7 @@ build, and what the gate is.
 
 ### M1 — world and audit engine (the important one)
 
-> Read `PROJECT_RULES.md` and `PROGRESS.md`. Read **only** sections 4 and 5 of
+> Read the project rules and `PROGRESS.md`. Read **only** sections 4 and 5 of
 > `ALIBI_SPEC.md`.
 >
 > Implement M1: the deterministic world generator, the mind writer, and the audit
@@ -122,7 +122,7 @@ proves conflict beats support.
 
 ### M2 — provenance
 
-> Read `PROJECT_RULES.md` and `PROGRESS.md`. Read only sections 4.2 and 5.7 of
+> Read the project rules and `PROGRESS.md`. Read only sections 4.2 and 5.7 of
 > `ALIBI_SPEC.md`.
 >
 > Implement Transmission nodes with `learned_at`, the cross-graph provenance trace
@@ -137,7 +137,7 @@ proves conflict beats support.
 
 ### M3 — LLM suspects behind the cache
 
-> Read `PROJECT_RULES.md` and `PROGRESS.md`. Read only section 7 of `ALIBI_SPEC.md`.
+> Read the project rules and `PROGRESS.md`. Read only section 7 of `ALIBI_SPEC.md`.
 >
 > Add LLM-driven suspects behind the cache wrapper, keyed by
 > `(seed, agent, prompt_hash)` in SQLite, with the per-case call cap enforced in
@@ -148,7 +148,7 @@ proves conflict beats support.
 
 ### M4 — detective loop
 
-> Read `PROJECT_RULES.md` and `PROGRESS.md`. Read only sections 5.9–5.12 and 7 of
+> Read the project rules and `PROGRESS.md`. Read only sections 5.9–5.12 and 7 of
 > `ALIBI_SPEC.md`.
 >
 > Implement the detective's typed tools, including `list_gaps`, and materialize
@@ -158,7 +158,7 @@ proves conflict beats support.
 
 ### M5 — the case board (separate session, do not mix with backend work)
 
-> Read `PROJECT_RULES.md` and `DESIGN_BRIEF.md` in full. **Do not read
+> Read the project rules and `DESIGN_BRIEF.md` in full. **Do not read
 > `ALIBI_SPEC.md`** — you do not need it.
 >
 > `docs/design/` holds six reference artboards as HTML. These are the intended
@@ -174,12 +174,12 @@ proves conflict beats support.
 > and tell me it passes each one.
 
 **The artboards are the leverage here.** They are literal HTML with real hex
-values, so the coding assistant has a reference implementation rather than a description.
+values, so the assistant has a reference implementation rather than a description.
 This is the single best defence against the UI drifting back to the default look.
 
 ### M6 — evaluation
 
-> Read `PROJECT_RULES.md` and `PROGRESS.md`. Read only section 8 of `ALIBI_SPEC.md`.
+> Read the project rules and `PROGRESS.md`. Read only section 8 of `ALIBI_SPEC.md`.
 >
 > Build the eval harness. **Commit `eval/seeds.json` before any tuning** and tell
 > me when you have. Primary metric is audit precision/recall per claim with the
@@ -192,7 +192,7 @@ This is the single best defence against the UI drifting back to the default look
 
 After each gate passes, two steps:
 
-1. Ask the coding assistant: *"Explain this milestone to me as if I'm reviewing your PR.
+1. Ask the assistant: *"Explain this milestone to me as if I'm reviewing your PR.
    What each module does, why the decision table is ordered that way, and where
    the parts you're least sure about are."*
 2. **Then you** write 5–10 lines in your own words into
@@ -213,13 +213,13 @@ script.
 | What you see | What is actually happening | Do this |
 |---|---|---|
 | "All tests pass" with no output shown | It may not have run them | Make it paste raw `make verify` output. Output or it did not happen. |
-| A test was edited in the same change as the fix | It weakened the test to go green | Revert the test, keep the fix, re-run. `PROJECT_RULES.md` rule 7 forbids this. |
+| A test was edited in the same change as the fix | It weakened the test to go green | Revert the test, keep the fix, re-run. Project rules rule 7 forbids this. |
 | A query wrapped in `try/except` returning `[]` | Silently degrading to empty results, so the audit looks fine and finds nothing | Make it raise. Spike the query properly. Rule 8. |
 | Verdict logic is an `if/elif` chain with early returns | v1's precedence bug is back: one supporting fact masks a contradicting one | Point at spec 5.5. Must gather all evidence, then decide. |
 | Any model call near a verdict | It took the easy path | Rule 1. Delete it. |
 | The UI has rounded corners, shadows, or Inter | Context compacted and the default look came back | New session, re-read `DESIGN_BRIEF.md` section 7, fix against the artboards. |
 | Many files created, nothing runs | Over-scaffolding | `git reset --hard` to the last tag, re-prompt with a narrower scope. |
-| Answers get vaguer, it forgets decisions | Context compacted | Stop. New session. Read `PROJECT_RULES.md` + `PROGRESS.md` + one spec section. |
+| Answers get vaguer, it forgets decisions | Context compacted | Stop. New session. Read the project rules + `PROGRESS.md` + one spec section. |
 | A spike failed but it kept building | It did not treat the gate as a gate | Roll back to the gate. Decide the fallback yourself, record it in `PROGRESS.md`. |
 | Benchmark numbers appear implausibly fast | LLM calls stubbed or mocked | Check the cache DB actually has rows and the call counter is non-zero. |
 | Coverage above 100%, or a gap that is negative | Unmerged intervals being summed | The bug I already hit. `test_coverage.py` case 6 catches it. |
@@ -254,7 +254,7 @@ explicitly; they are not all in the spec.
 The spec says high-stakes work should be checked by something that did not produce
 it. Concretely, once after M1 and once after M2:
 
-Open a **fresh** the coding assistant session. Give it only the relevant spec section and
+Open a **fresh** assistant session. Give it only the relevant spec section and
 the audit engine source — not the tests, not the conversation. Ask:
 
 > Here is a specification and an implementation. Find inputs where this
@@ -327,5 +327,5 @@ writing to the same repo will produce a merge you do not have time for.
 
 1. **The gate is the unit of work.** Not the task. You supply "done", and done
    means output you have read.
-2. **`PROJECT_RULES.md` is your only persistent instruction channel.** Anything you want
+2. **The project rules file is your only persistent instruction channel.** Anything you want
    to still be true at hour 70 belongs in a file, not in a message.

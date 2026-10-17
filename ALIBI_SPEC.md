@@ -160,7 +160,7 @@ Direct typed tool calls first. MCP (FastMCP) is an extension, added only once th
 
 **`Evidence` nodes are the privacy seam.** The case graph must stay public-information-only, but the audit must be inspectable. So when an audit cites a private fact, it creates a redacted public shadow of it in the case graph. The detective sees that a claim is supported by an observation at a place and time; it does not get a window into the suspect's whole mind. This is what makes `SUPPORTED_BY` a real path without leaking memory.
 
-**Rules for the coding assistant:** one relationship type per traversal purpose; keep claims short (<= 15 ticks); reference relationship aliases in any query that counts edges (known FalkorDB limitation: an unreferenced relationship is only existence-checked); never store arrays as properties without spiking it first.
+**Build rules:** one relationship type per traversal purpose; keep claims short (<= 15 ticks); reference relationship aliases in any query that counts edges (known FalkorDB limitation: an unreferenced relationship is only existence-checked); never store arrays as properties without spiking it first.
 
 ---
 
@@ -569,7 +569,7 @@ About 30 lines of fixture data, one page in the README, and the "just a game" ob
 - Routes respect travel times. Co-located suspects witness each other with a ~10% miss probability, so natural gaps exist.
 - One incident (place, window). The culprit is present during it. An optional accomplice falsely corroborates.
 - Hearsay: pairs meet and exchange 1–2 facts, each creating a `Transmission` with correct `tick` and `learned_at`. Honest suspects pass on witnessed facts. The culprit passes on one fabrication, which becomes hearsay in an honest suspect's mind — this produces the innocent-repeater demo moment.
-- **Provenance integrity rule:** only the generator creates provenance. The audit engine reads and materializes what it proved, and **never manufactures a link to make an answer look grounded**. Put this in `PROJECT_RULES.md`.
+- **Provenance integrity rule:** only the generator creates provenance. The audit engine reads and materializes what it proved, and **never manufactures a link to make an answer look grounded**. Put this in the project rules.
 - **Invariant tests:** identical world per seed; every route travel-feasible; every transmission temporally consistent (`source.learned_at <= tick`); the oracle (ground-truth based, section 8.4) finds the evidence sufficient. Rejected worlds are counted and reported.
 
 ---
@@ -656,11 +656,11 @@ Three demo moments:
 
 ---
 
-## 15. Repo layout and rules for the coding assistant
+## 15. Repo layout and working rules
 
 ```
 alibi/
-  PROJECT_RULES.md               # the rules below
+  <rules file>            # the rules below, loaded every session
   AI-USE.md               # disclosure log, updated every session
   README.md               # setup, graph model, queries, results, tracks
   docker-compose.yml
@@ -681,7 +681,7 @@ alibi/
   docs/                   # design references, brief, schema diagrams
 ```
 
-**PROJECT_RULES.md block**
+**Project rules block**
 - All Cypher lives in `backend/app/**/queries.py` as named constants with a one-line comment stating the graph question it answers. No inline Cypher in routes.
 - Verdicts, coverage, contradictions and scores are computed by Cypher plus deterministic Python. **Never by an LLM.**
 - A verdict describes grounding, not intent. No code path may label a claim a lie. Deception labels exist only in `referee/` and only for scoring.
@@ -693,7 +693,7 @@ alibi/
 - Test first for audit, time contract, aggregation and world-generator logic.
 - Small commits. Tag `m0`...`m6` at milestones. Append to `AI-USE.md` every session.
 
-**Kickoff prompt for the coding assistant**
+**Kickoff prompt**
 > Read `ALIBI_SPEC.md` fully, then implement **milestone M0 only**: a docker-compose with `falkordb/falkordb`, a Python 3.12 FastAPI skeleton using the official `falkordb` client, and `scripts/spikes.py` running each numbered spike from section 12 against a scratch graph, printing PASS/FAIL with the exact error text for failures. Also scaffold `backend/tests/test_time_contract.py` with the four boundary cases from section 4.0, which should fail until M1. Do not start M1 until I confirm the spike results.
 
 ---

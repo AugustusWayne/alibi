@@ -1,0 +1,7840 @@
+{
+  "meta": {
+    "seed": 7777,
+    "case_id": "0x1E61",
+    "tick_min": 0,
+    "tick_max": 300,
+    "clock_start": "18:00",
+    "clock_end": "23:00",
+    "hour_labels": [
+      {
+        "tick": 0,
+        "label": "18:00"
+      },
+      {
+        "tick": 60,
+        "label": "19:00"
+      },
+      {
+        "tick": 120,
+        "label": "20:00"
+      },
+      {
+        "tick": 180,
+        "label": "21:00"
+      },
+      {
+        "tick": 240,
+        "label": "22:00"
+      },
+      {
+        "tick": 300,
+        "label": "23:00"
+      }
+    ],
+    "claims": 126,
+    "audited": 126,
+    "interviews": 7,
+    "spec": {
+      "plant_broken_chain": true,
+      "plant_temporal_violation": true,
+      "n_places": 11,
+      "n_people": 7,
+      "exchanges": 14
+    }
+  },
+  "suspects": [
+    {
+      "id": "p1",
+      "name": "Avery"
+    },
+    {
+      "id": "p2",
+      "name": "Blake"
+    },
+    {
+      "id": "p3",
+      "name": "Cato"
+    },
+    {
+      "id": "p4",
+      "name": "Dara"
+    },
+    {
+      "id": "p5",
+      "name": "Esme"
+    },
+    {
+      "id": "p6",
+      "name": "Faris"
+    },
+    {
+      "id": "p7",
+      "name": "Gale"
+    }
+  ],
+  "incident": {
+    "id": "incident",
+    "place": "kitchen",
+    "t0": 102,
+    "t1": 122
+  },
+  "claims": [
+    {
+      "id": "p1-c1",
+      "speaker": "p1",
+      "subject": "p1",
+      "place": "ballroom",
+      "t0": 2,
+      "t1": 33,
+      "turn": 1,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": null,
+      "covered": [
+        [
+          2,
+          33
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p1-c1|f1"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p1-c2",
+      "speaker": "p1",
+      "subject": "p3",
+      "place": "ballroom",
+      "t0": 6,
+      "t1": 24,
+      "turn": 2,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": null,
+      "covered": [
+        [
+          6,
+          24
+        ],
+        [
+          6,
+          24
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p1-c2|f108",
+        "p1-c2|f68"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p1-c3",
+      "speaker": "p1",
+      "subject": "p3",
+      "place": "ballroom",
+      "t0": 6,
+      "t1": 24,
+      "turn": 3,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": "p3",
+      "covered": [
+        [
+          6,
+          24
+        ],
+        [
+          6,
+          24
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p1-c3|f108",
+        "p1-c3|f68"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p1-c4",
+      "speaker": "p1",
+      "subject": "p1",
+      "place": "terrace",
+      "t0": 43,
+      "t1": 59,
+      "turn": 4,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": null,
+      "covered": [
+        [
+          43,
+          59
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p1-c4|f2"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p1-c5",
+      "speaker": "p1",
+      "subject": "p1",
+      "place": "conservatory",
+      "t0": 71,
+      "t1": 95,
+      "turn": 5,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": null,
+      "covered": [
+        [
+          71,
+          95
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p1-c5|f3"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p1-c6",
+      "speaker": "p1",
+      "subject": "p4",
+      "place": "hall",
+      "t0": 102,
+      "t1": 122,
+      "turn": 6,
+      "modality": "THROUGHOUT",
+      "verdict": "HEARSAY",
+      "coverage": 0.0,
+      "uncovered": 20,
+      "relayed_from": "p4",
+      "covered": [
+        [
+          102,
+          122
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p1-c6|f148"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p1-c7",
+      "speaker": "p1",
+      "subject": "p1",
+      "place": "hall",
+      "t0": 106,
+      "t1": 123,
+      "turn": 7,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": null,
+      "covered": [
+        [
+          106,
+          123
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p1-c7|f4"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p1-c8",
+      "speaker": "p1",
+      "subject": "p2",
+      "place": "hall",
+      "t0": 118,
+      "t1": 123,
+      "turn": 8,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": null,
+      "covered": [
+        [
+          118,
+          123
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p1-c8|f78"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p1-c9",
+      "speaker": "p1",
+      "subject": "p4",
+      "place": "kitchen",
+      "t0": 122,
+      "t1": 147,
+      "turn": 9,
+      "modality": "THROUGHOUT",
+      "verdict": "HEARSAY",
+      "coverage": 0.0,
+      "uncovered": 25,
+      "relayed_from": "p4",
+      "covered": [
+        [
+          122,
+          147
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p1-c9|f116"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p1-c10",
+      "speaker": "p1",
+      "subject": "p1",
+      "place": "study",
+      "t0": 127,
+      "t1": 162,
+      "turn": 10,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": null,
+      "covered": [
+        [
+          127,
+          162
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p1-c10|f5"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p1-c11",
+      "speaker": "p1",
+      "subject": "p5",
+      "place": "ballroom",
+      "t0": 128,
+      "t1": 144,
+      "turn": 11,
+      "modality": "THROUGHOUT",
+      "verdict": "HEARSAY",
+      "coverage": 0.0,
+      "uncovered": 16,
+      "relayed_from": "p6",
+      "covered": [
+        [
+          128,
+          144
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p1-c11|f135"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p1-c12",
+      "speaker": "p1",
+      "subject": "p2",
+      "place": "scullery",
+      "t0": 174,
+      "t1": 178,
+      "turn": 12,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": null,
+      "covered": [
+        [
+          174,
+          178
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p1-c12|f89"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p1-c13",
+      "speaker": "p1",
+      "subject": "p1",
+      "place": "scullery",
+      "t0": 174,
+      "t1": 208,
+      "turn": 13,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": null,
+      "covered": [
+        [
+          174,
+          208
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p1-c13|f6"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p1-c14",
+      "speaker": "p1",
+      "subject": "p1",
+      "place": "cellar",
+      "t0": 219,
+      "t1": 238,
+      "turn": 14,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": null,
+      "covered": [
+        [
+          219,
+          238
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p1-c14|f7"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p1-c15",
+      "speaker": "p1",
+      "subject": "p4",
+      "place": "cellar",
+      "t0": 219,
+      "t1": 238,
+      "turn": 15,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": null,
+      "covered": [
+        [
+          219,
+          238
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p1-c15|f96"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p1-c16",
+      "speaker": "p1",
+      "subject": "p1",
+      "place": "library",
+      "t0": 255,
+      "t1": 269,
+      "turn": 16,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": null,
+      "covered": [
+        [
+          255,
+          269
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p1-c16|f8"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p1-c17",
+      "speaker": "p1",
+      "subject": "p1",
+      "place": "ballroom",
+      "t0": 282,
+      "t1": 294,
+      "turn": 17,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": null,
+      "covered": [
+        [
+          282,
+          294
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p1-c17|f9"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p1-c18",
+      "speaker": "p1",
+      "subject": "p6",
+      "place": "ballroom",
+      "t0": 288,
+      "t1": 294,
+      "turn": 18,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": null,
+      "covered": [
+        [
+          288,
+          294
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p1-c18|f103"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p2-c1",
+      "speaker": "p2",
+      "subject": "p2",
+      "place": "gallery",
+      "t0": 3,
+      "t1": 15,
+      "turn": 19,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": null,
+      "covered": [
+        [
+          3,
+          15
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p2-c1|f10"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p2-c2",
+      "speaker": "p2",
+      "subject": "p6",
+      "place": "study",
+      "t0": 6,
+      "t1": 23,
+      "turn": 20,
+      "modality": "THROUGHOUT",
+      "verdict": "HEARSAY",
+      "coverage": 0.0,
+      "uncovered": 17,
+      "relayed_from": "p6",
+      "covered": [
+        [
+          6,
+          23
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p2-c2|f124"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p2-c3",
+      "speaker": "p2",
+      "subject": "p7",
+      "place": "hall",
+      "t0": 8,
+      "t1": 33,
+      "turn": 21,
+      "modality": "THROUGHOUT",
+      "verdict": "HEARSAY",
+      "coverage": 0.0,
+      "uncovered": 25,
+      "relayed_from": "p7",
+      "covered": [
+        [
+          8,
+          33
+        ],
+        [
+          8,
+          33
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p2-c3|f106",
+        "p2-c3|f136"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p2-c4",
+      "speaker": "p2",
+      "subject": "p6",
+      "place": "kitchen",
+      "t0": 34,
+      "t1": 47,
+      "turn": 22,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": null,
+      "covered": [
+        [
+          34,
+          47
+        ],
+        [
+          34,
+          47
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p2-c4|f125",
+        "p2-c4|f70"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p2-c5",
+      "speaker": "p2",
+      "subject": "p6",
+      "place": "kitchen",
+      "t0": 34,
+      "t1": 58,
+      "turn": 23,
+      "modality": "THROUGHOUT",
+      "verdict": "INDETERMINATE",
+      "coverage": 0.541666666666667,
+      "uncovered": 11,
+      "relayed_from": "p6",
+      "covered": [
+        [
+          34,
+          47
+        ],
+        [
+          34,
+          58
+        ]
+      ],
+      "gaps": [
+        [
+          47,
+          58
+        ]
+      ],
+      "support": [
+        "p2-c5|f125",
+        "p2-c5|f70"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p2-c6",
+      "speaker": "p2",
+      "subject": "p4",
+      "place": "study",
+      "t0": 62,
+      "t1": 74,
+      "turn": 24,
+      "modality": "THROUGHOUT",
+      "verdict": "HEARSAY",
+      "coverage": 0.0,
+      "uncovered": 12,
+      "relayed_from": "p4",
+      "covered": [
+        [
+          62,
+          74
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p2-c6|f126"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p2-c7",
+      "speaker": "p2",
+      "subject": "p2",
+      "place": "gallery",
+      "t0": 65,
+      "t1": 81,
+      "turn": 25,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": null,
+      "covered": [
+        [
+          65,
+          81
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p2-c7|f12"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p2-c8",
+      "speaker": "p2",
+      "subject": "p2",
+      "place": "billiard",
+      "t0": 87,
+      "t1": 115,
+      "turn": 26,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": null,
+      "covered": [
+        [
+          87,
+          115
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p2-c8|f13"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p2-c9",
+      "speaker": "p2",
+      "subject": "p4",
+      "place": "kitchen",
+      "t0": 102,
+      "t1": 112,
+      "turn": 27,
+      "modality": "THROUGHOUT",
+      "verdict": "HEARSAY",
+      "coverage": 0.0,
+      "uncovered": 10,
+      "relayed_from": "p5",
+      "covered": [
+        [
+          102,
+          112
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p2-c9|f145"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p2-c10",
+      "speaker": "p2",
+      "subject": "p4",
+      "place": "hall",
+      "t0": 102,
+      "t1": 122,
+      "turn": 28,
+      "modality": "THROUGHOUT",
+      "verdict": "HEARSAY",
+      "coverage": 0.0,
+      "uncovered": 20,
+      "relayed_from": "p4",
+      "covered": [
+        [
+          102,
+          122
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p2-c10|f147"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p2-c11",
+      "speaker": "p2",
+      "subject": "p1",
+      "place": "hall",
+      "t0": 118,
+      "t1": 123,
+      "turn": 29,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": null,
+      "covered": [
+        [
+          118,
+          123
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p2-c11|f79"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p2-c12",
+      "speaker": "p2",
+      "subject": "p2",
+      "place": "hall",
+      "t0": 118,
+      "t1": 149,
+      "turn": 30,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": null,
+      "covered": [
+        [
+          118,
+          149
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p2-c12|f14"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p2-c13",
+      "speaker": "p2",
+      "subject": "p1",
+      "place": "scullery",
+      "t0": 174,
+      "t1": 178,
+      "turn": 31,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": null,
+      "covered": [
+        [
+          174,
+          178
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p2-c13|f88"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p2-c14",
+      "speaker": "p2",
+      "subject": "p7",
+      "place": "library",
+      "t0": 184,
+      "t1": 188,
+      "turn": 32,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": null,
+      "covered": [
+        [
+          184,
+          188
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p2-c14|f87"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p2-c15",
+      "speaker": "p2",
+      "subject": "p4",
+      "place": "library",
+      "t0": 184,
+      "t1": 201,
+      "turn": 33,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": null,
+      "covered": [
+        [
+          184,
+          201
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p2-c15|f91"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p2-c16",
+      "speaker": "p2",
+      "subject": "p2",
+      "place": "library",
+      "t0": 184,
+      "t1": 204,
+      "turn": 34,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": null,
+      "covered": [
+        [
+          184,
+          204
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p2-c16|f16"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p2-c17",
+      "speaker": "p2",
+      "subject": "p5",
+      "place": "kitchen",
+      "t0": 200,
+      "t1": 219,
+      "turn": 35,
+      "modality": "THROUGHOUT",
+      "verdict": "HEARSAY",
+      "coverage": 0.0,
+      "uncovered": 19,
+      "relayed_from": "p5",
+      "covered": [
+        [
+          200,
+          219
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p2-c17|f144"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p2-c18",
+      "speaker": "p2",
+      "subject": "p5",
+      "place": "conservatory",
+      "t0": 237,
+      "t1": 243,
+      "turn": 36,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": null,
+      "covered": [
+        [
+          237,
+          243
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p2-c18|f93"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p2-c19",
+      "speaker": "p2",
+      "subject": "p2",
+      "place": "terrace",
+      "t0": 255,
+      "t1": 284,
+      "turn": 37,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": null,
+      "covered": [
+        [
+          255,
+          284
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p2-c19|f18"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p2-c20",
+      "speaker": "p2",
+      "subject": "p2",
+      "place": "study",
+      "t0": 289,
+      "t1": 300,
+      "turn": 38,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": null,
+      "covered": [
+        [
+          289,
+          300
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p2-c20|f19"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p3-c1",
+      "speaker": "p3",
+      "subject": "p1",
+      "place": "ballroom",
+      "t0": 2,
+      "t1": 33,
+      "turn": 39,
+      "modality": "THROUGHOUT",
+      "verdict": "INDETERMINATE",
+      "coverage": 0.580645161290323,
+      "uncovered": 13,
+      "relayed_from": "p1",
+      "covered": [
+        [
+          2,
+          33
+        ],
+        [
+          6,
+          24
+        ]
+      ],
+      "gaps": [
+        [
+          2,
+          6
+        ],
+        [
+          24,
+          33
+        ]
+      ],
+      "support": [
+        "p3-c1|f107",
+        "p3-c1|f69"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p3-c2",
+      "speaker": "p3",
+      "subject": "p1",
+      "place": "ballroom",
+      "t0": 6,
+      "t1": 24,
+      "turn": 40,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": null,
+      "covered": [
+        [
+          6,
+          24
+        ],
+        [
+          6,
+          24
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p3-c2|f107",
+        "p3-c2|f69"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p3-c3",
+      "speaker": "p3",
+      "subject": "p3",
+      "place": "ballroom",
+      "t0": 6,
+      "t1": 24,
+      "turn": 41,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": null,
+      "covered": [
+        [
+          6,
+          24
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p3-c3|f20"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p3-c4",
+      "speaker": "p3",
+      "subject": "p3",
+      "place": "billiard",
+      "t0": 33,
+      "t1": 48,
+      "turn": 42,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": null,
+      "covered": [
+        [
+          33,
+          48
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p3-c4|f21"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p3-c5",
+      "speaker": "p3",
+      "subject": "p2",
+      "place": "kitchen",
+      "t0": 34,
+      "t1": 47,
+      "turn": 43,
+      "modality": "THROUGHOUT",
+      "verdict": "HEARSAY",
+      "coverage": 0.0,
+      "uncovered": 13,
+      "relayed_from": "p6",
+      "covered": [
+        [
+          34,
+          47
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p3-c5|f130"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p3-c6",
+      "speaker": "p3",
+      "subject": "p3",
+      "place": "study",
+      "t0": 55,
+      "t1": 69,
+      "turn": 44,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": null,
+      "covered": [
+        [
+          55,
+          69
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p3-c6|f22"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p3-c7",
+      "speaker": "p3",
+      "subject": "p4",
+      "place": "study",
+      "t0": 62,
+      "t1": 69,
+      "turn": 45,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": null,
+      "covered": [
+        [
+          62,
+          69
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p3-c7|f72"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p3-c8",
+      "speaker": "p3",
+      "subject": "p3",
+      "place": "cellar",
+      "t0": 78,
+      "t1": 95,
+      "turn": 46,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": null,
+      "covered": [
+        [
+          78,
+          95
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p3-c8|f23"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p3-c9",
+      "speaker": "p3",
+      "subject": "p3",
+      "place": "ballroom",
+      "t0": 99,
+      "t1": 125,
+      "turn": 47,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": null,
+      "covered": [
+        [
+          99,
+          125
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p3-c9|f24"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p3-c10",
+      "speaker": "p3",
+      "subject": "p6",
+      "place": "ballroom",
+      "t0": 127,
+      "t1": 160,
+      "turn": 48,
+      "modality": "THROUGHOUT",
+      "verdict": "INDETERMINATE",
+      "coverage": 0.0606060606060606,
+      "uncovered": 31,
+      "relayed_from": "p6",
+      "covered": [
+        [
+          127,
+          160
+        ],
+        [
+          128,
+          144
+        ],
+        [
+          158,
+          160
+        ]
+      ],
+      "gaps": [
+        [
+          127,
+          158
+        ]
+      ],
+      "support": [
+        "p3-c10|f109",
+        "p3-c10|f131",
+        "p3-c10|f83"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p3-c11",
+      "speaker": "p3",
+      "subject": "p6",
+      "place": "ballroom",
+      "t0": 128,
+      "t1": 144,
+      "turn": 49,
+      "modality": "THROUGHOUT",
+      "verdict": "HEARSAY",
+      "coverage": 0.0,
+      "uncovered": 16,
+      "relayed_from": "p5",
+      "covered": [
+        [
+          128,
+          144
+        ],
+        [
+          128,
+          144
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p3-c11|f109",
+        "p3-c11|f131"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p3-c12",
+      "speaker": "p3",
+      "subject": "p3",
+      "place": "terrace",
+      "t0": 135,
+      "t1": 148,
+      "turn": 50,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": null,
+      "covered": [
+        [
+          135,
+          148
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p3-c12|f25"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p3-c13",
+      "speaker": "p3",
+      "subject": "p6",
+      "place": "ballroom",
+      "t0": 158,
+      "t1": 160,
+      "turn": 51,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": null,
+      "covered": [
+        [
+          158,
+          160
+        ],
+        [
+          158,
+          160
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p3-c13|f109",
+        "p3-c13|f83"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p3-c14",
+      "speaker": "p3",
+      "subject": "p3",
+      "place": "ballroom",
+      "t0": 158,
+      "t1": 171,
+      "turn": 52,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": null,
+      "covered": [
+        [
+          158,
+          171
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p3-c14|f26"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p3-c15",
+      "speaker": "p3",
+      "subject": "p3",
+      "place": "billiard",
+      "t0": 180,
+      "t1": 213,
+      "turn": 53,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": null,
+      "covered": [
+        [
+          180,
+          213
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p3-c15|f27"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p3-c16",
+      "speaker": "p3",
+      "subject": "p3",
+      "place": "kitchen",
+      "t0": 225,
+      "t1": 254,
+      "turn": 54,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": null,
+      "covered": [
+        [
+          225,
+          254
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p3-c16|f28"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p3-c17",
+      "speaker": "p3",
+      "subject": "p5",
+      "place": "scullery",
+      "t0": 277,
+      "t1": 287,
+      "turn": 55,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": null,
+      "covered": [
+        [
+          277,
+          287
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p3-c17|f102"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p3-c18",
+      "speaker": "p3",
+      "subject": "p3",
+      "place": "scullery",
+      "t0": 277,
+      "t1": 300,
+      "turn": 56,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": null,
+      "covered": [
+        [
+          277,
+          300
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p3-c18|f29"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p4-c1",
+      "speaker": "p4",
+      "subject": "p4",
+      "place": "billiard",
+      "t0": 0,
+      "t1": 13,
+      "turn": 57,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": null,
+      "covered": [
+        [
+          0,
+          13
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p4-c1|f30"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p4-c2",
+      "speaker": "p4",
+      "subject": "p4",
+      "place": "gallery",
+      "t0": 19,
+      "t1": 28,
+      "turn": 58,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": null,
+      "covered": [
+        [
+          19,
+          28
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p4-c2|f31"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p4-c3",
+      "speaker": "p4",
+      "subject": "p4",
+      "place": "cellar",
+      "t0": 33,
+      "t1": 53,
+      "turn": 59,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": null,
+      "covered": [
+        [
+          33,
+          53
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p4-c3|f32"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p4-c4",
+      "speaker": "p4",
+      "subject": "p3",
+      "place": "study",
+      "t0": 62,
+      "t1": 69,
+      "turn": 60,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": null,
+      "covered": [
+        [
+          62,
+          69
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p4-c4|f73"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p4-c5",
+      "speaker": "p4",
+      "subject": "p4",
+      "place": "study",
+      "t0": 62,
+      "t1": 74,
+      "turn": 61,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": null,
+      "covered": [
+        [
+          62,
+          74
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p4-c5|f33"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p4-c6",
+      "speaker": "p4",
+      "subject": "p4",
+      "place": "hall",
+      "t0": 78,
+      "t1": 87,
+      "turn": 62,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": null,
+      "covered": [
+        [
+          78,
+          87
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p4-c6|f34"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p4-c7",
+      "speaker": "p4",
+      "subject": "p4",
+      "place": "hall",
+      "t0": 102,
+      "t1": 122,
+      "turn": 63,
+      "modality": "THROUGHOUT",
+      "verdict": "CONTRADICTED",
+      "coverage": 0.0,
+      "uncovered": 20,
+      "relayed_from": null,
+      "covered": [],
+      "gaps": [],
+      "support": [],
+      "conflict": [
+        "p4-c7|f35"
+      ]
+    },
+    {
+      "id": "p4-c8",
+      "speaker": "p4",
+      "subject": "p4",
+      "place": "kitchen",
+      "t0": 102,
+      "t1": 147,
+      "turn": 64,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": null,
+      "covered": [
+        [
+          102,
+          122
+        ],
+        [
+          122,
+          147
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p4-c8|f35",
+        "p4-c8|f36"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p4-c9",
+      "speaker": "p4",
+      "subject": "p7",
+      "place": "library",
+      "t0": 176,
+      "t1": 188,
+      "turn": 65,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": null,
+      "covered": [
+        [
+          176,
+          188
+        ],
+        [
+          176,
+          188
+        ],
+        [
+          184,
+          188
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p4-c9|f112",
+        "p4-c9|f127",
+        "p4-c9|f85"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p4-c10",
+      "speaker": "p4",
+      "subject": "p4",
+      "place": "library",
+      "t0": 176,
+      "t1": 201,
+      "turn": 66,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": null,
+      "covered": [
+        [
+          176,
+          201
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p4-c10|f37"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p4-c11",
+      "speaker": "p4",
+      "subject": "p2",
+      "place": "library",
+      "t0": 184,
+      "t1": 201,
+      "turn": 67,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": null,
+      "covered": [
+        [
+          184,
+          201
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p4-c11|f90"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p4-c12",
+      "speaker": "p4",
+      "subject": "p4",
+      "place": "cellar",
+      "t0": 218,
+      "t1": 238,
+      "turn": 68,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": null,
+      "covered": [
+        [
+          218,
+          238
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p4-c12|f38"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p4-c13",
+      "speaker": "p4",
+      "subject": "p1",
+      "place": "cellar",
+      "t0": 219,
+      "t1": 238,
+      "turn": 69,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": null,
+      "covered": [
+        [
+          219,
+          238
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p4-c13|f95"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p4-c14",
+      "speaker": "p4",
+      "subject": "p4",
+      "place": "gallery",
+      "t0": 243,
+      "t1": 263,
+      "turn": 70,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": null,
+      "covered": [
+        [
+          243,
+          263
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p4-c14|f39"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p4-c15",
+      "speaker": "p4",
+      "subject": "p6",
+      "place": "cellar",
+      "t0": 268,
+      "t1": 284,
+      "turn": 71,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": null,
+      "covered": [
+        [
+          268,
+          284
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p4-c15|f98"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p4-c16",
+      "speaker": "p4",
+      "subject": "p4",
+      "place": "cellar",
+      "t0": 268,
+      "t1": 300,
+      "turn": 72,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": null,
+      "covered": [
+        [
+          268,
+          300
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p4-c16|f40"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p5-c1",
+      "speaker": "p5",
+      "subject": "p5",
+      "place": "conservatory",
+      "t0": 4,
+      "t1": 30,
+      "turn": 73,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": null,
+      "covered": [
+        [
+          4,
+          30
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p5-c1|f41"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p5-c2",
+      "speaker": "p5",
+      "subject": "p2",
+      "place": "kitchen",
+      "t0": 34,
+      "t1": 47,
+      "turn": 74,
+      "modality": "THROUGHOUT",
+      "verdict": "HEARSAY",
+      "coverage": 0.0,
+      "uncovered": 13,
+      "relayed_from": "p6",
+      "covered": [
+        [
+          34,
+          47
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p5-c2|f139"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p5-c3",
+      "speaker": "p5",
+      "subject": "p5",
+      "place": "library",
+      "t0": 41,
+      "t1": 59,
+      "turn": 75,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": null,
+      "covered": [
+        [
+          41,
+          59
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p5-c3|f42"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p5-c4",
+      "speaker": "p5",
+      "subject": "p5",
+      "place": "kitchen",
+      "t0": 88,
+      "t1": 112,
+      "turn": 76,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": null,
+      "covered": [
+        [
+          88,
+          112
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p5-c4|f43"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p5-c5",
+      "speaker": "p5",
+      "subject": "p4",
+      "place": "kitchen",
+      "t0": 102,
+      "t1": 112,
+      "turn": 77,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": null,
+      "covered": [
+        [
+          102,
+          112
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p5-c5|f77"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p5-c6",
+      "speaker": "p5",
+      "subject": "p1",
+      "place": "hall",
+      "t0": 118,
+      "t1": 123,
+      "turn": 78,
+      "modality": "THROUGHOUT",
+      "verdict": "HEARSAY",
+      "coverage": 0.0,
+      "uncovered": 5,
+      "relayed_from": "p2",
+      "covered": [
+        [
+          118,
+          123
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p5-c6|f142"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p5-c7",
+      "speaker": "p5",
+      "subject": "p5",
+      "place": "ballroom",
+      "t0": 128,
+      "t1": 144,
+      "turn": 79,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": null,
+      "covered": [
+        [
+          128,
+          144
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p5-c7|f44"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p5-c8",
+      "speaker": "p5",
+      "subject": "p6",
+      "place": "ballroom",
+      "t0": 128,
+      "t1": 144,
+      "turn": 80,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": null,
+      "covered": [
+        [
+          128,
+          144
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p5-c8|f81"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p5-c9",
+      "speaker": "p5",
+      "subject": "p5",
+      "place": "conservatory",
+      "t0": 146,
+      "t1": 160,
+      "turn": 81,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": null,
+      "covered": [
+        [
+          146,
+          160
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p5-c9|f45"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p5-c10",
+      "speaker": "p5",
+      "subject": "p5",
+      "place": "study",
+      "t0": 167,
+      "t1": 189,
+      "turn": 82,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": null,
+      "covered": [
+        [
+          167,
+          189
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p5-c10|f46"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p5-c11",
+      "speaker": "p5",
+      "subject": "p4",
+      "place": "library",
+      "t0": 184,
+      "t1": 201,
+      "turn": 83,
+      "modality": "THROUGHOUT",
+      "verdict": "HEARSAY",
+      "coverage": 0.0,
+      "uncovered": 17,
+      "relayed_from": "p2",
+      "covered": [
+        [
+          184,
+          201
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p5-c11|f143"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p5-c12",
+      "speaker": "p5",
+      "subject": "p5",
+      "place": "kitchen",
+      "t0": 200,
+      "t1": 219,
+      "turn": 84,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": null,
+      "covered": [
+        [
+          200,
+          219
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p5-c12|f47"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p5-c13",
+      "speaker": "p5",
+      "subject": "p2",
+      "place": "conservatory",
+      "t0": 237,
+      "t1": 243,
+      "turn": 85,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": null,
+      "covered": [
+        [
+          237,
+          243
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p5-c13|f94"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p5-c14",
+      "speaker": "p5",
+      "subject": "p5",
+      "place": "conservatory",
+      "t0": 237,
+      "t1": 267,
+      "turn": 86,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": null,
+      "covered": [
+        [
+          237,
+          267
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p5-c14|f48"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p5-c15",
+      "speaker": "p5",
+      "subject": "p7",
+      "place": "scullery",
+      "t0": 272,
+      "t1": 275,
+      "turn": 87,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": null,
+      "covered": [
+        [
+          272,
+          275
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p5-c15|f100"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p5-c16",
+      "speaker": "p5",
+      "subject": "p5",
+      "place": "scullery",
+      "t0": 272,
+      "t1": 287,
+      "turn": 88,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": null,
+      "covered": [
+        [
+          272,
+          287
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p5-c16|f49"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p5-c17",
+      "speaker": "p5",
+      "subject": "p3",
+      "place": "scullery",
+      "t0": 277,
+      "t1": 287,
+      "turn": 89,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": null,
+      "covered": [
+        [
+          277,
+          287
+        ],
+        [
+          277,
+          287
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p5-c17|f101",
+        "p5-c17|f132"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p5-c18",
+      "speaker": "p5",
+      "subject": "p3",
+      "place": "scullery",
+      "t0": 277,
+      "t1": 300,
+      "turn": 90,
+      "modality": "THROUGHOUT",
+      "verdict": "INDETERMINATE",
+      "coverage": 0.434782608695652,
+      "uncovered": 13,
+      "relayed_from": "p3",
+      "covered": [
+        [
+          277,
+          287
+        ],
+        [
+          277,
+          300
+        ]
+      ],
+      "gaps": [
+        [
+          287,
+          300
+        ]
+      ],
+      "support": [
+        "p5-c18|f101",
+        "p5-c18|f132"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p6-c1",
+      "speaker": "p6",
+      "subject": "p2",
+      "place": "gallery",
+      "t0": 3,
+      "t1": 15,
+      "turn": 91,
+      "modality": "THROUGHOUT",
+      "verdict": "HEARSAY",
+      "coverage": 0.0,
+      "uncovered": 12,
+      "relayed_from": "p2",
+      "covered": [
+        [
+          3,
+          15
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p6-c1|f123"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p6-c2",
+      "speaker": "p6",
+      "subject": "p5",
+      "place": "conservatory",
+      "t0": 4,
+      "t1": 30,
+      "turn": 92,
+      "modality": "THROUGHOUT",
+      "verdict": "HEARSAY",
+      "coverage": 0.0,
+      "uncovered": 26,
+      "relayed_from": "p5",
+      "covered": [
+        [
+          4,
+          30
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p6-c2|f140"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p6-c3",
+      "speaker": "p6",
+      "subject": "p3",
+      "place": "ballroom",
+      "t0": 6,
+      "t1": 24,
+      "turn": 93,
+      "modality": "THROUGHOUT",
+      "verdict": "HEARSAY",
+      "coverage": 0.0,
+      "uncovered": 18,
+      "relayed_from": "p3",
+      "covered": [
+        [
+          6,
+          24
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p6-c3|f128"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p6-c4",
+      "speaker": "p6",
+      "subject": "p2",
+      "place": "kitchen",
+      "t0": 33,
+      "t1": 47,
+      "turn": 94,
+      "modality": "THROUGHOUT",
+      "verdict": "INDETERMINATE",
+      "coverage": 0.928571428571429,
+      "uncovered": 1,
+      "relayed_from": "p2",
+      "covered": [
+        [
+          33,
+          47
+        ],
+        [
+          34,
+          47
+        ]
+      ],
+      "gaps": [
+        [
+          33,
+          34
+        ]
+      ],
+      "support": [
+        "p6-c4|f122",
+        "p6-c4|f71"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p6-c5",
+      "speaker": "p6",
+      "subject": "p4",
+      "place": "cellar",
+      "t0": 33,
+      "t1": 53,
+      "turn": 95,
+      "modality": "THROUGHOUT",
+      "verdict": "HEARSAY",
+      "coverage": 0.0,
+      "uncovered": 20,
+      "relayed_from": "p4",
+      "covered": [
+        [
+          33,
+          53
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p6-c5|f121"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p6-c6",
+      "speaker": "p6",
+      "subject": "p2",
+      "place": "kitchen",
+      "t0": 34,
+      "t1": 47,
+      "turn": 96,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": null,
+      "covered": [
+        [
+          34,
+          47
+        ],
+        [
+          34,
+          47
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p6-c6|f122",
+        "p6-c6|f71"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p6-c7",
+      "speaker": "p6",
+      "subject": "p6",
+      "place": "cellar",
+      "t0": 75,
+      "t1": 86,
+      "turn": 97,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": null,
+      "covered": [
+        [
+          75,
+          86
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p6-c7|f52"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p6-c8",
+      "speaker": "p6",
+      "subject": "p3",
+      "place": "cellar",
+      "t0": 78,
+      "t1": 86,
+      "turn": 98,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": null,
+      "covered": [
+        [
+          78,
+          86
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p6-c8|f74"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p6-c9",
+      "speaker": "p6",
+      "subject": "p4",
+      "place": "hall",
+      "t0": 102,
+      "t1": 122,
+      "turn": 99,
+      "modality": "THROUGHOUT",
+      "verdict": "HEARSAY",
+      "coverage": 0.0,
+      "uncovered": 20,
+      "relayed_from": "p4",
+      "covered": [
+        [
+          102,
+          122
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p6-c9|f149"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p6-c10",
+      "speaker": "p6",
+      "subject": "p6",
+      "place": "library",
+      "t0": 103,
+      "t1": 114,
+      "turn": 100,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": null,
+      "covered": [
+        [
+          103,
+          114
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p6-c10|f53"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p6-c11",
+      "speaker": "p6",
+      "subject": "p5",
+      "place": "ballroom",
+      "t0": 128,
+      "t1": 144,
+      "turn": 101,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": null,
+      "covered": [
+        [
+          128,
+          144
+        ],
+        [
+          128,
+          144
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p6-c11|f141",
+        "p6-c11|f80"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p6-c12",
+      "speaker": "p6",
+      "subject": "p5",
+      "place": "ballroom",
+      "t0": 128,
+      "t1": 144,
+      "turn": 102,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": "p5",
+      "covered": [
+        [
+          128,
+          144
+        ],
+        [
+          128,
+          144
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p6-c12|f141",
+        "p6-c12|f80"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p6-c13",
+      "speaker": "p6",
+      "subject": "p3",
+      "place": "ballroom",
+      "t0": 158,
+      "t1": 160,
+      "turn": 103,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": null,
+      "covered": [
+        [
+          158,
+          160
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p6-c13|f82"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p6-c14",
+      "speaker": "p6",
+      "subject": "p6",
+      "place": "conservatory",
+      "t0": 162,
+      "t1": 179,
+      "turn": 104,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": null,
+      "covered": [
+        [
+          162,
+          179
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p6-c14|f55"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p6-c15",
+      "speaker": "p6",
+      "subject": "p6",
+      "place": "billiard",
+      "t0": 190,
+      "t1": 200,
+      "turn": 105,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": null,
+      "covered": [
+        [
+          190,
+          200
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p6-c15|f56"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p6-c16",
+      "speaker": "p6",
+      "subject": "p4",
+      "place": "cellar",
+      "t0": 219,
+      "t1": 238,
+      "turn": 106,
+      "modality": "THROUGHOUT",
+      "verdict": "HEARSAY",
+      "coverage": 0.0,
+      "uncovered": 19,
+      "relayed_from": "p1",
+      "covered": [
+        [
+          219,
+          238
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p6-c16|f133"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p6-c17",
+      "speaker": "p6",
+      "subject": "p6",
+      "place": "cellar",
+      "t0": 249,
+      "t1": 284,
+      "turn": 107,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": null,
+      "covered": [
+        [
+          249,
+          284
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p6-c17|f58"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p6-c18",
+      "speaker": "p6",
+      "subject": "p4",
+      "place": "cellar",
+      "t0": 268,
+      "t1": 284,
+      "turn": 108,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": null,
+      "covered": [
+        [
+          268,
+          284
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p6-c18|f97"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p6-c19",
+      "speaker": "p6",
+      "subject": "p1",
+      "place": "ballroom",
+      "t0": 288,
+      "t1": 294,
+      "turn": 109,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": null,
+      "covered": [
+        [
+          288,
+          294
+        ],
+        [
+          288,
+          294
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p6-c19|f104",
+        "p6-c19|f134"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p6-c20",
+      "speaker": "p6",
+      "subject": "p6",
+      "place": "ballroom",
+      "t0": 288,
+      "t1": 300,
+      "turn": 110,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": null,
+      "covered": [
+        [
+          288,
+          300
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p6-c20|f59"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p7-c1",
+      "speaker": "p7",
+      "subject": "p2",
+      "place": "gallery",
+      "t0": 3,
+      "t1": 15,
+      "turn": 111,
+      "modality": "THROUGHOUT",
+      "verdict": "HEARSAY",
+      "coverage": 0.0,
+      "uncovered": 12,
+      "relayed_from": "p2",
+      "covered": [
+        [
+          3,
+          15
+        ],
+        [
+          3,
+          15
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p7-c1|f105",
+        "p7-c1|f137"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p7-c2",
+      "speaker": "p7",
+      "subject": "p7",
+      "place": "hall",
+      "t0": 8,
+      "t1": 33,
+      "turn": 112,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": null,
+      "covered": [
+        [
+          8,
+          33
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p7-c2|f60"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p7-c3",
+      "speaker": "p7",
+      "subject": "p7",
+      "place": "scullery",
+      "t0": 49,
+      "t1": 81,
+      "turn": 113,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": null,
+      "covered": [
+        [
+          49,
+          81
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p7-c3|f61"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p7-c4",
+      "speaker": "p7",
+      "subject": "p4",
+      "place": "hall",
+      "t0": 78,
+      "t1": 87,
+      "turn": 114,
+      "modality": "THROUGHOUT",
+      "verdict": "HEARSAY",
+      "coverage": 0.0,
+      "uncovered": 9,
+      "relayed_from": "p4",
+      "covered": [
+        [
+          78,
+          87
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p7-c4|f114"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p7-c5",
+      "speaker": "p7",
+      "subject": "p2",
+      "place": "billiard",
+      "t0": 97,
+      "t1": 115,
+      "turn": 115,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": null,
+      "covered": [
+        [
+          97,
+          115
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p7-c5|f76"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p7-c6",
+      "speaker": "p7",
+      "subject": "p7",
+      "place": "billiard",
+      "t0": 97,
+      "t1": 125,
+      "turn": 116,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": null,
+      "covered": [
+        [
+          97,
+          125
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p7-c6|f62"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p7-c7",
+      "speaker": "p7",
+      "subject": "p4",
+      "place": "kitchen",
+      "t0": 122,
+      "t1": 147,
+      "turn": 117,
+      "modality": "THROUGHOUT",
+      "verdict": "HEARSAY",
+      "coverage": 0.0,
+      "uncovered": 25,
+      "relayed_from": "p4",
+      "covered": [
+        [
+          122,
+          147
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p7-c7|f115"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p7-c8",
+      "speaker": "p7",
+      "subject": "p7",
+      "place": "scullery",
+      "t0": 141,
+      "t1": 158,
+      "turn": 118,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": null,
+      "covered": [
+        [
+          141,
+          158
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p7-c8|f63"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p7-c9",
+      "speaker": "p7",
+      "subject": "p7",
+      "place": "library",
+      "t0": 164,
+      "t1": 188,
+      "turn": 119,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": null,
+      "covered": [
+        [
+          164,
+          188
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p7-c9|f64"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p7-c10",
+      "speaker": "p7",
+      "subject": "p4",
+      "place": "library",
+      "t0": 176,
+      "t1": 188,
+      "turn": 120,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": null,
+      "covered": [
+        [
+          176,
+          188
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p7-c10|f84"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p7-c11",
+      "speaker": "p7",
+      "subject": "p2",
+      "place": "library",
+      "t0": 184,
+      "t1": 188,
+      "turn": 121,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": null,
+      "covered": [
+        [
+          184,
+          188
+        ],
+        [
+          184,
+          188
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p7-c11|f138",
+        "p7-c11|f86"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p7-c12",
+      "speaker": "p7",
+      "subject": "p2",
+      "place": "library",
+      "t0": 184,
+      "t1": 204,
+      "turn": 122,
+      "modality": "THROUGHOUT",
+      "verdict": "INDETERMINATE",
+      "coverage": 0.2,
+      "uncovered": 16,
+      "relayed_from": "p2",
+      "covered": [
+        [
+          184,
+          188
+        ],
+        [
+          184,
+          204
+        ]
+      ],
+      "gaps": [
+        [
+          188,
+          204
+        ]
+      ],
+      "support": [
+        "p7-c12|f138",
+        "p7-c12|f86"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p7-c13",
+      "speaker": "p7",
+      "subject": "p7",
+      "place": "terrace",
+      "t0": 211,
+      "t1": 234,
+      "turn": 123,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": null,
+      "covered": [
+        [
+          211,
+          234
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p7-c13|f65"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p7-c14",
+      "speaker": "p7",
+      "subject": "p7",
+      "place": "scullery",
+      "t0": 251,
+      "t1": 275,
+      "turn": 124,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": null,
+      "covered": [
+        [
+          251,
+          275
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p7-c14|f66"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p7-c15",
+      "speaker": "p7",
+      "subject": "p5",
+      "place": "scullery",
+      "t0": 272,
+      "t1": 275,
+      "turn": 125,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": null,
+      "covered": [
+        [
+          272,
+          275
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p7-c15|f99"
+      ],
+      "conflict": []
+    },
+    {
+      "id": "p7-c16",
+      "speaker": "p7",
+      "subject": "p7",
+      "place": "terrace",
+      "t0": 292,
+      "t1": 300,
+      "turn": 126,
+      "modality": "THROUGHOUT",
+      "verdict": "SUPPORTED",
+      "coverage": 1.0,
+      "uncovered": 0,
+      "relayed_from": null,
+      "covered": [
+        [
+          292,
+          300
+        ]
+      ],
+      "gaps": [],
+      "support": [
+        "p7-c16|f67"
+      ],
+      "conflict": []
+    }
+  ],
+  "evidence": {
+    "support": [
+      {
+        "claim_id": "p1-c1",
+        "id": "p1-c1|f1",
+        "fact_id": "f1",
+        "src": "witnessed",
+        "place": "ballroom",
+        "agent": "p1",
+        "t0": 2,
+        "t1": 33,
+        "covers_t0": 2,
+        "covers_t1": 33
+      },
+      {
+        "claim_id": "p1-c10",
+        "id": "p1-c10|f5",
+        "fact_id": "f5",
+        "src": "witnessed",
+        "place": "study",
+        "agent": "p1",
+        "t0": 127,
+        "t1": 162,
+        "covers_t0": 127,
+        "covers_t1": 162
+      },
+      {
+        "claim_id": "p1-c11",
+        "id": "p1-c11|f135",
+        "fact_id": "f135",
+        "src": "hearsay",
+        "place": "ballroom",
+        "agent": "p1",
+        "t0": 128,
+        "t1": 144,
+        "covers_t0": 128,
+        "covers_t1": 144
+      },
+      {
+        "claim_id": "p1-c12",
+        "id": "p1-c12|f89",
+        "fact_id": "f89",
+        "src": "witnessed",
+        "place": "scullery",
+        "agent": "p1",
+        "t0": 174,
+        "t1": 178,
+        "covers_t0": 174,
+        "covers_t1": 178
+      },
+      {
+        "claim_id": "p1-c13",
+        "id": "p1-c13|f6",
+        "fact_id": "f6",
+        "src": "witnessed",
+        "place": "scullery",
+        "agent": "p1",
+        "t0": 174,
+        "t1": 208,
+        "covers_t0": 174,
+        "covers_t1": 208
+      },
+      {
+        "claim_id": "p1-c14",
+        "id": "p1-c14|f7",
+        "fact_id": "f7",
+        "src": "witnessed",
+        "place": "cellar",
+        "agent": "p1",
+        "t0": 219,
+        "t1": 238,
+        "covers_t0": 219,
+        "covers_t1": 238
+      },
+      {
+        "claim_id": "p1-c15",
+        "id": "p1-c15|f96",
+        "fact_id": "f96",
+        "src": "witnessed",
+        "place": "cellar",
+        "agent": "p1",
+        "t0": 219,
+        "t1": 238,
+        "covers_t0": 219,
+        "covers_t1": 238
+      },
+      {
+        "claim_id": "p1-c16",
+        "id": "p1-c16|f8",
+        "fact_id": "f8",
+        "src": "witnessed",
+        "place": "library",
+        "agent": "p1",
+        "t0": 255,
+        "t1": 269,
+        "covers_t0": 255,
+        "covers_t1": 269
+      },
+      {
+        "claim_id": "p1-c17",
+        "id": "p1-c17|f9",
+        "fact_id": "f9",
+        "src": "witnessed",
+        "place": "ballroom",
+        "agent": "p1",
+        "t0": 282,
+        "t1": 294,
+        "covers_t0": 282,
+        "covers_t1": 294
+      },
+      {
+        "claim_id": "p1-c18",
+        "id": "p1-c18|f103",
+        "fact_id": "f103",
+        "src": "witnessed",
+        "place": "ballroom",
+        "agent": "p1",
+        "t0": 288,
+        "t1": 294,
+        "covers_t0": 288,
+        "covers_t1": 294
+      },
+      {
+        "claim_id": "p1-c2",
+        "id": "p1-c2|f108",
+        "fact_id": "f108",
+        "src": "hearsay",
+        "place": "ballroom",
+        "agent": "p1",
+        "t0": 6,
+        "t1": 24,
+        "covers_t0": 6,
+        "covers_t1": 24
+      },
+      {
+        "claim_id": "p1-c2",
+        "id": "p1-c2|f68",
+        "fact_id": "f68",
+        "src": "witnessed",
+        "place": "ballroom",
+        "agent": "p1",
+        "t0": 6,
+        "t1": 24,
+        "covers_t0": 6,
+        "covers_t1": 24
+      },
+      {
+        "claim_id": "p1-c3",
+        "id": "p1-c3|f108",
+        "fact_id": "f108",
+        "src": "hearsay",
+        "place": "ballroom",
+        "agent": "p1",
+        "t0": 6,
+        "t1": 24,
+        "covers_t0": 6,
+        "covers_t1": 24
+      },
+      {
+        "claim_id": "p1-c3",
+        "id": "p1-c3|f68",
+        "fact_id": "f68",
+        "src": "witnessed",
+        "place": "ballroom",
+        "agent": "p1",
+        "t0": 6,
+        "t1": 24,
+        "covers_t0": 6,
+        "covers_t1": 24
+      },
+      {
+        "claim_id": "p1-c4",
+        "id": "p1-c4|f2",
+        "fact_id": "f2",
+        "src": "witnessed",
+        "place": "terrace",
+        "agent": "p1",
+        "t0": 43,
+        "t1": 59,
+        "covers_t0": 43,
+        "covers_t1": 59
+      },
+      {
+        "claim_id": "p1-c5",
+        "id": "p1-c5|f3",
+        "fact_id": "f3",
+        "src": "witnessed",
+        "place": "conservatory",
+        "agent": "p1",
+        "t0": 71,
+        "t1": 95,
+        "covers_t0": 71,
+        "covers_t1": 95
+      },
+      {
+        "claim_id": "p1-c6",
+        "id": "p1-c6|f148",
+        "fact_id": "f148",
+        "src": "hearsay",
+        "place": "hall",
+        "agent": "p1",
+        "t0": 102,
+        "t1": 122,
+        "covers_t0": 102,
+        "covers_t1": 122
+      },
+      {
+        "claim_id": "p1-c7",
+        "id": "p1-c7|f4",
+        "fact_id": "f4",
+        "src": "witnessed",
+        "place": "hall",
+        "agent": "p1",
+        "t0": 106,
+        "t1": 123,
+        "covers_t0": 106,
+        "covers_t1": 123
+      },
+      {
+        "claim_id": "p1-c8",
+        "id": "p1-c8|f78",
+        "fact_id": "f78",
+        "src": "witnessed",
+        "place": "hall",
+        "agent": "p1",
+        "t0": 118,
+        "t1": 123,
+        "covers_t0": 118,
+        "covers_t1": 123
+      },
+      {
+        "claim_id": "p1-c9",
+        "id": "p1-c9|f116",
+        "fact_id": "f116",
+        "src": "hearsay",
+        "place": "kitchen",
+        "agent": "p1",
+        "t0": 122,
+        "t1": 147,
+        "covers_t0": 122,
+        "covers_t1": 147
+      },
+      {
+        "claim_id": "p2-c1",
+        "id": "p2-c1|f10",
+        "fact_id": "f10",
+        "src": "witnessed",
+        "place": "gallery",
+        "agent": "p2",
+        "t0": 3,
+        "t1": 15,
+        "covers_t0": 3,
+        "covers_t1": 15
+      },
+      {
+        "claim_id": "p2-c10",
+        "id": "p2-c10|f147",
+        "fact_id": "f147",
+        "src": "hearsay",
+        "place": "hall",
+        "agent": "p2",
+        "t0": 102,
+        "t1": 122,
+        "covers_t0": 102,
+        "covers_t1": 122
+      },
+      {
+        "claim_id": "p2-c11",
+        "id": "p2-c11|f79",
+        "fact_id": "f79",
+        "src": "witnessed",
+        "place": "hall",
+        "agent": "p2",
+        "t0": 118,
+        "t1": 123,
+        "covers_t0": 118,
+        "covers_t1": 123
+      },
+      {
+        "claim_id": "p2-c12",
+        "id": "p2-c12|f14",
+        "fact_id": "f14",
+        "src": "witnessed",
+        "place": "hall",
+        "agent": "p2",
+        "t0": 118,
+        "t1": 149,
+        "covers_t0": 118,
+        "covers_t1": 149
+      },
+      {
+        "claim_id": "p2-c13",
+        "id": "p2-c13|f88",
+        "fact_id": "f88",
+        "src": "witnessed",
+        "place": "scullery",
+        "agent": "p2",
+        "t0": 174,
+        "t1": 178,
+        "covers_t0": 174,
+        "covers_t1": 178
+      },
+      {
+        "claim_id": "p2-c14",
+        "id": "p2-c14|f87",
+        "fact_id": "f87",
+        "src": "witnessed",
+        "place": "library",
+        "agent": "p2",
+        "t0": 184,
+        "t1": 188,
+        "covers_t0": 184,
+        "covers_t1": 188
+      },
+      {
+        "claim_id": "p2-c15",
+        "id": "p2-c15|f91",
+        "fact_id": "f91",
+        "src": "witnessed",
+        "place": "library",
+        "agent": "p2",
+        "t0": 184,
+        "t1": 201,
+        "covers_t0": 184,
+        "covers_t1": 201
+      },
+      {
+        "claim_id": "p2-c16",
+        "id": "p2-c16|f16",
+        "fact_id": "f16",
+        "src": "witnessed",
+        "place": "library",
+        "agent": "p2",
+        "t0": 184,
+        "t1": 204,
+        "covers_t0": 184,
+        "covers_t1": 204
+      },
+      {
+        "claim_id": "p2-c17",
+        "id": "p2-c17|f144",
+        "fact_id": "f144",
+        "src": "hearsay",
+        "place": "kitchen",
+        "agent": "p2",
+        "t0": 200,
+        "t1": 219,
+        "covers_t0": 200,
+        "covers_t1": 219
+      },
+      {
+        "claim_id": "p2-c18",
+        "id": "p2-c18|f93",
+        "fact_id": "f93",
+        "src": "witnessed",
+        "place": "conservatory",
+        "agent": "p2",
+        "t0": 237,
+        "t1": 243,
+        "covers_t0": 237,
+        "covers_t1": 243
+      },
+      {
+        "claim_id": "p2-c19",
+        "id": "p2-c19|f18",
+        "fact_id": "f18",
+        "src": "witnessed",
+        "place": "terrace",
+        "agent": "p2",
+        "t0": 255,
+        "t1": 284,
+        "covers_t0": 255,
+        "covers_t1": 284
+      },
+      {
+        "claim_id": "p2-c2",
+        "id": "p2-c2|f124",
+        "fact_id": "f124",
+        "src": "hearsay",
+        "place": "study",
+        "agent": "p2",
+        "t0": 6,
+        "t1": 23,
+        "covers_t0": 6,
+        "covers_t1": 23
+      },
+      {
+        "claim_id": "p2-c20",
+        "id": "p2-c20|f19",
+        "fact_id": "f19",
+        "src": "witnessed",
+        "place": "study",
+        "agent": "p2",
+        "t0": 289,
+        "t1": 300,
+        "covers_t0": 289,
+        "covers_t1": 300
+      },
+      {
+        "claim_id": "p2-c3",
+        "id": "p2-c3|f106",
+        "fact_id": "f106",
+        "src": "hearsay",
+        "place": "hall",
+        "agent": "p2",
+        "t0": 8,
+        "t1": 33,
+        "covers_t0": 8,
+        "covers_t1": 33
+      },
+      {
+        "claim_id": "p2-c3",
+        "id": "p2-c3|f136",
+        "fact_id": "f136",
+        "src": "hearsay",
+        "place": "hall",
+        "agent": "p2",
+        "t0": 8,
+        "t1": 33,
+        "covers_t0": 8,
+        "covers_t1": 33
+      },
+      {
+        "claim_id": "p2-c4",
+        "id": "p2-c4|f125",
+        "fact_id": "f125",
+        "src": "hearsay",
+        "place": "kitchen",
+        "agent": "p2",
+        "t0": 34,
+        "t1": 58,
+        "covers_t0": 34,
+        "covers_t1": 47
+      },
+      {
+        "claim_id": "p2-c4",
+        "id": "p2-c4|f70",
+        "fact_id": "f70",
+        "src": "witnessed",
+        "place": "kitchen",
+        "agent": "p2",
+        "t0": 34,
+        "t1": 47,
+        "covers_t0": 34,
+        "covers_t1": 47
+      },
+      {
+        "claim_id": "p2-c5",
+        "id": "p2-c5|f125",
+        "fact_id": "f125",
+        "src": "hearsay",
+        "place": "kitchen",
+        "agent": "p2",
+        "t0": 34,
+        "t1": 58,
+        "covers_t0": 34,
+        "covers_t1": 58
+      },
+      {
+        "claim_id": "p2-c5",
+        "id": "p2-c5|f70",
+        "fact_id": "f70",
+        "src": "witnessed",
+        "place": "kitchen",
+        "agent": "p2",
+        "t0": 34,
+        "t1": 47,
+        "covers_t0": 34,
+        "covers_t1": 47
+      },
+      {
+        "claim_id": "p2-c6",
+        "id": "p2-c6|f126",
+        "fact_id": "f126",
+        "src": "hearsay",
+        "place": "study",
+        "agent": "p2",
+        "t0": 62,
+        "t1": 74,
+        "covers_t0": 62,
+        "covers_t1": 74
+      },
+      {
+        "claim_id": "p2-c7",
+        "id": "p2-c7|f12",
+        "fact_id": "f12",
+        "src": "witnessed",
+        "place": "gallery",
+        "agent": "p2",
+        "t0": 65,
+        "t1": 81,
+        "covers_t0": 65,
+        "covers_t1": 81
+      },
+      {
+        "claim_id": "p2-c8",
+        "id": "p2-c8|f13",
+        "fact_id": "f13",
+        "src": "witnessed",
+        "place": "billiard",
+        "agent": "p2",
+        "t0": 87,
+        "t1": 115,
+        "covers_t0": 87,
+        "covers_t1": 115
+      },
+      {
+        "claim_id": "p2-c9",
+        "id": "p2-c9|f145",
+        "fact_id": "f145",
+        "src": "hearsay",
+        "place": "kitchen",
+        "agent": "p2",
+        "t0": 102,
+        "t1": 112,
+        "covers_t0": 102,
+        "covers_t1": 112
+      },
+      {
+        "claim_id": "p3-c1",
+        "id": "p3-c1|f107",
+        "fact_id": "f107",
+        "src": "hearsay",
+        "place": "ballroom",
+        "agent": "p3",
+        "t0": 2,
+        "t1": 33,
+        "covers_t0": 2,
+        "covers_t1": 33
+      },
+      {
+        "claim_id": "p3-c1",
+        "id": "p3-c1|f69",
+        "fact_id": "f69",
+        "src": "witnessed",
+        "place": "ballroom",
+        "agent": "p3",
+        "t0": 6,
+        "t1": 24,
+        "covers_t0": 6,
+        "covers_t1": 24
+      },
+      {
+        "claim_id": "p3-c10",
+        "id": "p3-c10|f109",
+        "fact_id": "f109",
+        "src": "hearsay",
+        "place": "ballroom",
+        "agent": "p3",
+        "t0": 127,
+        "t1": 160,
+        "covers_t0": 127,
+        "covers_t1": 160
+      },
+      {
+        "claim_id": "p3-c10",
+        "id": "p3-c10|f131",
+        "fact_id": "f131",
+        "src": "hearsay",
+        "place": "ballroom",
+        "agent": "p3",
+        "t0": 128,
+        "t1": 144,
+        "covers_t0": 128,
+        "covers_t1": 144
+      },
+      {
+        "claim_id": "p3-c10",
+        "id": "p3-c10|f83",
+        "fact_id": "f83",
+        "src": "witnessed",
+        "place": "ballroom",
+        "agent": "p3",
+        "t0": 158,
+        "t1": 160,
+        "covers_t0": 158,
+        "covers_t1": 160
+      },
+      {
+        "claim_id": "p3-c11",
+        "id": "p3-c11|f109",
+        "fact_id": "f109",
+        "src": "hearsay",
+        "place": "ballroom",
+        "agent": "p3",
+        "t0": 127,
+        "t1": 160,
+        "covers_t0": 128,
+        "covers_t1": 144
+      },
+      {
+        "claim_id": "p3-c11",
+        "id": "p3-c11|f131",
+        "fact_id": "f131",
+        "src": "hearsay",
+        "place": "ballroom",
+        "agent": "p3",
+        "t0": 128,
+        "t1": 144,
+        "covers_t0": 128,
+        "covers_t1": 144
+      },
+      {
+        "claim_id": "p3-c12",
+        "id": "p3-c12|f25",
+        "fact_id": "f25",
+        "src": "witnessed",
+        "place": "terrace",
+        "agent": "p3",
+        "t0": 135,
+        "t1": 148,
+        "covers_t0": 135,
+        "covers_t1": 148
+      },
+      {
+        "claim_id": "p3-c13",
+        "id": "p3-c13|f109",
+        "fact_id": "f109",
+        "src": "hearsay",
+        "place": "ballroom",
+        "agent": "p3",
+        "t0": 127,
+        "t1": 160,
+        "covers_t0": 158,
+        "covers_t1": 160
+      },
+      {
+        "claim_id": "p3-c13",
+        "id": "p3-c13|f83",
+        "fact_id": "f83",
+        "src": "witnessed",
+        "place": "ballroom",
+        "agent": "p3",
+        "t0": 158,
+        "t1": 160,
+        "covers_t0": 158,
+        "covers_t1": 160
+      },
+      {
+        "claim_id": "p3-c14",
+        "id": "p3-c14|f26",
+        "fact_id": "f26",
+        "src": "witnessed",
+        "place": "ballroom",
+        "agent": "p3",
+        "t0": 158,
+        "t1": 171,
+        "covers_t0": 158,
+        "covers_t1": 171
+      },
+      {
+        "claim_id": "p3-c15",
+        "id": "p3-c15|f27",
+        "fact_id": "f27",
+        "src": "witnessed",
+        "place": "billiard",
+        "agent": "p3",
+        "t0": 180,
+        "t1": 213,
+        "covers_t0": 180,
+        "covers_t1": 213
+      },
+      {
+        "claim_id": "p3-c16",
+        "id": "p3-c16|f28",
+        "fact_id": "f28",
+        "src": "witnessed",
+        "place": "kitchen",
+        "agent": "p3",
+        "t0": 225,
+        "t1": 254,
+        "covers_t0": 225,
+        "covers_t1": 254
+      },
+      {
+        "claim_id": "p3-c17",
+        "id": "p3-c17|f102",
+        "fact_id": "f102",
+        "src": "witnessed",
+        "place": "scullery",
+        "agent": "p3",
+        "t0": 277,
+        "t1": 287,
+        "covers_t0": 277,
+        "covers_t1": 287
+      },
+      {
+        "claim_id": "p3-c18",
+        "id": "p3-c18|f29",
+        "fact_id": "f29",
+        "src": "witnessed",
+        "place": "scullery",
+        "agent": "p3",
+        "t0": 277,
+        "t1": 300,
+        "covers_t0": 277,
+        "covers_t1": 300
+      },
+      {
+        "claim_id": "p3-c2",
+        "id": "p3-c2|f107",
+        "fact_id": "f107",
+        "src": "hearsay",
+        "place": "ballroom",
+        "agent": "p3",
+        "t0": 2,
+        "t1": 33,
+        "covers_t0": 6,
+        "covers_t1": 24
+      },
+      {
+        "claim_id": "p3-c2",
+        "id": "p3-c2|f69",
+        "fact_id": "f69",
+        "src": "witnessed",
+        "place": "ballroom",
+        "agent": "p3",
+        "t0": 6,
+        "t1": 24,
+        "covers_t0": 6,
+        "covers_t1": 24
+      },
+      {
+        "claim_id": "p3-c3",
+        "id": "p3-c3|f20",
+        "fact_id": "f20",
+        "src": "witnessed",
+        "place": "ballroom",
+        "agent": "p3",
+        "t0": 6,
+        "t1": 24,
+        "covers_t0": 6,
+        "covers_t1": 24
+      },
+      {
+        "claim_id": "p3-c4",
+        "id": "p3-c4|f21",
+        "fact_id": "f21",
+        "src": "witnessed",
+        "place": "billiard",
+        "agent": "p3",
+        "t0": 33,
+        "t1": 48,
+        "covers_t0": 33,
+        "covers_t1": 48
+      },
+      {
+        "claim_id": "p3-c5",
+        "id": "p3-c5|f130",
+        "fact_id": "f130",
+        "src": "hearsay",
+        "place": "kitchen",
+        "agent": "p3",
+        "t0": 34,
+        "t1": 47,
+        "covers_t0": 34,
+        "covers_t1": 47
+      },
+      {
+        "claim_id": "p3-c6",
+        "id": "p3-c6|f22",
+        "fact_id": "f22",
+        "src": "witnessed",
+        "place": "study",
+        "agent": "p3",
+        "t0": 55,
+        "t1": 69,
+        "covers_t0": 55,
+        "covers_t1": 69
+      },
+      {
+        "claim_id": "p3-c7",
+        "id": "p3-c7|f72",
+        "fact_id": "f72",
+        "src": "witnessed",
+        "place": "study",
+        "agent": "p3",
+        "t0": 62,
+        "t1": 69,
+        "covers_t0": 62,
+        "covers_t1": 69
+      },
+      {
+        "claim_id": "p3-c8",
+        "id": "p3-c8|f23",
+        "fact_id": "f23",
+        "src": "witnessed",
+        "place": "cellar",
+        "agent": "p3",
+        "t0": 78,
+        "t1": 95,
+        "covers_t0": 78,
+        "covers_t1": 95
+      },
+      {
+        "claim_id": "p3-c9",
+        "id": "p3-c9|f24",
+        "fact_id": "f24",
+        "src": "witnessed",
+        "place": "ballroom",
+        "agent": "p3",
+        "t0": 99,
+        "t1": 125,
+        "covers_t0": 99,
+        "covers_t1": 125
+      },
+      {
+        "claim_id": "p4-c1",
+        "id": "p4-c1|f30",
+        "fact_id": "f30",
+        "src": "witnessed",
+        "place": "billiard",
+        "agent": "p4",
+        "t0": 0,
+        "t1": 13,
+        "covers_t0": 0,
+        "covers_t1": 13
+      },
+      {
+        "claim_id": "p4-c10",
+        "id": "p4-c10|f37",
+        "fact_id": "f37",
+        "src": "witnessed",
+        "place": "library",
+        "agent": "p4",
+        "t0": 176,
+        "t1": 201,
+        "covers_t0": 176,
+        "covers_t1": 201
+      },
+      {
+        "claim_id": "p4-c11",
+        "id": "p4-c11|f90",
+        "fact_id": "f90",
+        "src": "witnessed",
+        "place": "library",
+        "agent": "p4",
+        "t0": 184,
+        "t1": 201,
+        "covers_t0": 184,
+        "covers_t1": 201
+      },
+      {
+        "claim_id": "p4-c12",
+        "id": "p4-c12|f38",
+        "fact_id": "f38",
+        "src": "witnessed",
+        "place": "cellar",
+        "agent": "p4",
+        "t0": 218,
+        "t1": 238,
+        "covers_t0": 218,
+        "covers_t1": 238
+      },
+      {
+        "claim_id": "p4-c13",
+        "id": "p4-c13|f95",
+        "fact_id": "f95",
+        "src": "witnessed",
+        "place": "cellar",
+        "agent": "p4",
+        "t0": 219,
+        "t1": 238,
+        "covers_t0": 219,
+        "covers_t1": 238
+      },
+      {
+        "claim_id": "p4-c14",
+        "id": "p4-c14|f39",
+        "fact_id": "f39",
+        "src": "witnessed",
+        "place": "gallery",
+        "agent": "p4",
+        "t0": 243,
+        "t1": 263,
+        "covers_t0": 243,
+        "covers_t1": 263
+      },
+      {
+        "claim_id": "p4-c15",
+        "id": "p4-c15|f98",
+        "fact_id": "f98",
+        "src": "witnessed",
+        "place": "cellar",
+        "agent": "p4",
+        "t0": 268,
+        "t1": 284,
+        "covers_t0": 268,
+        "covers_t1": 284
+      },
+      {
+        "claim_id": "p4-c16",
+        "id": "p4-c16|f40",
+        "fact_id": "f40",
+        "src": "witnessed",
+        "place": "cellar",
+        "agent": "p4",
+        "t0": 268,
+        "t1": 300,
+        "covers_t0": 268,
+        "covers_t1": 300
+      },
+      {
+        "claim_id": "p4-c2",
+        "id": "p4-c2|f31",
+        "fact_id": "f31",
+        "src": "witnessed",
+        "place": "gallery",
+        "agent": "p4",
+        "t0": 19,
+        "t1": 28,
+        "covers_t0": 19,
+        "covers_t1": 28
+      },
+      {
+        "claim_id": "p4-c3",
+        "id": "p4-c3|f32",
+        "fact_id": "f32",
+        "src": "witnessed",
+        "place": "cellar",
+        "agent": "p4",
+        "t0": 33,
+        "t1": 53,
+        "covers_t0": 33,
+        "covers_t1": 53
+      },
+      {
+        "claim_id": "p4-c4",
+        "id": "p4-c4|f73",
+        "fact_id": "f73",
+        "src": "witnessed",
+        "place": "study",
+        "agent": "p4",
+        "t0": 62,
+        "t1": 69,
+        "covers_t0": 62,
+        "covers_t1": 69
+      },
+      {
+        "claim_id": "p4-c5",
+        "id": "p4-c5|f33",
+        "fact_id": "f33",
+        "src": "witnessed",
+        "place": "study",
+        "agent": "p4",
+        "t0": 62,
+        "t1": 74,
+        "covers_t0": 62,
+        "covers_t1": 74
+      },
+      {
+        "claim_id": "p4-c6",
+        "id": "p4-c6|f34",
+        "fact_id": "f34",
+        "src": "witnessed",
+        "place": "hall",
+        "agent": "p4",
+        "t0": 78,
+        "t1": 87,
+        "covers_t0": 78,
+        "covers_t1": 87
+      },
+      {
+        "claim_id": "p4-c8",
+        "id": "p4-c8|f35",
+        "fact_id": "f35",
+        "src": "witnessed",
+        "place": "kitchen",
+        "agent": "p4",
+        "t0": 102,
+        "t1": 122,
+        "covers_t0": 102,
+        "covers_t1": 122
+      },
+      {
+        "claim_id": "p4-c8",
+        "id": "p4-c8|f36",
+        "fact_id": "f36",
+        "src": "witnessed",
+        "place": "kitchen",
+        "agent": "p4",
+        "t0": 122,
+        "t1": 147,
+        "covers_t0": 122,
+        "covers_t1": 147
+      },
+      {
+        "claim_id": "p4-c9",
+        "id": "p4-c9|f112",
+        "fact_id": "f112",
+        "src": "hearsay",
+        "place": "library",
+        "agent": "p4",
+        "t0": 164,
+        "t1": 188,
+        "covers_t0": 176,
+        "covers_t1": 188
+      },
+      {
+        "claim_id": "p4-c9",
+        "id": "p4-c9|f85",
+        "fact_id": "f85",
+        "src": "witnessed",
+        "place": "library",
+        "agent": "p4",
+        "t0": 176,
+        "t1": 188,
+        "covers_t0": 176,
+        "covers_t1": 188
+      },
+      {
+        "claim_id": "p4-c9",
+        "id": "p4-c9|f127",
+        "fact_id": "f127",
+        "src": "hearsay",
+        "place": "library",
+        "agent": "p4",
+        "t0": 184,
+        "t1": 188,
+        "covers_t0": 184,
+        "covers_t1": 188
+      },
+      {
+        "claim_id": "p5-c1",
+        "id": "p5-c1|f41",
+        "fact_id": "f41",
+        "src": "witnessed",
+        "place": "conservatory",
+        "agent": "p5",
+        "t0": 4,
+        "t1": 30,
+        "covers_t0": 4,
+        "covers_t1": 30
+      },
+      {
+        "claim_id": "p5-c10",
+        "id": "p5-c10|f46",
+        "fact_id": "f46",
+        "src": "witnessed",
+        "place": "study",
+        "agent": "p5",
+        "t0": 167,
+        "t1": 189,
+        "covers_t0": 167,
+        "covers_t1": 189
+      },
+      {
+        "claim_id": "p5-c11",
+        "id": "p5-c11|f143",
+        "fact_id": "f143",
+        "src": "hearsay",
+        "place": "library",
+        "agent": "p5",
+        "t0": 184,
+        "t1": 201,
+        "covers_t0": 184,
+        "covers_t1": 201
+      },
+      {
+        "claim_id": "p5-c12",
+        "id": "p5-c12|f47",
+        "fact_id": "f47",
+        "src": "witnessed",
+        "place": "kitchen",
+        "agent": "p5",
+        "t0": 200,
+        "t1": 219,
+        "covers_t0": 200,
+        "covers_t1": 219
+      },
+      {
+        "claim_id": "p5-c13",
+        "id": "p5-c13|f94",
+        "fact_id": "f94",
+        "src": "witnessed",
+        "place": "conservatory",
+        "agent": "p5",
+        "t0": 237,
+        "t1": 243,
+        "covers_t0": 237,
+        "covers_t1": 243
+      },
+      {
+        "claim_id": "p5-c14",
+        "id": "p5-c14|f48",
+        "fact_id": "f48",
+        "src": "witnessed",
+        "place": "conservatory",
+        "agent": "p5",
+        "t0": 237,
+        "t1": 267,
+        "covers_t0": 237,
+        "covers_t1": 267
+      },
+      {
+        "claim_id": "p5-c15",
+        "id": "p5-c15|f100",
+        "fact_id": "f100",
+        "src": "witnessed",
+        "place": "scullery",
+        "agent": "p5",
+        "t0": 272,
+        "t1": 275,
+        "covers_t0": 272,
+        "covers_t1": 275
+      },
+      {
+        "claim_id": "p5-c16",
+        "id": "p5-c16|f49",
+        "fact_id": "f49",
+        "src": "witnessed",
+        "place": "scullery",
+        "agent": "p5",
+        "t0": 272,
+        "t1": 287,
+        "covers_t0": 272,
+        "covers_t1": 287
+      },
+      {
+        "claim_id": "p5-c17",
+        "id": "p5-c17|f101",
+        "fact_id": "f101",
+        "src": "witnessed",
+        "place": "scullery",
+        "agent": "p5",
+        "t0": 277,
+        "t1": 287,
+        "covers_t0": 277,
+        "covers_t1": 287
+      },
+      {
+        "claim_id": "p5-c17",
+        "id": "p5-c17|f132",
+        "fact_id": "f132",
+        "src": "hearsay",
+        "place": "scullery",
+        "agent": "p5",
+        "t0": 277,
+        "t1": 300,
+        "covers_t0": 277,
+        "covers_t1": 287
+      },
+      {
+        "claim_id": "p5-c18",
+        "id": "p5-c18|f101",
+        "fact_id": "f101",
+        "src": "witnessed",
+        "place": "scullery",
+        "agent": "p5",
+        "t0": 277,
+        "t1": 287,
+        "covers_t0": 277,
+        "covers_t1": 287
+      },
+      {
+        "claim_id": "p5-c18",
+        "id": "p5-c18|f132",
+        "fact_id": "f132",
+        "src": "hearsay",
+        "place": "scullery",
+        "agent": "p5",
+        "t0": 277,
+        "t1": 300,
+        "covers_t0": 277,
+        "covers_t1": 300
+      },
+      {
+        "claim_id": "p5-c2",
+        "id": "p5-c2|f139",
+        "fact_id": "f139",
+        "src": "hearsay",
+        "place": "kitchen",
+        "agent": "p5",
+        "t0": 34,
+        "t1": 47,
+        "covers_t0": 34,
+        "covers_t1": 47
+      },
+      {
+        "claim_id": "p5-c3",
+        "id": "p5-c3|f42",
+        "fact_id": "f42",
+        "src": "witnessed",
+        "place": "library",
+        "agent": "p5",
+        "t0": 41,
+        "t1": 59,
+        "covers_t0": 41,
+        "covers_t1": 59
+      },
+      {
+        "claim_id": "p5-c4",
+        "id": "p5-c4|f43",
+        "fact_id": "f43",
+        "src": "witnessed",
+        "place": "kitchen",
+        "agent": "p5",
+        "t0": 88,
+        "t1": 112,
+        "covers_t0": 88,
+        "covers_t1": 112
+      },
+      {
+        "claim_id": "p5-c5",
+        "id": "p5-c5|f77",
+        "fact_id": "f77",
+        "src": "witnessed",
+        "place": "kitchen",
+        "agent": "p5",
+        "t0": 102,
+        "t1": 112,
+        "covers_t0": 102,
+        "covers_t1": 112
+      },
+      {
+        "claim_id": "p5-c6",
+        "id": "p5-c6|f142",
+        "fact_id": "f142",
+        "src": "hearsay",
+        "place": "hall",
+        "agent": "p5",
+        "t0": 118,
+        "t1": 123,
+        "covers_t0": 118,
+        "covers_t1": 123
+      },
+      {
+        "claim_id": "p5-c7",
+        "id": "p5-c7|f44",
+        "fact_id": "f44",
+        "src": "witnessed",
+        "place": "ballroom",
+        "agent": "p5",
+        "t0": 128,
+        "t1": 144,
+        "covers_t0": 128,
+        "covers_t1": 144
+      },
+      {
+        "claim_id": "p5-c8",
+        "id": "p5-c8|f81",
+        "fact_id": "f81",
+        "src": "witnessed",
+        "place": "ballroom",
+        "agent": "p5",
+        "t0": 128,
+        "t1": 144,
+        "covers_t0": 128,
+        "covers_t1": 144
+      },
+      {
+        "claim_id": "p5-c9",
+        "id": "p5-c9|f45",
+        "fact_id": "f45",
+        "src": "witnessed",
+        "place": "conservatory",
+        "agent": "p5",
+        "t0": 146,
+        "t1": 160,
+        "covers_t0": 146,
+        "covers_t1": 160
+      },
+      {
+        "claim_id": "p6-c1",
+        "id": "p6-c1|f123",
+        "fact_id": "f123",
+        "src": "hearsay",
+        "place": "gallery",
+        "agent": "p6",
+        "t0": 3,
+        "t1": 15,
+        "covers_t0": 3,
+        "covers_t1": 15
+      },
+      {
+        "claim_id": "p6-c10",
+        "id": "p6-c10|f53",
+        "fact_id": "f53",
+        "src": "witnessed",
+        "place": "library",
+        "agent": "p6",
+        "t0": 103,
+        "t1": 114,
+        "covers_t0": 103,
+        "covers_t1": 114
+      },
+      {
+        "claim_id": "p6-c11",
+        "id": "p6-c11|f141",
+        "fact_id": "f141",
+        "src": "hearsay",
+        "place": "ballroom",
+        "agent": "p6",
+        "t0": 128,
+        "t1": 144,
+        "covers_t0": 128,
+        "covers_t1": 144
+      },
+      {
+        "claim_id": "p6-c11",
+        "id": "p6-c11|f80",
+        "fact_id": "f80",
+        "src": "witnessed",
+        "place": "ballroom",
+        "agent": "p6",
+        "t0": 128,
+        "t1": 144,
+        "covers_t0": 128,
+        "covers_t1": 144
+      },
+      {
+        "claim_id": "p6-c12",
+        "id": "p6-c12|f141",
+        "fact_id": "f141",
+        "src": "hearsay",
+        "place": "ballroom",
+        "agent": "p6",
+        "t0": 128,
+        "t1": 144,
+        "covers_t0": 128,
+        "covers_t1": 144
+      },
+      {
+        "claim_id": "p6-c12",
+        "id": "p6-c12|f80",
+        "fact_id": "f80",
+        "src": "witnessed",
+        "place": "ballroom",
+        "agent": "p6",
+        "t0": 128,
+        "t1": 144,
+        "covers_t0": 128,
+        "covers_t1": 144
+      },
+      {
+        "claim_id": "p6-c13",
+        "id": "p6-c13|f82",
+        "fact_id": "f82",
+        "src": "witnessed",
+        "place": "ballroom",
+        "agent": "p6",
+        "t0": 158,
+        "t1": 160,
+        "covers_t0": 158,
+        "covers_t1": 160
+      },
+      {
+        "claim_id": "p6-c14",
+        "id": "p6-c14|f55",
+        "fact_id": "f55",
+        "src": "witnessed",
+        "place": "conservatory",
+        "agent": "p6",
+        "t0": 162,
+        "t1": 179,
+        "covers_t0": 162,
+        "covers_t1": 179
+      },
+      {
+        "claim_id": "p6-c15",
+        "id": "p6-c15|f56",
+        "fact_id": "f56",
+        "src": "witnessed",
+        "place": "billiard",
+        "agent": "p6",
+        "t0": 190,
+        "t1": 200,
+        "covers_t0": 190,
+        "covers_t1": 200
+      },
+      {
+        "claim_id": "p6-c16",
+        "id": "p6-c16|f133",
+        "fact_id": "f133",
+        "src": "hearsay",
+        "place": "cellar",
+        "agent": "p6",
+        "t0": 219,
+        "t1": 238,
+        "covers_t0": 219,
+        "covers_t1": 238
+      },
+      {
+        "claim_id": "p6-c17",
+        "id": "p6-c17|f58",
+        "fact_id": "f58",
+        "src": "witnessed",
+        "place": "cellar",
+        "agent": "p6",
+        "t0": 249,
+        "t1": 284,
+        "covers_t0": 249,
+        "covers_t1": 284
+      },
+      {
+        "claim_id": "p6-c18",
+        "id": "p6-c18|f97",
+        "fact_id": "f97",
+        "src": "witnessed",
+        "place": "cellar",
+        "agent": "p6",
+        "t0": 268,
+        "t1": 284,
+        "covers_t0": 268,
+        "covers_t1": 284
+      },
+      {
+        "claim_id": "p6-c19",
+        "id": "p6-c19|f104",
+        "fact_id": "f104",
+        "src": "witnessed",
+        "place": "ballroom",
+        "agent": "p6",
+        "t0": 288,
+        "t1": 294,
+        "covers_t0": 288,
+        "covers_t1": 294
+      },
+      {
+        "claim_id": "p6-c19",
+        "id": "p6-c19|f134",
+        "fact_id": "f134",
+        "src": "hearsay",
+        "place": "ballroom",
+        "agent": "p6",
+        "t0": 282,
+        "t1": 294,
+        "covers_t0": 288,
+        "covers_t1": 294
+      },
+      {
+        "claim_id": "p6-c2",
+        "id": "p6-c2|f140",
+        "fact_id": "f140",
+        "src": "hearsay",
+        "place": "conservatory",
+        "agent": "p6",
+        "t0": 4,
+        "t1": 30,
+        "covers_t0": 4,
+        "covers_t1": 30
+      },
+      {
+        "claim_id": "p6-c20",
+        "id": "p6-c20|f59",
+        "fact_id": "f59",
+        "src": "witnessed",
+        "place": "ballroom",
+        "agent": "p6",
+        "t0": 288,
+        "t1": 300,
+        "covers_t0": 288,
+        "covers_t1": 300
+      },
+      {
+        "claim_id": "p6-c3",
+        "id": "p6-c3|f128",
+        "fact_id": "f128",
+        "src": "hearsay",
+        "place": "ballroom",
+        "agent": "p6",
+        "t0": 6,
+        "t1": 24,
+        "covers_t0": 6,
+        "covers_t1": 24
+      },
+      {
+        "claim_id": "p6-c4",
+        "id": "p6-c4|f122",
+        "fact_id": "f122",
+        "src": "hearsay",
+        "place": "kitchen",
+        "agent": "p6",
+        "t0": 33,
+        "t1": 47,
+        "covers_t0": 33,
+        "covers_t1": 47
+      },
+      {
+        "claim_id": "p6-c4",
+        "id": "p6-c4|f71",
+        "fact_id": "f71",
+        "src": "witnessed",
+        "place": "kitchen",
+        "agent": "p6",
+        "t0": 34,
+        "t1": 47,
+        "covers_t0": 34,
+        "covers_t1": 47
+      },
+      {
+        "claim_id": "p6-c5",
+        "id": "p6-c5|f121",
+        "fact_id": "f121",
+        "src": "hearsay",
+        "place": "cellar",
+        "agent": "p6",
+        "t0": 33,
+        "t1": 53,
+        "covers_t0": 33,
+        "covers_t1": 53
+      },
+      {
+        "claim_id": "p6-c6",
+        "id": "p6-c6|f122",
+        "fact_id": "f122",
+        "src": "hearsay",
+        "place": "kitchen",
+        "agent": "p6",
+        "t0": 33,
+        "t1": 47,
+        "covers_t0": 34,
+        "covers_t1": 47
+      },
+      {
+        "claim_id": "p6-c6",
+        "id": "p6-c6|f71",
+        "fact_id": "f71",
+        "src": "witnessed",
+        "place": "kitchen",
+        "agent": "p6",
+        "t0": 34,
+        "t1": 47,
+        "covers_t0": 34,
+        "covers_t1": 47
+      },
+      {
+        "claim_id": "p6-c7",
+        "id": "p6-c7|f52",
+        "fact_id": "f52",
+        "src": "witnessed",
+        "place": "cellar",
+        "agent": "p6",
+        "t0": 75,
+        "t1": 86,
+        "covers_t0": 75,
+        "covers_t1": 86
+      },
+      {
+        "claim_id": "p6-c8",
+        "id": "p6-c8|f74",
+        "fact_id": "f74",
+        "src": "witnessed",
+        "place": "cellar",
+        "agent": "p6",
+        "t0": 78,
+        "t1": 86,
+        "covers_t0": 78,
+        "covers_t1": 86
+      },
+      {
+        "claim_id": "p6-c9",
+        "id": "p6-c9|f149",
+        "fact_id": "f149",
+        "src": "hearsay",
+        "place": "hall",
+        "agent": "p6",
+        "t0": 102,
+        "t1": 122,
+        "covers_t0": 102,
+        "covers_t1": 122
+      },
+      {
+        "claim_id": "p7-c1",
+        "id": "p7-c1|f105",
+        "fact_id": "f105",
+        "src": "hearsay",
+        "place": "gallery",
+        "agent": "p7",
+        "t0": 3,
+        "t1": 15,
+        "covers_t0": 3,
+        "covers_t1": 15
+      },
+      {
+        "claim_id": "p7-c1",
+        "id": "p7-c1|f137",
+        "fact_id": "f137",
+        "src": "hearsay",
+        "place": "gallery",
+        "agent": "p7",
+        "t0": 3,
+        "t1": 15,
+        "covers_t0": 3,
+        "covers_t1": 15
+      },
+      {
+        "claim_id": "p7-c10",
+        "id": "p7-c10|f84",
+        "fact_id": "f84",
+        "src": "witnessed",
+        "place": "library",
+        "agent": "p7",
+        "t0": 176,
+        "t1": 188,
+        "covers_t0": 176,
+        "covers_t1": 188
+      },
+      {
+        "claim_id": "p7-c11",
+        "id": "p7-c11|f138",
+        "fact_id": "f138",
+        "src": "hearsay",
+        "place": "library",
+        "agent": "p7",
+        "t0": 184,
+        "t1": 204,
+        "covers_t0": 184,
+        "covers_t1": 188
+      },
+      {
+        "claim_id": "p7-c11",
+        "id": "p7-c11|f86",
+        "fact_id": "f86",
+        "src": "witnessed",
+        "place": "library",
+        "agent": "p7",
+        "t0": 184,
+        "t1": 188,
+        "covers_t0": 184,
+        "covers_t1": 188
+      },
+      {
+        "claim_id": "p7-c12",
+        "id": "p7-c12|f138",
+        "fact_id": "f138",
+        "src": "hearsay",
+        "place": "library",
+        "agent": "p7",
+        "t0": 184,
+        "t1": 204,
+        "covers_t0": 184,
+        "covers_t1": 204
+      },
+      {
+        "claim_id": "p7-c12",
+        "id": "p7-c12|f86",
+        "fact_id": "f86",
+        "src": "witnessed",
+        "place": "library",
+        "agent": "p7",
+        "t0": 184,
+        "t1": 188,
+        "covers_t0": 184,
+        "covers_t1": 188
+      },
+      {
+        "claim_id": "p7-c13",
+        "id": "p7-c13|f65",
+        "fact_id": "f65",
+        "src": "witnessed",
+        "place": "terrace",
+        "agent": "p7",
+        "t0": 211,
+        "t1": 234,
+        "covers_t0": 211,
+        "covers_t1": 234
+      },
+      {
+        "claim_id": "p7-c14",
+        "id": "p7-c14|f66",
+        "fact_id": "f66",
+        "src": "witnessed",
+        "place": "scullery",
+        "agent": "p7",
+        "t0": 251,
+        "t1": 275,
+        "covers_t0": 251,
+        "covers_t1": 275
+      },
+      {
+        "claim_id": "p7-c15",
+        "id": "p7-c15|f99",
+        "fact_id": "f99",
+        "src": "witnessed",
+        "place": "scullery",
+        "agent": "p7",
+        "t0": 272,
+        "t1": 275,
+        "covers_t0": 272,
+        "covers_t1": 275
+      },
+      {
+        "claim_id": "p7-c16",
+        "id": "p7-c16|f67",
+        "fact_id": "f67",
+        "src": "witnessed",
+        "place": "terrace",
+        "agent": "p7",
+        "t0": 292,
+        "t1": 300,
+        "covers_t0": 292,
+        "covers_t1": 300
+      },
+      {
+        "claim_id": "p7-c2",
+        "id": "p7-c2|f60",
+        "fact_id": "f60",
+        "src": "witnessed",
+        "place": "hall",
+        "agent": "p7",
+        "t0": 8,
+        "t1": 33,
+        "covers_t0": 8,
+        "covers_t1": 33
+      },
+      {
+        "claim_id": "p7-c3",
+        "id": "p7-c3|f61",
+        "fact_id": "f61",
+        "src": "witnessed",
+        "place": "scullery",
+        "agent": "p7",
+        "t0": 49,
+        "t1": 81,
+        "covers_t0": 49,
+        "covers_t1": 81
+      },
+      {
+        "claim_id": "p7-c4",
+        "id": "p7-c4|f114",
+        "fact_id": "f114",
+        "src": "hearsay",
+        "place": "hall",
+        "agent": "p7",
+        "t0": 78,
+        "t1": 87,
+        "covers_t0": 78,
+        "covers_t1": 87
+      },
+      {
+        "claim_id": "p7-c5",
+        "id": "p7-c5|f76",
+        "fact_id": "f76",
+        "src": "witnessed",
+        "place": "billiard",
+        "agent": "p7",
+        "t0": 97,
+        "t1": 115,
+        "covers_t0": 97,
+        "covers_t1": 115
+      },
+      {
+        "claim_id": "p7-c6",
+        "id": "p7-c6|f62",
+        "fact_id": "f62",
+        "src": "witnessed",
+        "place": "billiard",
+        "agent": "p7",
+        "t0": 97,
+        "t1": 125,
+        "covers_t0": 97,
+        "covers_t1": 125
+      },
+      {
+        "claim_id": "p7-c7",
+        "id": "p7-c7|f115",
+        "fact_id": "f115",
+        "src": "hearsay",
+        "place": "kitchen",
+        "agent": "p7",
+        "t0": 122,
+        "t1": 147,
+        "covers_t0": 122,
+        "covers_t1": 147
+      },
+      {
+        "claim_id": "p7-c8",
+        "id": "p7-c8|f63",
+        "fact_id": "f63",
+        "src": "witnessed",
+        "place": "scullery",
+        "agent": "p7",
+        "t0": 141,
+        "t1": 158,
+        "covers_t0": 141,
+        "covers_t1": 158
+      },
+      {
+        "claim_id": "p7-c9",
+        "id": "p7-c9|f64",
+        "fact_id": "f64",
+        "src": "witnessed",
+        "place": "library",
+        "agent": "p7",
+        "t0": 164,
+        "t1": 188,
+        "covers_t0": 164,
+        "covers_t1": 188
+      }
+    ],
+    "conflict": [
+      {
+        "claim_id": "p4-c7",
+        "id": "p4-c7|f35",
+        "fact_id": "f35",
+        "src": "witnessed",
+        "place": "kitchen",
+        "agent": "p4",
+        "t0": 102,
+        "t1": 122
+      }
+    ]
+  },
+  "contradictions": [
+    {
+      "pair_id": "p1-c6|p1-c9",
+      "kind": "impossible_travel",
+      "a": "p1-c6",
+      "b": "p1-c9",
+      "speaker_a": "p1",
+      "speaker_b": "p1",
+      "subject": "p4",
+      "gap": 0,
+      "needed": 15
+    },
+    {
+      "pair_id": "p1-c6|p2-c9",
+      "kind": "exclusive_presence",
+      "a": "p1-c6",
+      "b": "p2-c9",
+      "speaker_a": "p1",
+      "speaker_b": "p2",
+      "subject": "p4",
+      "gap": null,
+      "needed": null
+    },
+    {
+      "pair_id": "p1-c6|p4-c8",
+      "kind": "exclusive_presence",
+      "a": "p1-c6",
+      "b": "p4-c8",
+      "speaker_a": "p1",
+      "speaker_b": "p4",
+      "subject": "p4",
+      "gap": null,
+      "needed": null
+    },
+    {
+      "pair_id": "p1-c6|p5-c5",
+      "kind": "exclusive_presence",
+      "a": "p1-c6",
+      "b": "p5-c5",
+      "speaker_a": "p1",
+      "speaker_b": "p5",
+      "subject": "p4",
+      "gap": null,
+      "needed": null
+    },
+    {
+      "pair_id": "p1-c6|p7-c7",
+      "kind": "impossible_travel",
+      "a": "p1-c6",
+      "b": "p7-c7",
+      "speaker_a": "p1",
+      "speaker_b": "p7",
+      "subject": "p4",
+      "gap": 0,
+      "needed": 15
+    },
+    {
+      "pair_id": "p2-c10|p1-c9",
+      "kind": "impossible_travel",
+      "a": "p2-c10",
+      "b": "p1-c9",
+      "speaker_a": "p2",
+      "speaker_b": "p1",
+      "subject": "p4",
+      "gap": 0,
+      "needed": 15
+    },
+    {
+      "pair_id": "p2-c10|p2-c9",
+      "kind": "exclusive_presence",
+      "a": "p2-c10",
+      "b": "p2-c9",
+      "speaker_a": "p2",
+      "speaker_b": "p2",
+      "subject": "p4",
+      "gap": null,
+      "needed": null
+    },
+    {
+      "pair_id": "p2-c10|p4-c8",
+      "kind": "exclusive_presence",
+      "a": "p2-c10",
+      "b": "p4-c8",
+      "speaker_a": "p2",
+      "speaker_b": "p4",
+      "subject": "p4",
+      "gap": null,
+      "needed": null
+    },
+    {
+      "pair_id": "p2-c10|p5-c5",
+      "kind": "exclusive_presence",
+      "a": "p2-c10",
+      "b": "p5-c5",
+      "speaker_a": "p2",
+      "speaker_b": "p5",
+      "subject": "p4",
+      "gap": null,
+      "needed": null
+    },
+    {
+      "pair_id": "p2-c10|p7-c7",
+      "kind": "impossible_travel",
+      "a": "p2-c10",
+      "b": "p7-c7",
+      "speaker_a": "p2",
+      "speaker_b": "p7",
+      "subject": "p4",
+      "gap": 0,
+      "needed": 15
+    },
+    {
+      "pair_id": "p2-c9|p4-c7",
+      "kind": "exclusive_presence",
+      "a": "p2-c9",
+      "b": "p4-c7",
+      "speaker_a": "p2",
+      "speaker_b": "p4",
+      "subject": "p4",
+      "gap": null,
+      "needed": null
+    },
+    {
+      "pair_id": "p2-c9|p6-c9",
+      "kind": "exclusive_presence",
+      "a": "p2-c9",
+      "b": "p6-c9",
+      "speaker_a": "p2",
+      "speaker_b": "p6",
+      "subject": "p4",
+      "gap": null,
+      "needed": null
+    },
+    {
+      "pair_id": "p4-c7|p1-c9",
+      "kind": "impossible_travel",
+      "a": "p4-c7",
+      "b": "p1-c9",
+      "speaker_a": "p4",
+      "speaker_b": "p1",
+      "subject": "p4",
+      "gap": 0,
+      "needed": 15
+    },
+    {
+      "pair_id": "p4-c7|p4-c8",
+      "kind": "exclusive_presence",
+      "a": "p4-c7",
+      "b": "p4-c8",
+      "speaker_a": "p4",
+      "speaker_b": "p4",
+      "subject": "p4",
+      "gap": null,
+      "needed": null
+    },
+    {
+      "pair_id": "p4-c7|p5-c5",
+      "kind": "exclusive_presence",
+      "a": "p4-c7",
+      "b": "p5-c5",
+      "speaker_a": "p4",
+      "speaker_b": "p5",
+      "subject": "p4",
+      "gap": null,
+      "needed": null
+    },
+    {
+      "pair_id": "p4-c7|p7-c7",
+      "kind": "impossible_travel",
+      "a": "p4-c7",
+      "b": "p7-c7",
+      "speaker_a": "p4",
+      "speaker_b": "p7",
+      "subject": "p4",
+      "gap": 0,
+      "needed": 15
+    },
+    {
+      "pair_id": "p4-c8|p6-c9",
+      "kind": "exclusive_presence",
+      "a": "p4-c8",
+      "b": "p6-c9",
+      "speaker_a": "p4",
+      "speaker_b": "p6",
+      "subject": "p4",
+      "gap": null,
+      "needed": null
+    },
+    {
+      "pair_id": "p5-c5|p6-c9",
+      "kind": "exclusive_presence",
+      "a": "p5-c5",
+      "b": "p6-c9",
+      "speaker_a": "p5",
+      "speaker_b": "p6",
+      "subject": "p4",
+      "gap": null,
+      "needed": null
+    },
+    {
+      "pair_id": "p6-c9|p1-c9",
+      "kind": "impossible_travel",
+      "a": "p6-c9",
+      "b": "p1-c9",
+      "speaker_a": "p6",
+      "speaker_b": "p1",
+      "subject": "p4",
+      "gap": 0,
+      "needed": 15
+    },
+    {
+      "pair_id": "p6-c9|p7-c7",
+      "kind": "impossible_travel",
+      "a": "p6-c9",
+      "b": "p7-c7",
+      "speaker_a": "p6",
+      "speaker_b": "p7",
+      "subject": "p4",
+      "gap": 0,
+      "needed": 15
+    }
+  ],
+  "corroborations": [
+    {
+      "a": "p1-c9",
+      "b": "p4-c8"
+    },
+    {
+      "a": "p1-c8",
+      "b": "p2-c12"
+    },
+    {
+      "a": "p1-c7",
+      "b": "p5-c6"
+    },
+    {
+      "a": "p1-c7",
+      "b": "p2-c11"
+    },
+    {
+      "a": "p1-c6",
+      "b": "p6-c9"
+    },
+    {
+      "a": "p1-c6",
+      "b": "p4-c7"
+    },
+    {
+      "a": "p1-c6",
+      "b": "p2-c10"
+    },
+    {
+      "a": "p1-c3",
+      "b": "p6-c3"
+    },
+    {
+      "a": "p1-c3",
+      "b": "p3-c3"
+    },
+    {
+      "a": "p1-c2",
+      "b": "p6-c3"
+    },
+    {
+      "a": "p1-c2",
+      "b": "p3-c3"
+    },
+    {
+      "a": "p1-c1",
+      "b": "p3-c2"
+    },
+    {
+      "a": "p1-c1",
+      "b": "p3-c1"
+    },
+    {
+      "a": "p2-c8",
+      "b": "p7-c5"
+    },
+    {
+      "a": "p2-c6",
+      "b": "p4-c5"
+    },
+    {
+      "a": "p2-c6",
+      "b": "p3-c7"
+    },
+    {
+      "a": "p2-c3",
+      "b": "p7-c2"
+    },
+    {
+      "a": "p2-c1",
+      "b": "p7-c1"
+    },
+    {
+      "a": "p2-c1",
+      "b": "p6-c1"
+    },
+    {
+      "a": "p1-c18",
+      "b": "p6-c20"
+    },
+    {
+      "a": "p1-c17",
+      "b": "p6-c19"
+    },
+    {
+      "a": "p1-c15",
+      "b": "p6-c16"
+    },
+    {
+      "a": "p1-c15",
+      "b": "p4-c12"
+    },
+    {
+      "a": "p1-c14",
+      "b": "p4-c13"
+    },
+    {
+      "a": "p1-c13",
+      "b": "p2-c13"
+    },
+    {
+      "a": "p1-c11",
+      "b": "p6-c12"
+    },
+    {
+      "a": "p1-c11",
+      "b": "p6-c11"
+    },
+    {
+      "a": "p1-c11",
+      "b": "p5-c7"
+    },
+    {
+      "a": "p1-c9",
+      "b": "p7-c7"
+    },
+    {
+      "a": "p2-c16",
+      "b": "p7-c11"
+    },
+    {
+      "a": "p2-c16",
+      "b": "p4-c11"
+    },
+    {
+      "a": "p2-c15",
+      "b": "p7-c10"
+    },
+    {
+      "a": "p2-c15",
+      "b": "p5-c11"
+    },
+    {
+      "a": "p2-c15",
+      "b": "p4-c10"
+    },
+    {
+      "a": "p2-c14",
+      "b": "p7-c9"
+    },
+    {
+      "a": "p2-c14",
+      "b": "p4-c9"
+    },
+    {
+      "a": "p2-c11",
+      "b": "p5-c6"
+    },
+    {
+      "a": "p2-c10",
+      "b": "p6-c9"
+    },
+    {
+      "a": "p2-c10",
+      "b": "p4-c7"
+    },
+    {
+      "a": "p2-c9",
+      "b": "p5-c5"
+    },
+    {
+      "a": "p2-c9",
+      "b": "p4-c8"
+    },
+    {
+      "a": "p3-c18",
+      "b": "p5-c18"
+    },
+    {
+      "a": "p3-c18",
+      "b": "p5-c17"
+    },
+    {
+      "a": "p3-c17",
+      "b": "p5-c16"
+    },
+    {
+      "a": "p3-c14",
+      "b": "p6-c13"
+    },
+    {
+      "a": "p3-c11",
+      "b": "p5-c8"
+    },
+    {
+      "a": "p3-c10",
+      "b": "p5-c8"
+    },
+    {
+      "a": "p3-c8",
+      "b": "p6-c8"
+    },
+    {
+      "a": "p3-c7",
+      "b": "p4-c5"
+    },
+    {
+      "a": "p3-c6",
+      "b": "p4-c4"
+    },
+    {
+      "a": "p3-c5",
+      "b": "p6-c6"
+    },
+    {
+      "a": "p3-c5",
+      "b": "p6-c4"
+    },
+    {
+      "a": "p3-c5",
+      "b": "p5-c2"
+    },
+    {
+      "a": "p3-c3",
+      "b": "p6-c3"
+    },
+    {
+      "a": "p2-c18",
+      "b": "p5-c14"
+    },
+    {
+      "a": "p2-c17",
+      "b": "p5-c12"
+    },
+    {
+      "a": "p2-c16",
+      "b": "p7-c12"
+    },
+    {
+      "a": "p5-c1",
+      "b": "p6-c2"
+    },
+    {
+      "a": "p4-c16",
+      "b": "p6-c18"
+    },
+    {
+      "a": "p4-c15",
+      "b": "p6-c17"
+    },
+    {
+      "a": "p4-c12",
+      "b": "p6-c16"
+    },
+    {
+      "a": "p4-c11",
+      "b": "p7-c12"
+    },
+    {
+      "a": "p4-c11",
+      "b": "p7-c11"
+    },
+    {
+      "a": "p4-c10",
+      "b": "p7-c10"
+    },
+    {
+      "a": "p4-c10",
+      "b": "p5-c11"
+    },
+    {
+      "a": "p4-c9",
+      "b": "p7-c9"
+    },
+    {
+      "a": "p4-c8",
+      "b": "p7-c7"
+    },
+    {
+      "a": "p4-c8",
+      "b": "p5-c5"
+    },
+    {
+      "a": "p4-c7",
+      "b": "p6-c9"
+    },
+    {
+      "a": "p4-c6",
+      "b": "p7-c4"
+    },
+    {
+      "a": "p4-c3",
+      "b": "p6-c5"
+    },
+    {
+      "a": "p6-c1",
+      "b": "p7-c1"
+    },
+    {
+      "a": "p5-c16",
+      "b": "p7-c15"
+    },
+    {
+      "a": "p5-c15",
+      "b": "p7-c14"
+    },
+    {
+      "a": "p5-c11",
+      "b": "p7-c10"
+    },
+    {
+      "a": "p5-c7",
+      "b": "p6-c12"
+    },
+    {
+      "a": "p5-c7",
+      "b": "p6-c11"
+    },
+    {
+      "a": "p5-c2",
+      "b": "p6-c6"
+    },
+    {
+      "a": "p5-c2",
+      "b": "p6-c4"
+    }
+  ],
+  "traces": [
+    {
+      "claim_id": "p1-c11",
+      "agent": "p1",
+      "role": "carrier",
+      "terminal": "ORIGIN_WITNESSED",
+      "ungrounded": false,
+      "depth": 1
+    },
+    {
+      "claim_id": "p1-c11",
+      "agent": "p6",
+      "role": "origin",
+      "terminal": "ORIGIN_WITNESSED",
+      "ungrounded": false,
+      "depth": 1
+    },
+    {
+      "claim_id": "p1-c6",
+      "agent": "p1",
+      "role": "carrier",
+      "terminal": "CHAIN_BROKEN",
+      "ungrounded": true,
+      "depth": 0
+    },
+    {
+      "claim_id": "p1-c9",
+      "agent": "p1",
+      "role": "carrier",
+      "terminal": "ORIGIN_WITNESSED",
+      "ungrounded": false,
+      "depth": 1
+    },
+    {
+      "claim_id": "p1-c9",
+      "agent": "p4",
+      "role": "origin",
+      "terminal": "ORIGIN_WITNESSED",
+      "ungrounded": false,
+      "depth": 1
+    },
+    {
+      "claim_id": "p2-c10",
+      "agent": "p2",
+      "role": "carrier",
+      "terminal": "ORIGIN_CONTRADICTED",
+      "ungrounded": true,
+      "depth": 1
+    },
+    {
+      "claim_id": "p2-c10",
+      "agent": "p4",
+      "role": "origin",
+      "terminal": "ORIGIN_CONTRADICTED",
+      "ungrounded": true,
+      "depth": 1
+    },
+    {
+      "claim_id": "p2-c17",
+      "agent": "p2",
+      "role": "carrier",
+      "terminal": "ORIGIN_WITNESSED",
+      "ungrounded": false,
+      "depth": 1
+    },
+    {
+      "claim_id": "p2-c17",
+      "agent": "p5",
+      "role": "origin",
+      "terminal": "ORIGIN_WITNESSED",
+      "ungrounded": false,
+      "depth": 1
+    },
+    {
+      "claim_id": "p2-c2",
+      "agent": "p2",
+      "role": "carrier",
+      "terminal": "ORIGIN_WITNESSED",
+      "ungrounded": false,
+      "depth": 1
+    },
+    {
+      "claim_id": "p2-c2",
+      "agent": "p6",
+      "role": "origin",
+      "terminal": "ORIGIN_WITNESSED",
+      "ungrounded": false,
+      "depth": 1
+    },
+    {
+      "claim_id": "p2-c3",
+      "agent": "p2",
+      "role": "carrier",
+      "terminal": "ORIGIN_WITNESSED",
+      "ungrounded": false,
+      "depth": 1
+    },
+    {
+      "claim_id": "p2-c3",
+      "agent": "p7",
+      "role": "origin",
+      "terminal": "ORIGIN_WITNESSED",
+      "ungrounded": false,
+      "depth": 1
+    },
+    {
+      "claim_id": "p2-c6",
+      "agent": "p2",
+      "role": "carrier",
+      "terminal": "ORIGIN_WITNESSED",
+      "ungrounded": false,
+      "depth": 1
+    },
+    {
+      "claim_id": "p2-c6",
+      "agent": "p4",
+      "role": "origin",
+      "terminal": "ORIGIN_WITNESSED",
+      "ungrounded": false,
+      "depth": 1
+    },
+    {
+      "claim_id": "p2-c9",
+      "agent": "p2",
+      "role": "carrier",
+      "terminal": "ORIGIN_WITNESSED",
+      "ungrounded": false,
+      "depth": 1
+    },
+    {
+      "claim_id": "p2-c9",
+      "agent": "p5",
+      "role": "origin",
+      "terminal": "ORIGIN_WITNESSED",
+      "ungrounded": false,
+      "depth": 1
+    },
+    {
+      "claim_id": "p3-c11",
+      "agent": "p3",
+      "role": "carrier",
+      "terminal": "ORIGIN_WITNESSED",
+      "ungrounded": false,
+      "depth": 1
+    },
+    {
+      "claim_id": "p3-c11",
+      "agent": "p6",
+      "role": "origin",
+      "terminal": "ORIGIN_WITNESSED",
+      "ungrounded": false,
+      "depth": 1
+    },
+    {
+      "claim_id": "p3-c5",
+      "agent": "p3",
+      "role": "carrier",
+      "terminal": "ORIGIN_WITNESSED",
+      "ungrounded": false,
+      "depth": 1
+    },
+    {
+      "claim_id": "p3-c5",
+      "agent": "p6",
+      "role": "origin",
+      "terminal": "ORIGIN_WITNESSED",
+      "ungrounded": false,
+      "depth": 1
+    },
+    {
+      "claim_id": "p5-c11",
+      "agent": "p5",
+      "role": "carrier",
+      "terminal": "ORIGIN_WITNESSED",
+      "ungrounded": false,
+      "depth": 1
+    },
+    {
+      "claim_id": "p5-c11",
+      "agent": "p2",
+      "role": "origin",
+      "terminal": "ORIGIN_WITNESSED",
+      "ungrounded": false,
+      "depth": 1
+    },
+    {
+      "claim_id": "p5-c2",
+      "agent": "p5",
+      "role": "carrier",
+      "terminal": "ORIGIN_WITNESSED",
+      "ungrounded": false,
+      "depth": 1
+    },
+    {
+      "claim_id": "p5-c2",
+      "agent": "p6",
+      "role": "origin",
+      "terminal": "ORIGIN_WITNESSED",
+      "ungrounded": false,
+      "depth": 1
+    },
+    {
+      "claim_id": "p5-c6",
+      "agent": "p5",
+      "role": "carrier",
+      "terminal": "ORIGIN_WITNESSED",
+      "ungrounded": false,
+      "depth": 1
+    },
+    {
+      "claim_id": "p5-c6",
+      "agent": "p2",
+      "role": "origin",
+      "terminal": "ORIGIN_WITNESSED",
+      "ungrounded": false,
+      "depth": 1
+    },
+    {
+      "claim_id": "p6-c1",
+      "agent": "p6",
+      "role": "carrier",
+      "terminal": "ORIGIN_WITNESSED",
+      "ungrounded": false,
+      "depth": 1
+    },
+    {
+      "claim_id": "p6-c1",
+      "agent": "p2",
+      "role": "origin",
+      "terminal": "ORIGIN_WITNESSED",
+      "ungrounded": false,
+      "depth": 1
+    },
+    {
+      "claim_id": "p6-c16",
+      "agent": "p6",
+      "role": "carrier",
+      "terminal": "ORIGIN_WITNESSED",
+      "ungrounded": false,
+      "depth": 1
+    },
+    {
+      "claim_id": "p6-c16",
+      "agent": "p1",
+      "role": "origin",
+      "terminal": "ORIGIN_WITNESSED",
+      "ungrounded": false,
+      "depth": 1
+    },
+    {
+      "claim_id": "p6-c2",
+      "agent": "p6",
+      "role": "carrier",
+      "terminal": "ORIGIN_WITNESSED",
+      "ungrounded": false,
+      "depth": 1
+    },
+    {
+      "claim_id": "p6-c2",
+      "agent": "p5",
+      "role": "origin",
+      "terminal": "ORIGIN_WITNESSED",
+      "ungrounded": false,
+      "depth": 1
+    },
+    {
+      "claim_id": "p6-c3",
+      "agent": "p6",
+      "role": "carrier",
+      "terminal": "ORIGIN_WITNESSED",
+      "ungrounded": false,
+      "depth": 1
+    },
+    {
+      "claim_id": "p6-c3",
+      "agent": "p3",
+      "role": "origin",
+      "terminal": "ORIGIN_WITNESSED",
+      "ungrounded": false,
+      "depth": 1
+    },
+    {
+      "claim_id": "p6-c5",
+      "agent": "p6",
+      "role": "carrier",
+      "terminal": "ORIGIN_WITNESSED",
+      "ungrounded": false,
+      "depth": 1
+    },
+    {
+      "claim_id": "p6-c5",
+      "agent": "p4",
+      "role": "origin",
+      "terminal": "ORIGIN_WITNESSED",
+      "ungrounded": false,
+      "depth": 1
+    },
+    {
+      "claim_id": "p6-c9",
+      "agent": "p4",
+      "role": "carrier",
+      "terminal": "CHAIN_TEMPORAL_VIOLATION",
+      "ungrounded": true,
+      "depth": 1
+    },
+    {
+      "claim_id": "p6-c9",
+      "agent": "p6",
+      "role": "carrier",
+      "terminal": "CHAIN_TEMPORAL_VIOLATION",
+      "ungrounded": true,
+      "depth": 1
+    },
+    {
+      "claim_id": "p7-c1",
+      "agent": "p7",
+      "role": "carrier",
+      "terminal": "ORIGIN_WITNESSED",
+      "ungrounded": false,
+      "depth": 1
+    },
+    {
+      "claim_id": "p7-c1",
+      "agent": "p2",
+      "role": "origin",
+      "terminal": "ORIGIN_WITNESSED",
+      "ungrounded": false,
+      "depth": 1
+    },
+    {
+      "claim_id": "p7-c4",
+      "agent": "p7",
+      "role": "carrier",
+      "terminal": "ORIGIN_WITNESSED",
+      "ungrounded": false,
+      "depth": 1
+    },
+    {
+      "claim_id": "p7-c4",
+      "agent": "p4",
+      "role": "origin",
+      "terminal": "ORIGIN_WITNESSED",
+      "ungrounded": false,
+      "depth": 1
+    },
+    {
+      "claim_id": "p7-c7",
+      "agent": "p7",
+      "role": "carrier",
+      "terminal": "ORIGIN_WITNESSED",
+      "ungrounded": false,
+      "depth": 1
+    },
+    {
+      "claim_id": "p7-c7",
+      "agent": "p4",
+      "role": "origin",
+      "terminal": "ORIGIN_WITNESSED",
+      "ungrounded": false,
+      "depth": 1
+    }
+  ],
+  "chains": [
+    {
+      "claim_id": "p1-c6",
+      "speaker": "p1",
+      "terminal": "CHAIN_BROKEN",
+      "origin_agent": null,
+      "is_origin": false,
+      "is_ungrounded": true,
+      "carriers": [
+        "p1"
+      ],
+      "detail": "p4 has no record 'f-void-p4'; ambiguous, not an origin",
+      "hops": [
+        {
+          "depth": 0,
+          "agent": "p1",
+          "fact_id": "f148",
+          "src": "hearsay",
+          "transmission_id": "tr43",
+          "tick": 223,
+          "verdict": null,
+          "learned_at": 223
+        }
+      ]
+    },
+    {
+      "claim_id": "p1-c9",
+      "speaker": "p1",
+      "terminal": "ORIGIN_WITNESSED",
+      "origin_agent": "p4",
+      "is_origin": true,
+      "is_ungrounded": false,
+      "carriers": [
+        "p1"
+      ],
+      "detail": "p4 holds this as witnessed memory",
+      "hops": [
+        {
+          "depth": 0,
+          "agent": "p1",
+          "fact_id": "f116",
+          "src": "hearsay",
+          "transmission_id": "tr12",
+          "tick": 228,
+          "verdict": null,
+          "learned_at": 228
+        },
+        {
+          "depth": 1,
+          "agent": "p4",
+          "fact_id": "f36",
+          "src": "witnessed",
+          "transmission_id": null,
+          "tick": null,
+          "verdict": "SUPPORTED",
+          "learned_at": 122
+        }
+      ]
+    },
+    {
+      "claim_id": "p1-c11",
+      "speaker": "p1",
+      "terminal": "ORIGIN_WITNESSED",
+      "origin_agent": "p6",
+      "is_origin": true,
+      "is_ungrounded": false,
+      "carriers": [
+        "p1"
+      ],
+      "detail": "p6 holds this as witnessed memory",
+      "hops": [
+        {
+          "depth": 0,
+          "agent": "p1",
+          "fact_id": "f135",
+          "src": "hearsay",
+          "transmission_id": "tr31",
+          "tick": 292,
+          "verdict": null,
+          "learned_at": 292
+        },
+        {
+          "depth": 1,
+          "agent": "p6",
+          "fact_id": "f80",
+          "src": "witnessed",
+          "transmission_id": null,
+          "tick": null,
+          "verdict": "SUPPORTED",
+          "learned_at": 128
+        }
+      ]
+    },
+    {
+      "claim_id": "p2-c2",
+      "speaker": "p2",
+      "terminal": "ORIGIN_WITNESSED",
+      "origin_agent": "p6",
+      "is_origin": true,
+      "is_ungrounded": false,
+      "carriers": [
+        "p2"
+      ],
+      "detail": "p6 holds this as witnessed memory",
+      "hops": [
+        {
+          "depth": 0,
+          "agent": "p2",
+          "fact_id": "f124",
+          "src": "hearsay",
+          "transmission_id": "tr20",
+          "tick": 44,
+          "verdict": null,
+          "learned_at": 44
+        },
+        {
+          "depth": 1,
+          "agent": "p6",
+          "fact_id": "f50",
+          "src": "witnessed",
+          "transmission_id": null,
+          "tick": null,
+          "verdict": "SUPPORTED",
+          "learned_at": 6
+        }
+      ]
+    },
+    {
+      "claim_id": "p2-c3",
+      "speaker": "p2",
+      "terminal": "ORIGIN_WITNESSED",
+      "origin_agent": "p7",
+      "is_origin": true,
+      "is_ungrounded": false,
+      "carriers": [
+        "p2"
+      ],
+      "detail": "p7 holds this as witnessed memory",
+      "hops": [
+        {
+          "depth": 0,
+          "agent": "p2",
+          "fact_id": "f106",
+          "src": "hearsay",
+          "transmission_id": "tr2",
+          "tick": 103,
+          "verdict": null,
+          "learned_at": 103
+        },
+        {
+          "depth": 1,
+          "agent": "p7",
+          "fact_id": "f60",
+          "src": "witnessed",
+          "transmission_id": null,
+          "tick": null,
+          "verdict": "SUPPORTED",
+          "learned_at": 8
+        }
+      ]
+    },
+    {
+      "claim_id": "p2-c6",
+      "speaker": "p2",
+      "terminal": "ORIGIN_WITNESSED",
+      "origin_agent": "p4",
+      "is_origin": true,
+      "is_ungrounded": false,
+      "carriers": [
+        "p2"
+      ],
+      "detail": "p4 holds this as witnessed memory",
+      "hops": [
+        {
+          "depth": 0,
+          "agent": "p2",
+          "fact_id": "f126",
+          "src": "hearsay",
+          "transmission_id": "tr22",
+          "tick": 184,
+          "verdict": null,
+          "learned_at": 184
+        },
+        {
+          "depth": 1,
+          "agent": "p4",
+          "fact_id": "f33",
+          "src": "witnessed",
+          "transmission_id": null,
+          "tick": null,
+          "verdict": "SUPPORTED",
+          "learned_at": 62
+        }
+      ]
+    },
+    {
+      "claim_id": "p2-c9",
+      "speaker": "p2",
+      "terminal": "ORIGIN_WITNESSED",
+      "origin_agent": "p5",
+      "is_origin": true,
+      "is_ungrounded": false,
+      "carriers": [
+        "p2"
+      ],
+      "detail": "p5 holds this as witnessed memory",
+      "hops": [
+        {
+          "depth": 0,
+          "agent": "p2",
+          "fact_id": "f145",
+          "src": "hearsay",
+          "transmission_id": "tr41",
+          "tick": 241,
+          "verdict": null,
+          "learned_at": 241
+        },
+        {
+          "depth": 1,
+          "agent": "p5",
+          "fact_id": "f77",
+          "src": "witnessed",
+          "transmission_id": null,
+          "tick": null,
+          "verdict": "SUPPORTED",
+          "learned_at": 102
+        }
+      ]
+    },
+    {
+      "claim_id": "p2-c10",
+      "speaker": "p2",
+      "terminal": "ORIGIN_CONTRADICTED",
+      "origin_agent": "p4",
+      "is_origin": true,
+      "is_ungrounded": true,
+      "carriers": [
+        "p2"
+      ],
+      "detail": "p4's own memory conflicts with what it passed on",
+      "hops": [
+        {
+          "depth": 0,
+          "agent": "p2",
+          "fact_id": "f147",
+          "src": "hearsay",
+          "transmission_id": "tr42",
+          "tick": 195,
+          "verdict": null,
+          "learned_at": 195
+        },
+        {
+          "depth": 1,
+          "agent": "p4",
+          "fact_id": "f146",
+          "src": "inferred",
+          "transmission_id": null,
+          "tick": null,
+          "verdict": "CONTRADICTED",
+          "learned_at": 102
+        }
+      ]
+    },
+    {
+      "claim_id": "p2-c17",
+      "speaker": "p2",
+      "terminal": "ORIGIN_WITNESSED",
+      "origin_agent": "p5",
+      "is_origin": true,
+      "is_ungrounded": false,
+      "carriers": [
+        "p2"
+      ],
+      "detail": "p5 holds this as witnessed memory",
+      "hops": [
+        {
+          "depth": 0,
+          "agent": "p2",
+          "fact_id": "f144",
+          "src": "hearsay",
+          "transmission_id": "tr40",
+          "tick": 241,
+          "verdict": null,
+          "learned_at": 241
+        },
+        {
+          "depth": 1,
+          "agent": "p5",
+          "fact_id": "f47",
+          "src": "witnessed",
+          "transmission_id": null,
+          "tick": null,
+          "verdict": "SUPPORTED",
+          "learned_at": 200
+        }
+      ]
+    },
+    {
+      "claim_id": "p3-c5",
+      "speaker": "p3",
+      "terminal": "ORIGIN_WITNESSED",
+      "origin_agent": "p6",
+      "is_origin": true,
+      "is_ungrounded": false,
+      "carriers": [
+        "p3"
+      ],
+      "detail": "p6 holds this as witnessed memory",
+      "hops": [
+        {
+          "depth": 0,
+          "agent": "p3",
+          "fact_id": "f130",
+          "src": "hearsay",
+          "transmission_id": "tr26",
+          "tick": 195,
+          "verdict": null,
+          "learned_at": 195
+        },
+        {
+          "depth": 1,
+          "agent": "p6",
+          "fact_id": "f71",
+          "src": "witnessed",
+          "transmission_id": null,
+          "tick": null,
+          "verdict": "SUPPORTED",
+          "learned_at": 34
+        }
+      ]
+    },
+    {
+      "claim_id": "p3-c11",
+      "speaker": "p3",
+      "terminal": "ORIGIN_WITNESSED",
+      "origin_agent": "p6",
+      "is_origin": true,
+      "is_ungrounded": false,
+      "carriers": [
+        "p3"
+      ],
+      "detail": "p6 holds this as witnessed memory",
+      "hops": [
+        {
+          "depth": 0,
+          "agent": "p3",
+          "fact_id": "f109",
+          "src": "hearsay",
+          "transmission_id": "tr5",
+          "tick": 159,
+          "verdict": null,
+          "learned_at": 159
+        },
+        {
+          "depth": 1,
+          "agent": "p6",
+          "fact_id": "f54",
+          "src": "witnessed",
+          "transmission_id": null,
+          "tick": null,
+          "verdict": "SUPPORTED",
+          "learned_at": 127
+        }
+      ]
+    },
+    {
+      "claim_id": "p5-c2",
+      "speaker": "p5",
+      "terminal": "ORIGIN_WITNESSED",
+      "origin_agent": "p6",
+      "is_origin": true,
+      "is_ungrounded": false,
+      "carriers": [
+        "p5"
+      ],
+      "detail": "p6 holds this as witnessed memory",
+      "hops": [
+        {
+          "depth": 0,
+          "agent": "p5",
+          "fact_id": "f139",
+          "src": "hearsay",
+          "transmission_id": "tr35",
+          "tick": 131,
+          "verdict": null,
+          "learned_at": 131
+        },
+        {
+          "depth": 1,
+          "agent": "p6",
+          "fact_id": "f71",
+          "src": "witnessed",
+          "transmission_id": null,
+          "tick": null,
+          "verdict": "SUPPORTED",
+          "learned_at": 34
+        }
+      ]
+    },
+    {
+      "claim_id": "p5-c6",
+      "speaker": "p5",
+      "terminal": "ORIGIN_WITNESSED",
+      "origin_agent": "p2",
+      "is_origin": true,
+      "is_ungrounded": false,
+      "carriers": [
+        "p5"
+      ],
+      "detail": "p2 holds this as witnessed memory",
+      "hops": [
+        {
+          "depth": 0,
+          "agent": "p5",
+          "fact_id": "f142",
+          "src": "hearsay",
+          "transmission_id": "tr38",
+          "tick": 241,
+          "verdict": null,
+          "learned_at": 241
+        },
+        {
+          "depth": 1,
+          "agent": "p2",
+          "fact_id": "f79",
+          "src": "witnessed",
+          "transmission_id": null,
+          "tick": null,
+          "verdict": "SUPPORTED",
+          "learned_at": 118
+        }
+      ]
+    },
+    {
+      "claim_id": "p5-c11",
+      "speaker": "p5",
+      "terminal": "ORIGIN_WITNESSED",
+      "origin_agent": "p2",
+      "is_origin": true,
+      "is_ungrounded": false,
+      "carriers": [
+        "p5"
+      ],
+      "detail": "p2 holds this as witnessed memory",
+      "hops": [
+        {
+          "depth": 0,
+          "agent": "p5",
+          "fact_id": "f143",
+          "src": "hearsay",
+          "transmission_id": "tr39",
+          "tick": 241,
+          "verdict": null,
+          "learned_at": 241
+        },
+        {
+          "depth": 1,
+          "agent": "p2",
+          "fact_id": "f91",
+          "src": "witnessed",
+          "transmission_id": null,
+          "tick": null,
+          "verdict": "SUPPORTED",
+          "learned_at": 184
+        }
+      ]
+    },
+    {
+      "claim_id": "p6-c1",
+      "speaker": "p6",
+      "terminal": "ORIGIN_WITNESSED",
+      "origin_agent": "p2",
+      "is_origin": true,
+      "is_ungrounded": false,
+      "carriers": [
+        "p6"
+      ],
+      "detail": "p2 holds this as witnessed memory",
+      "hops": [
+        {
+          "depth": 0,
+          "agent": "p6",
+          "fact_id": "f123",
+          "src": "hearsay",
+          "transmission_id": "tr19",
+          "tick": 44,
+          "verdict": null,
+          "learned_at": 44
+        },
+        {
+          "depth": 1,
+          "agent": "p2",
+          "fact_id": "f10",
+          "src": "witnessed",
+          "transmission_id": null,
+          "tick": null,
+          "verdict": "SUPPORTED",
+          "learned_at": 3
+        }
+      ]
+    },
+    {
+      "claim_id": "p6-c2",
+      "speaker": "p6",
+      "terminal": "ORIGIN_WITNESSED",
+      "origin_agent": "p5",
+      "is_origin": true,
+      "is_ungrounded": false,
+      "carriers": [
+        "p6"
+      ],
+      "detail": "p5 holds this as witnessed memory",
+      "hops": [
+        {
+          "depth": 0,
+          "agent": "p6",
+          "fact_id": "f140",
+          "src": "hearsay",
+          "transmission_id": "tr36",
+          "tick": 131,
+          "verdict": null,
+          "learned_at": 131
+        },
+        {
+          "depth": 1,
+          "agent": "p5",
+          "fact_id": "f41",
+          "src": "witnessed",
+          "transmission_id": null,
+          "tick": null,
+          "verdict": "SUPPORTED",
+          "learned_at": 4
+        }
+      ]
+    },
+    {
+      "claim_id": "p6-c3",
+      "speaker": "p6",
+      "terminal": "ORIGIN_WITNESSED",
+      "origin_agent": "p3",
+      "is_origin": true,
+      "is_ungrounded": false,
+      "carriers": [
+        "p6"
+      ],
+      "detail": "p3 holds this as witnessed memory",
+      "hops": [
+        {
+          "depth": 0,
+          "agent": "p6",
+          "fact_id": "f128",
+          "src": "hearsay",
+          "transmission_id": "tr24",
+          "tick": 195,
+          "verdict": null,
+          "learned_at": 195
+        },
+        {
+          "depth": 1,
+          "agent": "p3",
+          "fact_id": "f20",
+          "src": "witnessed",
+          "transmission_id": null,
+          "tick": null,
+          "verdict": "SUPPORTED",
+          "learned_at": 6
+        }
+      ]
+    },
+    {
+      "claim_id": "p6-c5",
+      "speaker": "p6",
+      "terminal": "ORIGIN_WITNESSED",
+      "origin_agent": "p4",
+      "is_origin": true,
+      "is_ungrounded": false,
+      "carriers": [
+        "p6"
+      ],
+      "detail": "p4 holds this as witnessed memory",
+      "hops": [
+        {
+          "depth": 0,
+          "agent": "p6",
+          "fact_id": "f121",
+          "src": "hearsay",
+          "transmission_id": "tr17",
+          "tick": 273,
+          "verdict": null,
+          "learned_at": 273
+        },
+        {
+          "depth": 1,
+          "agent": "p4",
+          "fact_id": "f32",
+          "src": "witnessed",
+          "transmission_id": null,
+          "tick": null,
+          "verdict": "SUPPORTED",
+          "learned_at": 33
+        }
+      ]
+    },
+    {
+      "claim_id": "p6-c9",
+      "speaker": "p6",
+      "terminal": "CHAIN_TEMPORAL_VIOLATION",
+      "origin_agent": null,
+      "is_origin": false,
+      "is_ungrounded": true,
+      "carriers": [
+        "p6",
+        "p4"
+      ],
+      "detail": "told at tick 101 but the cited record was learned at 102",
+      "hops": [
+        {
+          "depth": 0,
+          "agent": "p6",
+          "fact_id": "f149",
+          "src": "hearsay",
+          "transmission_id": "tr44",
+          "tick": 101,
+          "verdict": null,
+          "learned_at": 101
+        },
+        {
+          "depth": 1,
+          "agent": "p4",
+          "fact_id": "f146",
+          "src": "inferred",
+          "transmission_id": null,
+          "tick": null,
+          "verdict": null,
+          "learned_at": 102
+        }
+      ]
+    },
+    {
+      "claim_id": "p6-c16",
+      "speaker": "p6",
+      "terminal": "ORIGIN_WITNESSED",
+      "origin_agent": "p1",
+      "is_origin": true,
+      "is_ungrounded": false,
+      "carriers": [
+        "p6"
+      ],
+      "detail": "p1 holds this as witnessed memory",
+      "hops": [
+        {
+          "depth": 0,
+          "agent": "p6",
+          "fact_id": "f133",
+          "src": "hearsay",
+          "transmission_id": "tr29",
+          "tick": 292,
+          "verdict": null,
+          "learned_at": 292
+        },
+        {
+          "depth": 1,
+          "agent": "p1",
+          "fact_id": "f96",
+          "src": "witnessed",
+          "transmission_id": null,
+          "tick": null,
+          "verdict": "SUPPORTED",
+          "learned_at": 219
+        }
+      ]
+    },
+    {
+      "claim_id": "p7-c1",
+      "speaker": "p7",
+      "terminal": "ORIGIN_WITNESSED",
+      "origin_agent": "p2",
+      "is_origin": true,
+      "is_ungrounded": false,
+      "carriers": [
+        "p7"
+      ],
+      "detail": "p2 holds this as witnessed memory",
+      "hops": [
+        {
+          "depth": 0,
+          "agent": "p7",
+          "fact_id": "f105",
+          "src": "hearsay",
+          "transmission_id": "tr1",
+          "tick": 103,
+          "verdict": null,
+          "learned_at": 103
+        },
+        {
+          "depth": 1,
+          "agent": "p2",
+          "fact_id": "f10",
+          "src": "witnessed",
+          "transmission_id": null,
+          "tick": null,
+          "verdict": "SUPPORTED",
+          "learned_at": 3
+        }
+      ]
+    },
+    {
+      "claim_id": "p7-c4",
+      "speaker": "p7",
+      "terminal": "ORIGIN_WITNESSED",
+      "origin_agent": "p4",
+      "is_origin": true,
+      "is_ungrounded": false,
+      "carriers": [
+        "p7"
+      ],
+      "detail": "p4 holds this as witnessed memory",
+      "hops": [
+        {
+          "depth": 0,
+          "agent": "p7",
+          "fact_id": "f114",
+          "src": "hearsay",
+          "transmission_id": "tr10",
+          "tick": 186,
+          "verdict": null,
+          "learned_at": 186
+        },
+        {
+          "depth": 1,
+          "agent": "p4",
+          "fact_id": "f34",
+          "src": "witnessed",
+          "transmission_id": null,
+          "tick": null,
+          "verdict": "SUPPORTED",
+          "learned_at": 78
+        }
+      ]
+    },
+    {
+      "claim_id": "p7-c7",
+      "speaker": "p7",
+      "terminal": "ORIGIN_WITNESSED",
+      "origin_agent": "p4",
+      "is_origin": true,
+      "is_ungrounded": false,
+      "carriers": [
+        "p7"
+      ],
+      "detail": "p4 holds this as witnessed memory",
+      "hops": [
+        {
+          "depth": 0,
+          "agent": "p7",
+          "fact_id": "f115",
+          "src": "hearsay",
+          "transmission_id": "tr11",
+          "tick": 186,
+          "verdict": null,
+          "learned_at": 186
+        },
+        {
+          "depth": 1,
+          "agent": "p4",
+          "fact_id": "f36",
+          "src": "witnessed",
+          "transmission_id": null,
+          "tick": null,
+          "verdict": "SUPPORTED",
+          "learned_at": 122
+        }
+      ]
+    }
+  ],
+  "tally": {
+    "CONTRADICTED": 1,
+    "HEARSAY": 23,
+    "INDETERMINATE": 6,
+    "SUPPORTED": 96
+  },
+  "scoreboard": [
+    {
+      "suspect": "p4",
+      "claims": 16,
+      "self_contradictions": 1,
+      "other_contradictions": 7,
+      "gaps": 0,
+      "originated_ungrounded": 1,
+      "carried_ungrounded": 1,
+      "score": 27.5,
+      "breakdown": {
+        "originated_ungrounded": 8.0,
+        "self_contradictions": 5.0,
+        "other_contradictions": 14.0,
+        "gaps": 0.0,
+        "carried_ungrounded": 0.5
+      }
+    },
+    {
+      "suspect": "p2",
+      "claims": 20,
+      "self_contradictions": 1,
+      "other_contradictions": 7,
+      "gaps": 1,
+      "originated_ungrounded": 0,
+      "carried_ungrounded": 1,
+      "score": 20.5,
+      "breakdown": {
+        "originated_ungrounded": 0.0,
+        "self_contradictions": 5.0,
+        "other_contradictions": 14.0,
+        "gaps": 1.0,
+        "carried_ungrounded": 0.5
+      }
+    },
+    {
+      "suspect": "p1",
+      "claims": 18,
+      "self_contradictions": 1,
+      "other_contradictions": 7,
+      "gaps": 0,
+      "originated_ungrounded": 0,
+      "carried_ungrounded": 1,
+      "score": 19.5,
+      "breakdown": {
+        "originated_ungrounded": 0.0,
+        "self_contradictions": 5.0,
+        "other_contradictions": 14.0,
+        "gaps": 0.0,
+        "carried_ungrounded": 0.5
+      }
+    },
+    {
+      "suspect": "p6",
+      "claims": 20,
+      "self_contradictions": 0,
+      "other_contradictions": 5,
+      "gaps": 1,
+      "originated_ungrounded": 0,
+      "carried_ungrounded": 1,
+      "score": 11.5,
+      "breakdown": {
+        "originated_ungrounded": 0.0,
+        "self_contradictions": 0.0,
+        "other_contradictions": 10.0,
+        "gaps": 1.0,
+        "carried_ungrounded": 0.5
+      }
+    },
+    {
+      "suspect": "p5",
+      "claims": 18,
+      "self_contradictions": 0,
+      "other_contradictions": 4,
+      "gaps": 1,
+      "originated_ungrounded": 0,
+      "carried_ungrounded": 0,
+      "score": 9.0,
+      "breakdown": {
+        "originated_ungrounded": 0.0,
+        "self_contradictions": 0.0,
+        "other_contradictions": 8.0,
+        "gaps": 1.0,
+        "carried_ungrounded": 0.0
+      }
+    },
+    {
+      "suspect": "p7",
+      "claims": 16,
+      "self_contradictions": 0,
+      "other_contradictions": 4,
+      "gaps": 1,
+      "originated_ungrounded": 0,
+      "carried_ungrounded": 0,
+      "score": 9.0,
+      "breakdown": {
+        "originated_ungrounded": 0.0,
+        "self_contradictions": 0.0,
+        "other_contradictions": 8.0,
+        "gaps": 1.0,
+        "carried_ungrounded": 0.0
+      }
+    },
+    {
+      "suspect": "p3",
+      "claims": 18,
+      "self_contradictions": 0,
+      "other_contradictions": 0,
+      "gaps": 3,
+      "originated_ungrounded": 0,
+      "carried_ungrounded": 0,
+      "score": 3.0,
+      "breakdown": {
+        "originated_ungrounded": 0.0,
+        "self_contradictions": 0.0,
+        "other_contradictions": 0.0,
+        "gaps": 3.0,
+        "carried_ungrounded": 0.0
+      }
+    }
+  ],
+  "floor_plan": {
+    "places": [
+      {
+        "id": "ballroom",
+        "name": "Ballroom"
+      },
+      {
+        "id": "billiard",
+        "name": "Billiard Room"
+      },
+      {
+        "id": "cellar",
+        "name": "Wine Cellar"
+      },
+      {
+        "id": "conservatory",
+        "name": "Conservatory"
+      },
+      {
+        "id": "gallery",
+        "name": "Long Gallery"
+      },
+      {
+        "id": "hall",
+        "name": "Entrance Hall"
+      },
+      {
+        "id": "kitchen",
+        "name": "Kitchen"
+      },
+      {
+        "id": "library",
+        "name": "Library"
+      },
+      {
+        "id": "scullery",
+        "name": "Scullery"
+      },
+      {
+        "id": "study",
+        "name": "Study"
+      },
+      {
+        "id": "terrace",
+        "name": "Terrace"
+      }
+    ],
+    "corridors": [
+      {
+        "a": "ballroom",
+        "b": "cellar",
+        "minutes": 4
+      },
+      {
+        "a": "ballroom",
+        "b": "conservatory",
+        "minutes": 2
+      },
+      {
+        "a": "ballroom",
+        "b": "study",
+        "minutes": 5
+      },
+      {
+        "a": "billiard",
+        "b": "cellar",
+        "minutes": 5
+      },
+      {
+        "a": "billiard",
+        "b": "hall",
+        "minutes": 3
+      },
+      {
+        "a": "billiard",
+        "b": "terrace",
+        "minutes": 6
+      },
+      {
+        "a": "cellar",
+        "b": "gallery",
+        "minutes": 5
+      },
+      {
+        "a": "conservatory",
+        "b": "scullery",
+        "minutes": 5
+      },
+      {
+        "a": "gallery",
+        "b": "hall",
+        "minutes": 3
+      },
+      {
+        "a": "hall",
+        "b": "study",
+        "minutes": 4
+      },
+      {
+        "a": "kitchen",
+        "b": "terrace",
+        "minutes": 6
+      },
+      {
+        "a": "library",
+        "b": "scullery",
+        "minutes": 6
+      },
+      {
+        "a": "study",
+        "b": "terrace",
+        "minutes": 5
+      }
+    ],
+    "travel": {
+      "ballroom|billiard": 9,
+      "ballroom|cellar": 4,
+      "ballroom|conservatory": 2,
+      "ballroom|gallery": 9,
+      "ballroom|hall": 9,
+      "ballroom|kitchen": 16,
+      "ballroom|library": 13,
+      "ballroom|scullery": 7,
+      "ballroom|study": 5,
+      "ballroom|terrace": 10,
+      "billiard|ballroom": 9,
+      "billiard|cellar": 5,
+      "billiard|conservatory": 11,
+      "billiard|gallery": 6,
+      "billiard|hall": 3,
+      "billiard|kitchen": 12,
+      "billiard|library": 22,
+      "billiard|scullery": 16,
+      "billiard|study": 7,
+      "billiard|terrace": 6,
+      "cellar|ballroom": 4,
+      "cellar|billiard": 5,
+      "cellar|conservatory": 6,
+      "cellar|gallery": 5,
+      "cellar|hall": 8,
+      "cellar|kitchen": 17,
+      "cellar|library": 17,
+      "cellar|scullery": 11,
+      "cellar|study": 9,
+      "cellar|terrace": 11,
+      "conservatory|ballroom": 2,
+      "conservatory|billiard": 11,
+      "conservatory|cellar": 6,
+      "conservatory|gallery": 11,
+      "conservatory|hall": 11,
+      "conservatory|kitchen": 18,
+      "conservatory|library": 11,
+      "conservatory|scullery": 5,
+      "conservatory|study": 7,
+      "conservatory|terrace": 12,
+      "gallery|ballroom": 9,
+      "gallery|billiard": 6,
+      "gallery|cellar": 5,
+      "gallery|conservatory": 11,
+      "gallery|hall": 3,
+      "gallery|kitchen": 18,
+      "gallery|library": 22,
+      "gallery|scullery": 16,
+      "gallery|study": 7,
+      "gallery|terrace": 12,
+      "hall|ballroom": 9,
+      "hall|billiard": 3,
+      "hall|cellar": 8,
+      "hall|conservatory": 11,
+      "hall|gallery": 3,
+      "hall|kitchen": 15,
+      "hall|library": 22,
+      "hall|scullery": 16,
+      "hall|study": 4,
+      "hall|terrace": 9,
+      "kitchen|ballroom": 16,
+      "kitchen|billiard": 12,
+      "kitchen|cellar": 17,
+      "kitchen|conservatory": 18,
+      "kitchen|gallery": 18,
+      "kitchen|hall": 15,
+      "kitchen|library": 29,
+      "kitchen|scullery": 23,
+      "kitchen|study": 11,
+      "kitchen|terrace": 6,
+      "library|ballroom": 13,
+      "library|billiard": 22,
+      "library|cellar": 17,
+      "library|conservatory": 11,
+      "library|gallery": 22,
+      "library|hall": 22,
+      "library|kitchen": 29,
+      "library|scullery": 6,
+      "library|study": 18,
+      "library|terrace": 23,
+      "scullery|ballroom": 7,
+      "scullery|billiard": 16,
+      "scullery|cellar": 11,
+      "scullery|conservatory": 5,
+      "scullery|gallery": 16,
+      "scullery|hall": 16,
+      "scullery|kitchen": 23,
+      "scullery|library": 6,
+      "scullery|study": 12,
+      "scullery|terrace": 17,
+      "study|ballroom": 5,
+      "study|billiard": 7,
+      "study|cellar": 9,
+      "study|conservatory": 7,
+      "study|gallery": 7,
+      "study|hall": 4,
+      "study|kitchen": 11,
+      "study|library": 18,
+      "study|scullery": 12,
+      "study|terrace": 5,
+      "terrace|ballroom": 10,
+      "terrace|billiard": 6,
+      "terrace|cellar": 11,
+      "terrace|conservatory": 12,
+      "terrace|gallery": 12,
+      "terrace|hall": 9,
+      "terrace|kitchen": 6,
+      "terrace|library": 23,
+      "terrace|scullery": 17,
+      "terrace|study": 5
+    },
+    "routes": {
+      "ballroom|billiard": [
+        "ballroom",
+        "cellar",
+        "billiard"
+      ],
+      "ballroom|cellar": [
+        "ballroom",
+        "cellar"
+      ],
+      "ballroom|conservatory": [
+        "ballroom",
+        "conservatory"
+      ],
+      "ballroom|gallery": [
+        "ballroom",
+        "cellar",
+        "gallery"
+      ],
+      "ballroom|hall": [
+        "ballroom",
+        "study",
+        "hall"
+      ],
+      "ballroom|kitchen": [
+        "ballroom",
+        "study",
+        "terrace",
+        "kitchen"
+      ],
+      "ballroom|library": [
+        "ballroom",
+        "conservatory",
+        "scullery",
+        "library"
+      ],
+      "ballroom|scullery": [
+        "ballroom",
+        "conservatory",
+        "scullery"
+      ],
+      "ballroom|study": [
+        "ballroom",
+        "study"
+      ],
+      "ballroom|terrace": [
+        "ballroom",
+        "study",
+        "terrace"
+      ],
+      "billiard|ballroom": [
+        "billiard",
+        "cellar",
+        "ballroom"
+      ],
+      "billiard|cellar": [
+        "billiard",
+        "cellar"
+      ],
+      "billiard|conservatory": [
+        "billiard",
+        "cellar",
+        "ballroom",
+        "conservatory"
+      ],
+      "billiard|gallery": [
+        "billiard",
+        "hall",
+        "gallery"
+      ],
+      "billiard|hall": [
+        "billiard",
+        "hall"
+      ],
+      "billiard|kitchen": [
+        "billiard",
+        "terrace",
+        "kitchen"
+      ],
+      "billiard|library": [
+        "billiard",
+        "cellar",
+        "ballroom",
+        "conservatory",
+        "scullery",
+        "library"
+      ],
+      "billiard|scullery": [
+        "billiard",
+        "cellar",
+        "ballroom",
+        "conservatory",
+        "scullery"
+      ],
+      "billiard|study": [
+        "billiard",
+        "hall",
+        "study"
+      ],
+      "billiard|terrace": [
+        "billiard",
+        "terrace"
+      ],
+      "cellar|ballroom": [
+        "cellar",
+        "ballroom"
+      ],
+      "cellar|billiard": [
+        "cellar",
+        "billiard"
+      ],
+      "cellar|conservatory": [
+        "cellar",
+        "ballroom",
+        "conservatory"
+      ],
+      "cellar|gallery": [
+        "cellar",
+        "gallery"
+      ],
+      "cellar|hall": [
+        "cellar",
+        "billiard",
+        "hall"
+      ],
+      "cellar|kitchen": [
+        "cellar",
+        "billiard",
+        "terrace",
+        "kitchen"
+      ],
+      "cellar|library": [
+        "cellar",
+        "ballroom",
+        "conservatory",
+        "scullery",
+        "library"
+      ],
+      "cellar|scullery": [
+        "cellar",
+        "ballroom",
+        "conservatory",
+        "scullery"
+      ],
+      "cellar|study": [
+        "cellar",
+        "ballroom",
+        "study"
+      ],
+      "cellar|terrace": [
+        "cellar",
+        "billiard",
+        "terrace"
+      ],
+      "conservatory|ballroom": [
+        "conservatory",
+        "ballroom"
+      ],
+      "conservatory|billiard": [
+        "conservatory",
+        "ballroom",
+        "cellar",
+        "billiard"
+      ],
+      "conservatory|cellar": [
+        "conservatory",
+        "ballroom",
+        "cellar"
+      ],
+      "conservatory|gallery": [
+        "conservatory",
+        "ballroom",
+        "cellar",
+        "gallery"
+      ],
+      "conservatory|hall": [
+        "conservatory",
+        "ballroom",
+        "study",
+        "hall"
+      ],
+      "conservatory|kitchen": [
+        "conservatory",
+        "ballroom",
+        "study",
+        "terrace",
+        "kitchen"
+      ],
+      "conservatory|library": [
+        "conservatory",
+        "scullery",
+        "library"
+      ],
+      "conservatory|scullery": [
+        "conservatory",
+        "scullery"
+      ],
+      "conservatory|study": [
+        "conservatory",
+        "ballroom",
+        "study"
+      ],
+      "conservatory|terrace": [
+        "conservatory",
+        "ballroom",
+        "study",
+        "terrace"
+      ],
+      "gallery|ballroom": [
+        "gallery",
+        "cellar",
+        "ballroom"
+      ],
+      "gallery|billiard": [
+        "gallery",
+        "hall",
+        "billiard"
+      ],
+      "gallery|cellar": [
+        "gallery",
+        "cellar"
+      ],
+      "gallery|conservatory": [
+        "gallery",
+        "cellar",
+        "ballroom",
+        "conservatory"
+      ],
+      "gallery|hall": [
+        "gallery",
+        "hall"
+      ],
+      "gallery|kitchen": [
+        "gallery",
+        "hall",
+        "billiard",
+        "terrace",
+        "kitchen"
+      ],
+      "gallery|library": [
+        "gallery",
+        "cellar",
+        "ballroom",
+        "conservatory",
+        "scullery",
+        "library"
+      ],
+      "gallery|scullery": [
+        "gallery",
+        "cellar",
+        "ballroom",
+        "conservatory",
+        "scullery"
+      ],
+      "gallery|study": [
+        "gallery",
+        "hall",
+        "study"
+      ],
+      "gallery|terrace": [
+        "gallery",
+        "hall",
+        "billiard",
+        "terrace"
+      ],
+      "hall|ballroom": [
+        "hall",
+        "study",
+        "ballroom"
+      ],
+      "hall|billiard": [
+        "hall",
+        "billiard"
+      ],
+      "hall|cellar": [
+        "hall",
+        "gallery",
+        "cellar"
+      ],
+      "hall|conservatory": [
+        "hall",
+        "study",
+        "ballroom",
+        "conservatory"
+      ],
+      "hall|gallery": [
+        "hall",
+        "gallery"
+      ],
+      "hall|kitchen": [
+        "hall",
+        "billiard",
+        "terrace",
+        "kitchen"
+      ],
+      "hall|library": [
+        "hall",
+        "study",
+        "ballroom",
+        "conservatory",
+        "scullery",
+        "library"
+      ],
+      "hall|scullery": [
+        "hall",
+        "study",
+        "ballroom",
+        "conservatory",
+        "scullery"
+      ],
+      "hall|study": [
+        "hall",
+        "study"
+      ],
+      "hall|terrace": [
+        "hall",
+        "billiard",
+        "terrace"
+      ],
+      "kitchen|ballroom": [
+        "kitchen",
+        "terrace",
+        "study",
+        "ballroom"
+      ],
+      "kitchen|billiard": [
+        "kitchen",
+        "terrace",
+        "billiard"
+      ],
+      "kitchen|cellar": [
+        "kitchen",
+        "terrace",
+        "billiard",
+        "cellar"
+      ],
+      "kitchen|conservatory": [
+        "kitchen",
+        "terrace",
+        "study",
+        "ballroom",
+        "conservatory"
+      ],
+      "kitchen|gallery": [
+        "kitchen",
+        "terrace",
+        "study",
+        "hall",
+        "gallery"
+      ],
+      "kitchen|hall": [
+        "kitchen",
+        "terrace",
+        "study",
+        "hall"
+      ],
+      "kitchen|library": [
+        "kitchen",
+        "terrace",
+        "study",
+        "ballroom",
+        "conservatory",
+        "scullery",
+        "library"
+      ],
+      "kitchen|scullery": [
+        "kitchen",
+        "terrace",
+        "study",
+        "ballroom",
+        "conservatory",
+        "scullery"
+      ],
+      "kitchen|study": [
+        "kitchen",
+        "terrace",
+        "study"
+      ],
+      "kitchen|terrace": [
+        "kitchen",
+        "terrace"
+      ],
+      "library|ballroom": [
+        "library",
+        "scullery",
+        "conservatory",
+        "ballroom"
+      ],
+      "library|billiard": [
+        "library",
+        "scullery",
+        "conservatory",
+        "ballroom",
+        "cellar",
+        "billiard"
+      ],
+      "library|cellar": [
+        "library",
+        "scullery",
+        "conservatory",
+        "ballroom",
+        "cellar"
+      ],
+      "library|conservatory": [
+        "library",
+        "scullery",
+        "conservatory"
+      ],
+      "library|gallery": [
+        "library",
+        "scullery",
+        "conservatory",
+        "ballroom",
+        "cellar",
+        "gallery"
+      ],
+      "library|hall": [
+        "library",
+        "scullery",
+        "conservatory",
+        "ballroom",
+        "study",
+        "hall"
+      ],
+      "library|kitchen": [
+        "library",
+        "scullery",
+        "conservatory",
+        "ballroom",
+        "study",
+        "terrace",
+        "kitchen"
+      ],
+      "library|scullery": [
+        "library",
+        "scullery"
+      ],
+      "library|study": [
+        "library",
+        "scullery",
+        "conservatory",
+        "ballroom",
+        "study"
+      ],
+      "library|terrace": [
+        "library",
+        "scullery",
+        "conservatory",
+        "ballroom",
+        "study",
+        "terrace"
+      ],
+      "scullery|ballroom": [
+        "scullery",
+        "conservatory",
+        "ballroom"
+      ],
+      "scullery|billiard": [
+        "scullery",
+        "conservatory",
+        "ballroom",
+        "cellar",
+        "billiard"
+      ],
+      "scullery|cellar": [
+        "scullery",
+        "conservatory",
+        "ballroom",
+        "cellar"
+      ],
+      "scullery|conservatory": [
+        "scullery",
+        "conservatory"
+      ],
+      "scullery|gallery": [
+        "scullery",
+        "conservatory",
+        "ballroom",
+        "cellar",
+        "gallery"
+      ],
+      "scullery|hall": [
+        "scullery",
+        "conservatory",
+        "ballroom",
+        "study",
+        "hall"
+      ],
+      "scullery|kitchen": [
+        "scullery",
+        "conservatory",
+        "ballroom",
+        "study",
+        "terrace",
+        "kitchen"
+      ],
+      "scullery|library": [
+        "scullery",
+        "library"
+      ],
+      "scullery|study": [
+        "scullery",
+        "conservatory",
+        "ballroom",
+        "study"
+      ],
+      "scullery|terrace": [
+        "scullery",
+        "conservatory",
+        "ballroom",
+        "study",
+        "terrace"
+      ],
+      "study|ballroom": [
+        "study",
+        "ballroom"
+      ],
+      "study|billiard": [
+        "study",
+        "hall",
+        "billiard"
+      ],
+      "study|cellar": [
+        "study",
+        "ballroom",
+        "cellar"
+      ],
+      "study|conservatory": [
+        "study",
+        "ballroom",
+        "conservatory"
+      ],
+      "study|gallery": [
+        "study",
+        "hall",
+        "gallery"
+      ],
+      "study|hall": [
+        "study",
+        "hall"
+      ],
+      "study|kitchen": [
+        "study",
+        "terrace",
+        "kitchen"
+      ],
+      "study|library": [
+        "study",
+        "ballroom",
+        "conservatory",
+        "scullery",
+        "library"
+      ],
+      "study|scullery": [
+        "study",
+        "ballroom",
+        "conservatory",
+        "scullery"
+      ],
+      "study|terrace": [
+        "study",
+        "terrace"
+      ],
+      "terrace|ballroom": [
+        "terrace",
+        "study",
+        "ballroom"
+      ],
+      "terrace|billiard": [
+        "terrace",
+        "billiard"
+      ],
+      "terrace|cellar": [
+        "terrace",
+        "billiard",
+        "cellar"
+      ],
+      "terrace|conservatory": [
+        "terrace",
+        "study",
+        "ballroom",
+        "conservatory"
+      ],
+      "terrace|gallery": [
+        "terrace",
+        "study",
+        "hall",
+        "gallery"
+      ],
+      "terrace|hall": [
+        "terrace",
+        "study",
+        "hall"
+      ],
+      "terrace|kitchen": [
+        "terrace",
+        "kitchen"
+      ],
+      "terrace|library": [
+        "terrace",
+        "study",
+        "ballroom",
+        "conservatory",
+        "scullery",
+        "library"
+      ],
+      "terrace|scullery": [
+        "terrace",
+        "study",
+        "ballroom",
+        "conservatory",
+        "scullery"
+      ],
+      "terrace|study": [
+        "terrace",
+        "study"
+      ]
+    }
+  },
+  "audit_summary": {
+    "uncovered_minutes": 494,
+    "claims_with_gaps": 30
+  }
+}

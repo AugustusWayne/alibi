@@ -1,0 +1,48 @@
+/* The pocket recorder (brief 5.8). Layers of pixel art at 4px per grid cell,
+   with live type and real buttons laid over them. Everything that moves runs
+   on steps(), and pausing the replay stops the whole machine. */
+
+.rec { --spd: 1; position: absolute; left: 808px; top: 462px; width: 456px; height: 352px; font-family: var(--pixel); }
+.rec__art, .rec__layer { position: absolute; left: 0; top: 0; pointer-events: none; }
+
+.rec__brand { position: absolute; left: 22px; top: 44px; display: flex; align-items: baseline; gap: 10px; }
+.rec__brand b { font-weight: 400; font-size: 14px; color: var(--night); }
+.rec__brand span { font-size: 6px; color: var(--night); }
+.rec__lbl { position: absolute; font-size: 6px; line-height: 12px; color: var(--night); white-space: nowrap; }
+.rec__lbl--on { color: var(--black); text-decoration: underline; text-underline-offset: 2px; }
+
+.rec__tape { position: absolute; left: 50px; top: 92px; width: 172px; height: 24px; padding: 1px 6px 0 14px; color: var(--night); white-space: nowrap; }
+.rec__tape b { display: block; font-family: var(--text); font-weight: 400; font-size: 18px; line-height: 14px; }
+.rec__tape span { display: block; font-size: 6px; line-height: 8px; }
+
+.rec__lcd { position: absolute; left: 272px; top: 84px; width: 160px; height: 72px; padding: 6px 7px; color: var(--lime); overflow: hidden; font: inherit; }
+.rec__clock { display: block; font-size: 18px; line-height: 20px; }
+.rec__mode { display: block; font-size: 7px; line-height: 12px; margin-top: 4px; }
+.rec__scroll { display: block; margin-top: 4px; font-size: 7px; line-height: 12px; white-space: nowrap; overflow: hidden; }
+.rec__scroll span { display: inline-block; padding-left: 100%; animation: marquee calc(18s / var(--spd)) steps(180) infinite; }
+@keyframes marquee { to { transform: translateX(-100%); } }
+
+.rec__digit { position: absolute; top: 180px; width: 28px; height: 24px; font-size: 11px; line-height: 24px; text-align: center; color: var(--cream); }
+
+.rec__needle { position: absolute; top: 196px; width: 4px; background: var(--black); }
+.rec__needle i { position: absolute; left: -2px; bottom: -4px; width: 8px; height: 8px; background: var(--red); }
+
+.rec__sticker { position: absolute; left: 24px; top: 316px; font-size: 7px; line-height: 12px; color: var(--black); }
+
+.rec__key { position: absolute; top: 0; width: 56px; height: 40px; background: none; border: 0; border-radius: 0; padding: 0; cursor: pointer; font: inherit; }
+.rec__knob { position: absolute; left: 344px; top: 228px; width: 76px; height: 76px; background: none; border: 0; border-radius: 0; padding: 0; cursor: pointer; font: inherit; }
+
+/* the reels turn in three frames */
+.rec__frame { opacity: 0; animation: calc(0.6s / var(--spd)) steps(1, end) infinite; }
+.rec__frame--0 { animation-name: frame-0; }
+.rec__frame--1 { animation-name: frame-1; }
+.rec__frame--2 { animation-name: frame-2; }
+@keyframes frame-0 { 0% { opacity: 1; } 33.333% { opacity: 0; } 100% { opacity: 0; } }
+@keyframes frame-1 { 0% { opacity: 0; } 33.333% { opacity: 1; } 66.666% { opacity: 0; } 100% { opacity: 0; } }
+@keyframes frame-2 { 0% { opacity: 0; } 66.666% { opacity: 1; } 100% { opacity: 1; } }
+
+.rec__lamp-rec { animation: lamp 1s steps(1, end) infinite; }
+@keyframes lamp { 0% { opacity: 1; } 50% { opacity: 0.2; } 100% { opacity: 0.2; } }
+
+.rec--paused .rec__frame, .rec--paused .rec__scroll span, .rec--paused .rec__lamp-rec { animation-play-state: paused; }
+.rec--paused .rec__frame--0 { opacity: 1; }
