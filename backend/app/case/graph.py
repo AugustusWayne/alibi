@@ -102,7 +102,18 @@ class CaseGraph:
         modality: str,
         relayed_from: str | None = None,
     ) -> None:
-        """Q4. Record what a suspect said. The verdict starts PENDING."""
+        """Q4. Record what a suspect said. The verdict starts PENDING.
+
+        Refuses a zero-length or inverted window, so a claim the audit could
+        only answer vacuously never enters the graph. `decide` raises on the
+        same condition as a backstop; this is the gate that keeps the case
+        graph a record of well-formed claims only.
+        """
+        if t0 >= t1:
+            raise ValueError(
+                f"claim {claim_id!r} has window [{t0}, {t1}), which is zero-length "
+                f"or inverted; a claim must satisfy t0 < t1"
+            )
         self._graph.query(
             q.INGEST_CLAIM,
             {
@@ -186,6 +197,42 @@ class CaseGraph:
     def materialize_gap(self, *, claim_id: str, g0: int, g1: int) -> None:
         self._graph.query(q.MATERIALIZE_GAP, {"claim_id": claim_id, "g0": g0, "g1": g1})
 
+    def materialize_trace(
+        self,
+        *,
+        claim_id: str,
+        agent: str,
+        role: str,
+        terminal: str,
+        ungrounded: bool,
+        depth: int,
+    ) -> None:
+        """Record a traced chain's conclusion. Referee-written, see 5.7."""
+        self._graph.query(
+            q.MATERIALIZE_TRACE,
+            {
+                "claim_id": claim_id,
+                "agent": agent,
+                "role": role,
+                "terminal": terminal,
+                "ungrounded": ungrounded,
+                "depth": depth,
+            },
+        )
+
+    def traces(self) -> list[dict]:
+        return _rows(self._graph.ro_query(q.ALL_TRACES))
+
+    def traces_for_claim(self, claim_id: str) -> list[dict]:
+        """The chain conclusions recorded for one claim.
+
+        Empty for a claim nobody polygraphed. That is the gating, read back:
+        `TRACED_TO` exists only where a polygraph was spent (see
+        `agents/detective.py`), so an empty list means "not asked", not
+        "nothing found".
+        """
+        return _rows(self._graph.ro_query(q.TRACES_FOR_CLAIM, {"claim_id": claim_id}))
+
     def set_verdict(self, *, claim_id: str, verdict: str, coverage: float, uncovered: int) -> None:
         self._graph.query(
             q.SET_VERDICT,
@@ -217,6 +264,55 @@ class CaseGraph:
     def scoreboard_rows(self) -> list[dict]:
         """Q8. Raw per-suspect counts. The weighting lives in `scoreboard.py`."""
         return _rows(self._graph.ro_query(q.SCOREBOARD))
+
+    # -- display readers (the case board) ------------------------------------
+
+    def suspects(self) -> list[dict]:
+        return _rows(self._graph.ro_query(q.ALL_SUSPECTS))
+
+    def adjacency(self) -> list[dict]:
+        """Every corridor, once per pair. The floor plan the UI draws."""
+        return _rows(self._graph.ro_query(q.ALL_ADJACENCY))
+
+    def incident(self) -> dict | None:
+        rows = _rows(self._graph.ro_query(q.INCIDENT))
+        return rows[0] if rows else None
+
+    def support_shadows(self) -> list[dict]:
+        """Every SUPPORTED_BY shadow with the slice of its claim it covers."""
+        return _rows(self._graph.ro_query(q.ALL_SUPPORT_SHADOWS))
+
+    def conflict_shadows(self) -> list[dict]:
+        return _rows(self._graph.ro_query(q.ALL_CONFLICT_SHADOWS))
+
+    def gaps(self) -> list[dict]:
+        return _rows(self._graph.ro_query(q.ALL_GAPS))
+
+    # -- readers the detective's tools need ---------------------------------
+
+    def gaps_by_speaker(self, suspect: str | None = None) -> list[dict]:
+        """Every unaccounted-for span, or only one suspect's. `list_gaps`."""
+        return _rows(self._graph.ro_query(q.GAPS_BY_SPEAKER, {"suspect": suspect}))
+
+    def gaps_for_claim(self, claim_id: str) -> list[tuple[int, int]]:
+        rows = _rows(self._graph.ro_query(q.GAPS_FOR_CLAIM, {"claim_id": claim_id}))
+        return [(int(r["t0"]), int(r["t1"])) for r in rows]
+
+    def support_shadows_for_claim(self, claim_id: str) -> list[dict]:
+        return _rows(
+            self._graph.ro_query(q.SUPPORT_SHADOWS_FOR_CLAIM, {"claim_id": claim_id})
+        )
+
+    def conflict_shadows_for_claim(self, claim_id: str) -> list[dict]:
+        return _rows(
+            self._graph.ro_query(q.CONFLICT_SHADOWS_FOR_CLAIM, {"claim_id": claim_id})
+        )
+
+    def latest_turn(self) -> int:
+        """The highest turn in the case, or 0 when nothing has been said yet."""
+        rows = _rows(self._graph.ro_query(q.LATEST_TURN))
+        turn = rows[0]["turn"] if rows else None
+        return int(turn) if turn is not None else 0
 
     def verdict_tally(self) -> dict[str, int]:
         return {r["verdict"]: r["n"] for r in _rows(self._graph.ro_query(q.VERDICT_TALLY))}

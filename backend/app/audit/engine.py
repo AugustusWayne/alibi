@@ -153,6 +153,29 @@ class AuditEngine:
             uncovered=decision.uncovered_minutes,
         )
 
+    def evaluate_in_mind(
+        self,
+        *,
+        agent: str,
+        subject: str,
+        place: str,
+        t0: int,
+        t1: int,
+        modality: str,
+    ) -> Decision:
+        """Audit a claim against one agent's memory, writing nothing.
+
+        The referee's chain walk needs the verdict a claim would get in each
+        agent's mind along the way, without those intermediate answers
+        overwriting the claim's own verdict in the case graph — the claim
+        belongs to its speaker, not to whoever they heard it from. So this
+        gathers and decides, and deliberately does not materialize.
+        """
+        evidence = self._mind(agent).gather_evidence(
+            subject=subject, place=place, t0=t0, t1=t1
+        )
+        return decide(claim_t0=t0, claim_t1=t1, modality=modality, evidence=evidence)
+
     def audit_all(self) -> list[AuditResult]:
         """Audit every claim in the case, in turn order."""
         return [self.audit_claim(c["id"]) for c in self._case.all_claims()]

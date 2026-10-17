@@ -43,7 +43,8 @@ ON CREATE SET i.place = $place, i.t0 = $t0, i.t1 = $t1
 # The generator's record of what it instructed an agent to fabricate. This is
 # what makes ground-truth scoring possible without inferring intent.
 CREATE_PLANTED_FABRICATION = """
-CREATE (:PlantedFabrication {claim_key:$claim_key, by_person:$by_person, reason:$reason})
+CREATE (:PlantedFabrication {claim_key:$claim_key, by_person:$by_person, reason:$reason,
+                             pathology:$pathology, src_fact_id:$src_fact_id})
 """
 
 # Who was really where, for the referee's scoring and the oracle.
@@ -63,7 +64,8 @@ ORDER BY p.id
 # Every fabrication the generator planted.
 ALL_PLANTED_FABRICATIONS = """
 MATCH (f:PlantedFabrication)
-RETURN f.claim_key AS claim_key, f.by_person AS by_person, f.reason AS reason
+RETURN f.claim_key AS claim_key, f.by_person AS by_person, f.reason AS reason,
+       f.pathology AS pathology, f.src_fact_id AS src_fact_id
 ORDER BY f.claim_key
 """
 

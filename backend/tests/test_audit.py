@@ -81,6 +81,16 @@ def world(db, scratch_seed, graphs):
             mind.write_fact(fact_id=fact_id, kind="did", src="inferred",
                             subject=subject, place=place, t0=t0, t1=t1, learned_at=t0)
 
+        def engine_decide(self, *, claim_t0, claim_t1, evidence, modality="THROUGHOUT"):
+            """Call the decision table directly, for degenerate windows that
+            cannot be ingested at all."""
+            from backend.app.audit.decide import decide
+
+            return decide(
+                claim_t0=claim_t0, claim_t1=claim_t1, modality=modality,
+                evidence=evidence,
+            )
+
     b = Builder()
     b.seed = seed
     b.case = case
@@ -313,3 +323,53 @@ def test_every_verdict_is_reachable_in_one_case(world):
         "ind": INDETERMINATE,
         "hea": HEARSAY,
     }
+
+
+# -- degenerate claim windows ------------------------------------------------
+
+
+def test_a_zero_length_claim_is_refused_rather_than_judged(world):
+    """`[t, t)` is the empty interval, so there is nothing to ground.
+
+    Before this test the audit returned SUPPORTED for a zero-length claim
+    whenever any witnessed fact straddled the instant, because the modality
+    check `covered >= duration` reduces to `0 >= 0`. That is the same
+    vacuous-arithmetic bug class as summing unmerged spans: a confident
+    verdict over zero examined minutes.
+
+    A claim about no ticks is malformed input, not an epistemic state, so it
+    raises rather than being assigned one of the five verdicts.
+    """
+    with pytest.raises(ValueError, match="zero-length|t0 < t1"):
+        world.engine_decide(claim_t0=10, claim_t1=10, evidence=[])
+
+
+def test_an_inverted_claim_is_refused(world):
+    """`[20, 10)` is not an interval at all. Same reasoning."""
+    with pytest.raises(ValueError, match="zero-length|t0 < t1"):
+        world.engine_decide(claim_t0=20, claim_t1=10, evidence=[])
+
+
+def test_a_zero_length_claim_cannot_be_ingested(world):
+    """The case graph refuses to store one, so the audit never meets it.
+
+    Validating at ingest keeps the graph the system of record for
+    well-formed claims only; `decide` raising is the backstop.
+    """
+    with pytest.raises(ValueError, match="zero-length|t0 < t1"):
+        world.claim(claim_id="bad", t0=10, t1=10)
+
+
+def test_a_one_tick_claim_is_the_smallest_auditable_one(world):
+    """`[10, 11)` contains exactly tick 10 and audits normally.
+
+    The boundary next to the refusal: one tick is a real claim, zero is not.
+    """
+    world.claim(claim_id="c1", t0=10, t1=11)
+    world.witnessed(fact_id="f1", t0=10, t1=11)
+
+    r = world.engine.audit_claim("c1")
+
+    assert r.verdict == SUPPORTED
+    assert r.covered_minutes == 1
+    assert r.coverage == pytest.approx(1.0)

@@ -82,6 +82,8 @@ class WorldSpec:
     with_accomplice: bool = True
     exchanges: int = 14
     incident_length: int = 20
+    plant_broken_chain: bool = False
+    plant_temporal_violation: bool = False
 
 
 @dataclass(frozen=True)
@@ -166,6 +168,18 @@ class PlantedFabrication:
     t1: int
     src_fact_id: str
     relayed_fact_ids: tuple[str, ...] = ()
+    pathology: str = "none"
+    """What the referee's chain walk should run into at this agent.
+
+    `none` — the cited fact exists in the fabricator's mind but nothing
+    witnessed backs it, so the trace reaches the fabricator and names it.
+    `broken_chain` — the cited fact does not exist anywhere.
+    `temporal_violation` — the telling precedes the moment the cited fact was
+    learned.
+
+    The last two are planted only when asked for, so the eval can prove the
+    referee detects each state rather than assuming it would.
+    """
 
 
 @dataclass(frozen=True)
@@ -452,7 +466,7 @@ def _exchanges(
     return new_facts, transmissions
 
 
-def _plant_fabrication(
+def _plant_fabrications(
     rng: random.Random,
     *,
     culprit: Person,
@@ -462,25 +476,44 @@ def _plant_fabrication(
     presences: list[Presence],
     next_fact_n: int,
     next_tr_n: int,
-) -> tuple[PlantedFabrication, list[PlannedFact], list[PlannedTransmission]]:
+    broken_chain: bool,
+    temporal_violation: bool,
+) -> tuple[list[PlantedFabrication], list[PlannedFact], list[PlannedTransmission]]:
     """The culprit asserts it was elsewhere, and tells someone so.
 
-    The culprit's *own mind stays truthful* — it holds no memory of being in
-    the alibi room, so the claim it makes has nothing in its own memory to
-    ground it. What it passes on cites `src_fact_id`, a fact that does not
-    exist anywhere, so the chain the referee walks later terminates in a
-    nameable state instead of resolving to a real memory.
+    The culprit's *witnessed* memory stays truthful: it holds no `saw`/`did`
+    record of the alibi room, because it was in the incident room. What it
+    does hold is an `inferred` fact asserting the alibi — the thing it has
+    decided to say. An inferred memory can neither ground nor refute a claim
+    (spec 5.5's last row), so when the referee's chain reaches the culprit it
+    finds the cited fact present but unbacked, and the culprit's own witnessed
+    memory of the incident room conflicting with it.
+
+    That is what makes the chain *terminate at a named agent* rather than
+    trailing off. The earlier M1 design had the relay cite a fact that existed
+    nowhere, which could only ever produce CHAIN_BROKEN — a state spec 5.7
+    calls ambiguous and explicitly says is not an origin. A world whose only
+    fabrication is unattributable cannot exercise the origin states at all.
 
     The honest suspect who receives it has done nothing wrong: their memory
     genuinely contains what they were told. That is the innocent-repeater
     case, and the reason HEARSAY is one of the five verdicts.
+
+    `broken_chain` and `temporal_violation` plant the two pathological chains
+    on top, so the referee's detection of each is tested rather than assumed.
     """
     elsewhere = sorted(p for p in places if p != incident.place)
     alibi_place = rng.choice(elsewhere)
-    claim_key = f"{culprit.id}|{alibi_place}|{incident.t0}|{incident.t1}"
     dangling = f"f-void-{culprit.id}"
 
-    # Tell someone the culprit actually met, after the incident.
+    facts: list[PlannedFact] = []
+    transmissions: list[PlannedTransmission] = []
+    fabrications: list[PlantedFabrication] = []
+    n = next_fact_n
+    t_n = next_tr_n
+
+    # Every honest suspect the culprit actually met after the incident, so a
+    # telling can be placed in a window they really shared.
     windows = sorted(
         (max(a.t0, b.t0), min(a.t1, b.t1), b.person)
         for a in presences
@@ -491,14 +524,38 @@ def _plant_fabrication(
         and overlaps(a.t0, a.t1, b.t0, b.t1)
         and max(a.t0, b.t0) >= incident.t1
     )
-    facts: list[PlannedFact] = []
-    transmissions: list[PlannedTransmission] = []
-    relayed: list[str] = []
 
-    if windows:
-        o0, o1, listener = windows[0]
+    # The culprit's own record of what it intends to say. Inferred, not
+    # witnessed: the generator does not give it a memory it could not have.
+    n += 1
+    asserted_id = f"f{n}"
+    facts.append(
+        PlannedFact(
+            id=asserted_id,
+            owner=culprit.id,
+            kind="did",
+            src="inferred",
+            subject=culprit.id,
+            place=alibi_place,
+            t0=incident.t0,
+            t1=incident.t1,
+            learned_at=incident.t0,
+        )
+    )
+
+    def relay(window_idx: int, src_fact_id: str, *, tick_before_learned: bool) -> str | None:
+        """Tell one honest suspect, returning the hearsay fact's id."""
+        nonlocal n, t_n
+        if window_idx >= len(windows):
+            return None
+        o0, o1, listener = windows[window_idx]
         tick = o0 if o1 - o0 <= 1 else rng.randrange(o0, o1)
-        fid = f"f{next_fact_n + 1}"
+        if tick_before_learned:
+            # Before the cited fact was learned, which is the violation.
+            tick = max(TICK_MIN, incident.t0 - 1)
+        n += 1
+        t_n += 1
+        fid = f"f{n}"
         facts.append(
             PlannedFact(
                 id=fid,
@@ -514,27 +571,64 @@ def _plant_fabrication(
         )
         transmissions.append(
             PlannedTransmission(
-                id=f"tr{next_tr_n + 1}",
+                id=f"tr{t_n}",
                 fact_id=fid,
                 owner=listener,
                 tick=tick,
                 src_agent=culprit.id,
-                src_fact_id=dangling,
+                src_fact_id=src_fact_id,
             )
         )
-        relayed.append(fid)
+        return fid
 
-    fab = PlantedFabrication(
-        claim_key=claim_key,
-        by_person=culprit.id,
-        reason="places itself away from the incident room during the incident window",
-        place=alibi_place,
-        t0=incident.t0,
-        t1=incident.t1,
-        src_fact_id=dangling,
-        relayed_fact_ids=tuple(relayed),
+    traceable = relay(0, asserted_id, tick_before_learned=False)
+    fabrications.append(
+        PlantedFabrication(
+            claim_key=f"{culprit.id}|{alibi_place}|{incident.t0}|{incident.t1}",
+            by_person=culprit.id,
+            reason="places itself away from the incident room during the incident window",
+            place=alibi_place,
+            t0=incident.t0,
+            t1=incident.t1,
+            src_fact_id=asserted_id,
+            relayed_fact_ids=tuple(x for x in [traceable] if x),
+            pathology="none",
+        )
     )
-    return fab, facts, transmissions
+
+    if broken_chain:
+        relayed = relay(1, dangling, tick_before_learned=False)
+        fabrications.append(
+            PlantedFabrication(
+                claim_key=f"{culprit.id}|{alibi_place}|{incident.t0}|{incident.t1}|broken",
+                by_person=culprit.id,
+                reason="names a source record that exists in no mind",
+                place=alibi_place,
+                t0=incident.t0,
+                t1=incident.t1,
+                src_fact_id=dangling,
+                relayed_fact_ids=tuple(x for x in [relayed] if x),
+                pathology="broken_chain",
+            )
+        )
+
+    if temporal_violation:
+        relayed = relay(2, asserted_id, tick_before_learned=True)
+        fabrications.append(
+            PlantedFabrication(
+                claim_key=f"{culprit.id}|{alibi_place}|{incident.t0}|{incident.t1}|early",
+                by_person=culprit.id,
+                reason="tells it before the moment the cited record was learned",
+                place=alibi_place,
+                t0=incident.t0,
+                t1=incident.t1,
+                src_fact_id=asserted_id,
+                relayed_fact_ids=tuple(x for x in [relayed] if x),
+                pathology="temporal_violation",
+            )
+        )
+
+    return fabrications, facts, transmissions
 
 
 # -- the plan -----------------------------------------------------------------
@@ -593,7 +687,7 @@ def plan_world(seed: int, spec: WorldSpec | None = None) -> WorldPlan:
     facts = facts + heard
 
     honest_ids = sorted(p.id for p in people if p.role == "honest")
-    fab, fab_facts, fab_transmissions = _plant_fabrication(
+    fabs, fab_facts, fab_transmissions = _plant_fabrications(
         rng,
         culprit=culprit,
         honest_ids=honest_ids,
@@ -602,6 +696,8 @@ def plan_world(seed: int, spec: WorldSpec | None = None) -> WorldPlan:
         presences=presences,
         next_fact_n=len(facts),
         next_tr_n=len(transmissions),
+        broken_chain=spec.plant_broken_chain,
+        temporal_violation=spec.plant_temporal_violation,
     )
     facts = facts + fab_facts
     transmissions = transmissions + fab_transmissions
@@ -616,7 +712,7 @@ def plan_world(seed: int, spec: WorldSpec | None = None) -> WorldPlan:
         incident=incident,
         facts=tuple(facts),
         transmissions=tuple(transmissions),
-        fabrications=(fab,),
+        fabrications=tuple(fabs),
         rejected=0,
         notes=(
             f"culprit={culprit.id}",
@@ -664,7 +760,13 @@ def generate(db: Any, seed: int, spec: WorldSpec | None = None) -> dict[str, int
     for fab in plan.fabrications:
         world.query(
             q.CREATE_PLANTED_FABRICATION,
-            {"claim_key": fab.claim_key, "by_person": fab.by_person, "reason": fab.reason},
+            {
+                "claim_key": fab.claim_key,
+                "by_person": fab.by_person,
+                "reason": fab.reason,
+                "pathology": fab.pathology,
+                "src_fact_id": fab.src_fact_id,
+            },
         )
 
     # Minds. Each person's memories go into their own graph and nowhere else.

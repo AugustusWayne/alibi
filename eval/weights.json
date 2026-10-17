@@ -1,0 +1,36 @@
+{
+  "_comment": [
+    "Frozen scoreboard weights. Set once, from reasoning about what each",
+    "signal can and cannot tell you — never fitted to any seed's outcome.",
+    "Tuning these until the culprit comes top is the rigged benchmark spec",
+    "8.4 warns against: it would make the ranking a restatement of the",
+    "answer key rather than a measurement. If a seed ranks an honest",
+    "suspect first, that is a result to report and explain, not a bug to",
+    "weight away.",
+    "Changing a value here invalidates every eval number already recorded,",
+    "so it needs a new row in AI-USE.md saying what argument changed."
+  ],
+  "_version": 1,
+  "weights": {
+    "originated_ungrounded": {
+      "value": 8.0,
+      "rationale": "The chain ends here: as far as the referee can see, this agent is where an unbacked account began, which is the only signal that separates a source from a relay."
+    },
+    "self_contradictions": {
+      "value": 5.0,
+      "rationale": "This agent's own two claims cannot both hold, so the inconsistency is internal and needs no second witness to establish."
+    },
+    "other_contradictions": {
+      "value": 2.0,
+      "rationale": "Two accounts disagree, but which one is mistaken is exactly what is not yet known, so it counts for less than a self-contradiction."
+    },
+    "gaps": {
+      "value": 1.0,
+      "rationale": "A span nothing accounted for, which is routine for anyone who was briefly alone and so the weakest signal here."
+    },
+    "carried_ungrounded": {
+      "value": 0.5,
+      "rationale": "Repeating what you were told in good faith is near-costless, and must stay low because the innocent repeater is by construction a carrier."
+    }
+  }
+}
