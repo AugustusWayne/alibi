@@ -6,7 +6,6 @@ A murder mystery where the detective is an AI agent, the suspects each have thei
 private memory, and every single statement gets checked against the speaker's own head
 before anyone is allowed to believe it. Built on [FalkorDB](https://www.falkordb.com/).
 
-It looks like this:
 
 ![the case board](docs/board.png)
 
