@@ -136,7 +136,7 @@
 .term { display: flex; align-items: center; gap: 6px; color: var(--silver); }
 .term--short { color: var(--red); }
 /* A bracket four pixels to the minute: a line between two end caps, so a term
-   of nothing collapses to the caps rather than drawing a bar that lies. */
+   of nothing collapses to the caps rather than drawing a bar that misstates it. */
 .term__bar { position: relative; height: 9px; border-left: 2px solid var(--silver); border-right: 2px solid var(--silver); }
 .term__bar::after { content: ""; position: absolute; left: 0; right: 0; top: 3px; height: 2px; background: var(--silver); }
 .term--short .term__bar { border-color: var(--red); }

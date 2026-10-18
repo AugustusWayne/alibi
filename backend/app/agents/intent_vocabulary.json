@@ -1,8 +1,8 @@
 {
   "note": [
     "Words an accusation's rationale may not use, because each one asserts",
-    "something about a person — their intent, their honesty, or a conclusion",
-    "about their conduct — rather than describing grounding (the project rules,",
+    "something about a person \u2014 their intent, their honesty, or a conclusion",
+    "about their conduct \u2014 rather than describing grounding (the project rules,",
     "rule 2). The rationale is the one string in this system written by a model",
     "and shown to a person, so the restriction is enforced in code:",
     "`backend/app/agents/loop.py` loads this list and refuses an `accuse` call",
@@ -17,7 +17,7 @@
     "overlap with the referee's own DELIBERATE_FABRICATION label, which is",
     "correct rather than a conflict: that label is scoring vocabulary and a",
     "rationale is not scoring. `perjury` and `perjured` are legal conclusions",
-    "rather than intent words — they are on the list for the same underlying",
+    "rather than intent words \u2014 they are on the list for the same underlying",
     "reason, that a rationale is not the place to reach one, which is why the",
     "opening sentence says intent OR a conclusion about conduct.",
     "",
@@ -65,5 +65,28 @@
     "fabrication",
     "perjury",
     "perjured"
+  ],
+  "fixture_forbidden_note": [
+    "A second list, for a second seam. `intent_words` above is what an",
+    "accusation's rationale may not say. These are what a UI fixture may not",
+    "contain at all: four ground-truth role words that live only in the",
+    "referee (spec 8.1), and the intent words again. `scripts/dump_case.py`",
+    "raises if a dumped fixture contains any of them, which is how the board",
+    "is kept from ever being handed a judgement of intent or the answer key.",
+    "",
+    "They live here for the same reason `intent_words` does: defining a word",
+    "so that nothing can publish it is the opposite of the thing rule 2",
+    "forbids, and the repo's guard holds that vocabulary to one file.",
+    "",
+    "Matched on whole words: the floor plan has a billiard room in it."
+  ],
+  "fixture_forbidden": [
+    "culprit",
+    "accomplice",
+    "honest",
+    "lie",
+    "liar",
+    "lying",
+    "deception"
   ]
 }

@@ -58,8 +58,17 @@ CLOCK_END = "23:00"
 
 # Words that would mean ground truth had leaked out of the referee's side of
 # the seam, or that the interface had been handed a judgement of intent.
-# Matched on whole words: the floor plan has a billiard room in it.
-FORBIDDEN = ("culprit", "accomplice", "honest", "lie", "liar", "lying", "deception")
+# Frozen in the one data file the repo keeps unpublishable vocabulary in, so
+# that no module outside `referee/` spells them out — the same reason the
+# detective's accusation guard reads its list from there.
+FORBIDDEN = tuple(
+    json.loads(
+        (
+            Path(__file__).resolve().parents[1]
+            / "backend/app/agents/intent_vocabulary.json"
+        ).read_text()
+    )["fixture_forbidden"]
+)
 
 
 def _fresh_graphs(db: Any) -> None:
@@ -185,7 +194,7 @@ def build() -> dict:
     # returned, so the board can draw the shortest path instead of a straight
     # line between two rooms (brief 5.9). The weight is asserted against the
     # matrix cell the impossible-travel check actually read: a route that did
-    # not cost what the check was told would make the drawing a lie about the
+    # not cost what the check was told would make the drawing misstate the
     # arithmetic beside it.
     routes: dict[str, list[str]] = {}
     for cell, minutes in travel.items():
