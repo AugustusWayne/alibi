@@ -1,7 +1,7 @@
 # Recipes use literal tabs. The original `.RECIPEPREFIX = >` form needs GNU Make
 # 3.82+, and macOS ships 3.81 (`make --version`), where it is a syntax error.
 # Tabs work on both, so the clean-clone setup check cannot trip over this.
-.PHONY: venv up down spikes test verify eval demo fmt
+.PHONY: venv up down spikes test verify eval fmt
 
 # The image is pinned by tag AND digest in docker-compose.yml, not here. An
 # unpinned tag means FalkorDB behaviour can change under you mid-build, which
@@ -47,5 +47,3 @@ verify:
 eval:
 	$(PY) -m scripts.run_eval --seeds eval/seeds.json
 
-demo:
-	$(PY) -m scripts.record_demo
