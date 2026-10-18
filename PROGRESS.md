@@ -6,16 +6,21 @@ lines — delete detail that no longer matters.
 
 ## Current state
 
-- **M4 is built and unreviewed**, on `wip/m4-detective-loop-a2e276`,
-  **uncommitted**: the detective's loop, the LLM replay cache, the FastAPI
-  routes with SSE. **Last verified** 2026-10-18: `make verify` → ruff clean,
-  **201 passed** (131 before M4).
-- **M6 gate closed**, tagged `m6`. **M5 tagged `m5`** (`3e1f452` on
-  `adoring-wright`): board, `scripts/dump_case.py`, `docs/design/directions/`.
-  Neither M5 nor M4 has had a show-me-the-raw-output gate review, unlike M2
+- **M4 is committed and tagged `m4`**, on `wip/m4-detective-loop-a2e276`:
+  the detective's loop, the LLM replay cache, the FastAPI routes with SSE.
+  **Last verified** 2026-10-18: `make verify` → ruff clean, **201 passed**
+  (131 before M4).
+- **All history was rewritten on 2026-10-18 to remove the assistant's vendor
+  name**, so every hash below is new. Branches, all five, and tags m0–m6 were
+  moved together; `main` has not been pushed and now differs from
+  `origin/main` by its whole history. Pre-rewrite tips are kept locally under
+  `refs/pre-debrand/*` and in `~/alibi-backup-20261018-132036/all-refs.bundle`.
+- **All six gates are tagged**: m0 `1268a23`, m1 `542cfde`, m2 `08c06e7`,
+  m4 `42742e8`, m5 `e9f6863`, m6 `00377b1`. m0 and m1 were cut
+  retrospectively on 2026-10-18, which their annotations say; they had never
+  existed as refs before that, despite earlier notes here claiming otherwise.
+- Neither M5 nor M4 has had a show-me-the-raw-output gate review, unlike M2
   and M6. Both reviews are open.
-- **Tags that exist are `m2`, `m5`, `m6`.** `m0`/`m1` never existed as refs;
-  candidates if they get cut are `ca13855` and `b23a03f`.
 - FalkorDB `v4.22.1`, `falkordb 1.8.0`, Python 3.12.1, host port **6380**.
 
 ## What M4 is
@@ -26,13 +31,16 @@ prompt_hash)` plus the hard per-case call cap — the only path to a model.
 intent-vocabulary guard; `agents/intent_vocabulary.json` holds the frozen
 list. `api/{runner,routes}.py`: case routes and the SSE stream.
 `scripts/run_detective.py`: record a case, then replay it. 68 new tests in
-`test_{llm_cache,loop,api}.py`. Default model id `the-configured-model`, cap 24.
-One new dependency, the model vendor's SDK, pinned at 1.15.0, plus `httpx`
-for the test client. Those two names and the model id are third-party
-identifiers the code needs to resolve and call, not attributions.
+`test_{llm_cache,loop,api}.py`. Call cap 24. **No model-vendor SDK is pinned,
+imported or named anywhere, and no model id is either**: the transport is a
+plain callable resolved at runtime from `ALIBI_COMPLETER`
+(`package.module:factory`), the model id comes from `ALIBI_DETECTIVE_MODEL`,
+and both raise rather than defaulting. One new dependency, `httpx`, for the
+test client.
 
-**The loop has never made a real model call.** No API credential exists in this environment (no `LLM_API_KEY`, no `LLM_AUTH_TOKEN`,
-no `ant` CLI), confirmed independently by the M6 session. All 201 passing
+**The loop has never made a real model call.** No API credential and no
+transport are configured in this environment, confirmed independently by the
+M6 session. All 201 passing
 tests exercise the cached and scripted-transport paths only; `--live` is
 untested against the API. **Spec 8.3's three-arm comparison therefore cannot
 be claimed at all yet** — not arm C, and not the LLM-calls-per-case column.
