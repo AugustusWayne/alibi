@@ -351,9 +351,6 @@ double — deterministic testimony under an explicit fabrication policy, which
 is what makes the whole audit exercisable at zero cost. The consequence is
 honest and visible in the gap-precision result above.
 
-`PROGRESS.md` and `AI-USE.md` carry the full, dated account of what is
-reviewed versus still pending.
-
 ## Reproducing
 
 ```bash
