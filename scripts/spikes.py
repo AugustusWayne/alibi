@@ -722,7 +722,7 @@ def spike_fastmcp_round_trip(ctx: Ctx) -> str:
     return (
         f"fastmcp {pkg_version('fastmcp')}: in-memory client/server round trip ok, "
         "tool signature carries no graph name or agent id. "
-        "NOT tested: the model client half of the round trip (needs an API key; M3)"
+        "NOT tested: the model-transport half of the round trip (needs a live client)"
     )
 
 

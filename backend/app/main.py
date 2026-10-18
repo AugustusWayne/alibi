@@ -1,7 +1,9 @@
-"""FastAPI skeleton.
+"""The FastAPI orchestrator.
 
-M0 ships one route. The orchestrator, SSE stream and agent routes arrive with
-the milestones that need them (spec section 3).
+M0 shipped `/health`. M4 mounts the case routes and the SSE stream from
+`backend/app/api`, which is where the privacy seam is documented and tested:
+every route serves the public case graph, and none of them can reach a mind
+or a ground-truth label.
 """
 
 from __future__ import annotations
@@ -10,13 +12,15 @@ from fastapi import FastAPI
 from fastapi.responses import JSONResponse
 
 from backend.app import db
+from backend.app.api.routes import router as case_router
 from backend.app.config import settings
 
 app = FastAPI(
     title="Alibi",
-    version="0.0.1-m0",
+    version="0.4.0-m4",
     summary="An epistemic audit layer for multi-agent systems, on FalkorDB.",
 )
+app.include_router(case_router)
 
 
 @app.get("/health")
