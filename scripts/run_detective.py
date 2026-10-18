@@ -18,9 +18,11 @@ in both passes. What `--live` changes is only who chooses the next tool call:
   accuse. It demonstrates the loop, the budget and the cache with no key and
   no cost, and it is what CI can run. It is not a demonstration of a model's
   judgement and is not reported as one.
-- `--live` puts the detective model behind the same interface. Every call
-  still goes through the cache wrapper and the per-case cap (the project
-  rules, rule 9); there is no path here that bypasses either.
+- `--live` puts a real model behind the same interface, resolved from
+  `ALIBI_COMPLETER` ("package.module:factory"); this repo pins no vendor SDK
+  and names no model, so `--live` needs both that and `ALIBI_DETECTIVE_MODEL`
+  set. Every call still goes through the cache wrapper and the per-case cap
+  (the project rules, rule 9); no path here bypasses either.
 
 No ground-truth label is printed. This is the detective's view of the case,
 and the detective never sees the answer key — `scripts/run_case.py` is the
@@ -35,7 +37,7 @@ import tempfile
 from pathlib import Path
 
 from backend.app.agents.detective import DetectiveTools
-from backend.app.agents.llm_cache import CachedLLM, LLMCache, sdk_completer
+from backend.app.agents.llm_cache import CachedLLM, LLMCache, load_completer
 from backend.app.agents.loop import DetectiveLoop, briefing
 from backend.app.agents.scripted import build_suspects, interview_all
 from backend.app.audit.engine import AuditEngine
@@ -162,7 +164,7 @@ def run_pass(
     if replay_only:
         completer = NoTransport()
     elif live:
-        completer = sdk_completer()
+        completer = load_completer(settings.completer)
     else:
         completer = scripted_plan(case)
 
@@ -239,7 +241,7 @@ def main(argv: list[str] | None = None) -> int:
         help="let the detective model choose the tool calls (costs money the "
         "first time; replays free after)",
     )
-    parser.add_argument("--model", default=settings.detective_model)
+    parser.add_argument("--model", default=settings.detective_model or "scripted-plan")
     parser.add_argument(
         "--pathologies",
         action=argparse.BooleanOptionalAction,

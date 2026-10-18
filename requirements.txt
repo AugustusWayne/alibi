@@ -12,6 +12,10 @@ ruff==0.14.1
 # summing unmerged spans would silently hide.
 hypothesis==6.140.3
 
+# No model-vendor SDK is pinned here, and none is imported anywhere in this
+# repo. The detective's transport is a plain callable resolved at runtime from
+# ALIBI_COMPLETER, so a deployment that wants a live model installs its own
+# client. Every call still goes through the replay cache and the per-case cap.
 
 # The Starlette test client talks to the app in-process; the API tests need it.
 httpx==0.28.1

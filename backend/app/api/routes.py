@@ -39,6 +39,7 @@ from pydantic import BaseModel, Field
 
 from backend.app.api import runner
 from backend.app.case.scoreboard import rank_suspects
+from backend.app.config import settings
 from backend.app.world.generator import WorldSpec
 
 router = APIRouter(prefix="/cases", tags=["cases"])
@@ -253,14 +254,16 @@ def close_case(seed: int) -> dict:
 
 
 def _live_completer() -> Any:
-    """The transport for a run that is allowed to reach the API.
+    """The transport for a run that is allowed to reach a model.
 
-    Built here rather than at import so a server with no SDK installed and no
-    key configured still starts, serves the case graph and replays.
+    Resolved here rather than at import so a server with no transport
+    configured still starts, serves the case graph and replays cases. It
+    raises if `ALIBI_COMPLETER` is unset, which surfaces on the stream as a
+    failed investigation rather than as a case that quietly did nothing.
     """
-    from backend.app.agents.llm_cache import sdk_completer  # noqa: PLC0415
+    from backend.app.agents.llm_cache import load_completer  # noqa: PLC0415
 
-    return sdk_completer()
+    return load_completer(settings.completer)
 
 
 def _sse(event: dict) -> str:

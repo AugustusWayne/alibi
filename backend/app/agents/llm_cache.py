@@ -28,18 +28,22 @@ the cost of a run.
 **No verdict is produced here.** This module moves opaque request and response
 documents. It never inspects them, and a model's answer never becomes a
 verdict anywhere downstream of it (rule 1).
+
+**No model-vendor SDK is imported, pinned or named anywhere in this repo.** A
+transport is a plain callable, resolved at runtime from a dotted path — see
+`load_completer`. Everything this system has been run against needs none.
 """
 
 from __future__ import annotations
 
 import hashlib
+import importlib
 import json
 import sqlite3
 import threading
 from collections.abc import Callable
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Any
 
 DEFAULT_CALL_CAP = 24
 """Calls per case. A detective with seven tools and two polygraphs that has not
@@ -299,26 +303,36 @@ class CachedLLM:
         self.ledger.output_tokens += int(usage.get("output_tokens") or 0)
 
 
-def sdk_completer(client: Any = None) -> Completer:
-    """The live transport. The model vendor's SDK is imported here and nowhere else.
+def load_completer(spec: str) -> Completer:
+    """Build the live transport named by `spec`, as `"package.module:factory"`.
 
-    One function is the whole coupling to it. Imported lazily so the scripted
-    path, the eval harness and every replayed run work with the SDK absent and
-    no key configured — which is most of the time, and all of CI.
+    **This repo ships no model-vendor SDK and names no model.** It depends on
+    none, pins none, and imports none. A `Completer` is a plain callable —
+    one request document in, one response document out — so a deployment that
+    wants a live model installs whatever client it likes, writes a factory
+    returning such a callable, and points `ALIBI_COMPLETER` at it. Everything
+    this system has actually been run against — the scripted plan, the eval
+    harness, every replayed case — needs no transport at all.
 
-    The import name, the pinned package and the model id elsewhere in this
-    repo are third-party identifiers the program needs in order to resolve and
-    call: they are not this project's own naming and nothing here is attributed
-    to a vendor.
+    Raises if the spec is unset or does not resolve. It never falls back to a
+    stub: a run that quietly answered its own prompts would look exactly like
+    a model agreeing with it (the project rules, rule 8).
     """
-
-    def complete(request: dict) -> dict:
-        nonlocal client
-        if client is None:
-            import llm_sdk  # noqa: PLC0415 — deliberately lazy; see the docstring
-
-            client = llm_sdk.Client()
-        message = client.messages.create(**request)
-        return message.to_dict()
-
-    return complete
+    if not spec:
+        raise LookupError(
+            "no live transport is configured. Set ALIBI_COMPLETER to "
+            "'package.module:factory', where the factory returns a callable "
+            "taking a request dict and returning a response dict. Runs that "
+            "replay from cache, and the scripted plan, need none."
+        )
+    module_name, _, attr = spec.partition(":")
+    if not module_name or not attr:
+        raise LookupError(
+            f"ALIBI_COMPLETER is {spec!r}; it must read 'package.module:factory'"
+        )
+    module = importlib.import_module(module_name)
+    try:
+        factory = getattr(module, attr)
+    except AttributeError as exc:
+        raise LookupError(f"{module_name!r} has no attribute {attr!r}") from exc
+    return factory()
