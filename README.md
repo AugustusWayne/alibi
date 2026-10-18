@@ -1,6 +1,6 @@
 # Alibi
 
-**Seven suspects. One evening. Everybody's lying about something — and the graph knows who can't back it up.**
+**Seven suspects. One evening. Every story has a hole in it — and the graph knows exactly where.**
 
 A murder mystery where the detective is an AI agent, the suspects each have their own
 private memory, and every single statement gets checked against the speaker's own head
