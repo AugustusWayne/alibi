@@ -1,0 +1,87 @@
+/* The pocket recorder, and the live layer of the 8-bit house it sits in.
+   Every animation runs on steps(): sprites jump between frames rather than
+   gliding, the way 8-bit hardware drew them. */
+
+/* -- room for the recorder ------------------------------------------------- */
+.px--device .px-log { height: 380px; padding-top: 22px; }
+.px--device .px-witness { margin-top: 10px; }
+.px--device .px-sub { margin: 10px 0 4px; }
+.px--device .px-level { width: 776px; top: 584px; height: 224px; }
+
+/* -- the recorder ------------------------------------------------------------ */
+.dv { position: absolute; left: 808px; top: 462px; width: 456px; height: 352px; --spd: 1; font-family: "Press Start 2P", monospace; }
+.dv-art { position: absolute; left: 0; top: 0; image-rendering: pixelated; }
+.dv-brand { position: absolute; left: 22px; top: 44px; display: flex; align-items: baseline; gap: 10px; }
+.dv-brand b { font-weight: 400; font-size: 14px; color: #1d2b53; }
+.dv-brand span { font-size: 6px; color: #5f574f; }
+.dv-lbl { position: absolute; font-size: 6px; line-height: 12px; color: #5f574f; white-space: nowrap; }
+.dv-lbl--dark { color: #1d2b53; }
+.dv-lbl--on { color: #ff004d; }
+.dv-tape { position: absolute; left: 50px; top: 92px; width: 172px; height: 24px; padding: 1px 6px 0 14px; color: #1d2b53; white-space: nowrap; }
+.dv-tape b { display: block; font-family: "VT323", monospace; font-weight: 400; font-size: 18px; line-height: 14px; }
+.dv-tape span { display: block; font-size: 5px; line-height: 8px; }
+
+.dv-lcd { position: absolute; left: 272px; top: 84px; width: 160px; height: 72px; padding: 6px 7px; color: #00e436; overflow: hidden; }
+.dv-lcd-clock { font-size: 18px; line-height: 20px; }
+.dv-lcd-mode { font-size: 7px; line-height: 14px; color: #008751; }
+.dv-lcd-mode, .dv-lcd-scroll { margin-top: 4px; }
+.dv-lcd-scroll { font-size: 7px; line-height: 12px; white-space: nowrap; overflow: hidden; }
+.dv-lcd-scroll span { display: inline-block; padding-left: 100%; animation: dv-marquee calc(16s / var(--spd)) steps(160) infinite; }
+@keyframes dv-marquee { to { transform: translateX(-100%); } }
+
+.dv-digit { position: absolute; top: 180px; width: 28px; height: 24px; font-size: 11px; line-height: 24px; text-align: center; color: #fff1e8; }
+
+.dv-slip { position: absolute; left: 32px; top: 232px; width: 264px; height: 72px; background-repeat: repeat-x; background-size: 272px 72px; animation: dv-slip calc(5s / var(--spd)) steps(68) infinite; }
+@keyframes dv-slip { to { background-position: -272px 0; } }
+.dv-needle { position: absolute; left: 276px; top: 206px; width: 4px; height: 58px; background: #000; }
+.dv-needle i { position: absolute; left: -2px; bottom: -6px; width: 8px; height: 8px; background: #ff004d; animation: dv-jitter calc(0.5s / var(--spd)) steps(1, end) infinite; }
+@keyframes dv-jitter { 0% { transform: translateY(0); } 25% { transform: translateY(-8px); } 50% { transform: translateY(4px); } 75% { transform: translateY(-4px); } 100% { transform: translateY(-4px); } }
+
+.dv-sticker { position: absolute; left: 24px; top: 316px; font-size: 7px; line-height: 12px; color: #000; }
+
+.dv-key { position: absolute; top: 0; width: 56px; height: 40px; background: transparent; border: 0; border-radius: 0; padding: 0; cursor: pointer; }
+.dv-knob { position: absolute; left: 344px; top: 228px; width: 76px; height: 76px; background: transparent; border: 0; border-radius: 0; padding: 0; cursor: pointer; }
+.dv-key:focus-visible, .dv-knob:focus-visible { outline: 2px solid #ffec27; outline-offset: 2px; }
+
+/* reels turn in three frames */
+.dv-reel .dv-f { opacity: 0; animation: calc(0.6s / var(--spd)) steps(1, end) infinite; }
+.dv-reel .dv-f0 { animation-name: dv-f0; }
+.dv-reel .dv-f1 { animation-name: dv-f1; }
+.dv-reel .dv-f2 { animation-name: dv-f2; }
+@keyframes dv-f0 { 0% { opacity: 1; } 33.333% { opacity: 0; } 100% { opacity: 0; } }
+@keyframes dv-f1 { 0% { opacity: 0; } 33.333% { opacity: 1; } 66.666% { opacity: 0; } 100% { opacity: 0; } }
+@keyframes dv-f2 { 0% { opacity: 0; } 66.666% { opacity: 1; } 100% { opacity: 1; } }
+
+.dv-rec { animation: dv-blink 1s steps(1, end) infinite; }
+@keyframes dv-blink { 0% { opacity: 1; } 50% { opacity: 0.2; } 100% { opacity: 0.2; } }
+.dv-rx, .dv-rx-tip { animation: dv-rx calc(1.1s / var(--spd)) steps(1, end) infinite; }
+@keyframes dv-rx { 0% { opacity: 1; } 12% { opacity: 0.15; } 22% { opacity: 1; } 58% { opacity: 0.15; } 64% { opacity: 1; } 100% { opacity: 1; } }
+
+/* pause stops the whole machine, not just the tape */
+.dv--paused, .dv--paused * { animation-play-state: paused !important; }
+.dv--paused .dv-rec { opacity: 1; }
+
+/* -- the house, alive ---------------------------------------------------------- */
+.px--live .px-occupants .px-who .px-sprite { animation: px-bob 1.4s steps(1, end) infinite; }
+.px--live .px-occupants .px-who:nth-child(2) .px-sprite { animation-delay: -0.7s; }
+.px--live .px-room--cellar .px-sprite, .px--live .px-room--library .px-sprite { animation-delay: -0.35s; }
+@keyframes px-bob { 0% { transform: translateY(0); } 50% { transform: translateY(-3px); } 100% { transform: translateY(-3px); } }
+.px--live .px-dither--b { display: inline; }
+.px--live .px-dither--a { animation: px-ph-a 0.5s steps(1, end) infinite; }
+.px--live .px-dither--b { animation: px-ph-b 0.5s steps(1, end) infinite; }
+@keyframes px-ph-a { 0% { opacity: 1; } 50% { opacity: 0; } 100% { opacity: 0; } }
+@keyframes px-ph-b { 0% { opacity: 0; } 50% { opacity: 1; } 100% { opacity: 1; } }
+.px--live .px-link { animation: px-march 0.6s steps(1, end) infinite; }
+@keyframes px-march { 0% { stroke-dashoffset: 0; } 50% { stroke-dashoffset: -4; } 100% { stroke-dashoffset: -4; } }
+.px--live .px-fog { animation: px-boil 0.8s steps(1, end) infinite; }
+@keyframes px-boil { 0% { background-position: 0 0; } 50% { background-position: 2px 0; } 100% { background-position: 2px 0; } }
+.px--live .px-head .px-lens { animation: px-bob 1s steps(1, end) infinite; }
+
+/* the code */
+.px-party .px-who .px-sprite { animation: px-hop 0.3s steps(1, end) infinite !important; }
+@keyframes px-hop { 0% { transform: translateY(0); } 50% { transform: translateY(-10px); } 100% { transform: translateY(-10px); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .px *, .dv * { animation: none !important; }
+  .px--live .px-dither--b { display: none; }
+}

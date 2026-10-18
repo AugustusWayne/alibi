@@ -1,0 +1,86 @@
+/* Direction 1: the living instrument. Dark chassis tokens from brief section 3,
+   paper and ink from the light artboards (Main.dc.html's stock and teal). */
+.in {
+  --body: #0a1015; --panel: #121a20; --line: #1e2a32;
+  --ink-d: #e8eef0; --text-d: #c8d4d8; --dim-d: #6e8189;
+  --paper: #e9edec; --paper-rule: #dce3e1; --paper-hour: #c3cecb;
+  --teal: #1c4e5a; --ochre: #6e5b2e; --red: #8a2b20; --red-d: #e05a40; --dim-p: #5a6b70;
+  position: absolute; inset: 0; background: var(--body); color: var(--text-d);
+  font-family: Archivo, sans-serif;
+}
+.in-head { position: absolute; left: 40px; right: 40px; top: 22px; display: flex; align-items: baseline; justify-content: space-between; border-bottom: 1px solid var(--line); padding-bottom: 10px; }
+.in-mark { font-size: 22px; font-weight: 700; color: var(--ink-d); letter-spacing: -0.02em; }
+.in-mark span { font-family: "Geist Mono", monospace; font-size: 10.5px; font-weight: 400; color: var(--dim-d); margin-left: 14px; letter-spacing: 0; }
+.in-status { display: flex; gap: 24px; font-family: "Geist Mono", monospace; font-size: 10.5px; color: var(--dim-d); }
+.in-rec { color: var(--text-d); display: inline-flex; align-items: center; gap: 6px; }
+.in-rec i { width: 7px; height: 7px; background: var(--red-d); display: inline-block; }
+
+.in-top { position: absolute; left: 40px; right: 40px; top: 68px; height: 116px; display: flex; gap: 28px; align-items: flex-start; }
+.in-clock { font-size: 112px; line-height: 0.82; font-weight: 600; letter-spacing: -0.05em; color: var(--ink-d); font-variant-numeric: tabular-nums; flex: none; }
+.in-headline { flex: 1; min-width: 0; padding-top: 4px; }
+.in-headline h1 { margin: 0; font-size: 30px; line-height: 1.18; font-weight: 500; letter-spacing: -0.015em; color: var(--ink-d); max-width: 560px; }
+.in-headline p { margin: 10px 0 0; font-size: 13px; line-height: 1.55; color: var(--dim-d); max-width: 540px; }
+
+.in-card { flex: none; width: 250px; background: var(--paper); color: var(--teal); padding: 12px 14px 10px; position: relative; }
+.in-card::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 4px; background: repeating-linear-gradient(to right, var(--body) 0 6px, transparent 6px 14px); }
+.in-tally-row { display: flex; align-items: center; gap: 8px; height: 18px; }
+.in-tally-name { width: 90px; font-family: "Geist Mono", monospace; font-size: 10.5px; color: var(--teal); }
+.in-tally-track { position: relative; flex: 1; height: 9px; background: var(--paper-rule); }
+.in-tally-track .in-bar { position: absolute; left: 0; top: 0; height: 9px; }
+.in-tally-track .in-bracket { top: 11px; height: 3px; }
+.in-tally-n { width: 22px; text-align: right; font-family: "Geist Mono", monospace; font-size: 10.5px; }
+
+.in-paper { position: absolute; left: 40px; right: 40px; top: 196px; height: 500px; background: var(--paper); }
+.in-sprockets { position: absolute; left: 0; right: 0; height: 8px; }
+.in-sprockets i { position: absolute; top: 0; width: 7px; height: 7px; background: var(--body); }
+.in-sprockets--top { top: 6px; }
+.in-sprockets--bottom { bottom: 6px; }
+.in-hours { position: absolute; left: 128px; width: 1052px; top: 24px; height: 14px; font-family: "Geist Mono", monospace; font-size: 10px; color: var(--teal); }
+.in-hours span { position: absolute; transform: translateX(-50%); }
+.in-hours span:first-child { transform: none; }
+.in-hours span.end { transform: translateX(-100%); }
+.in-grid { position: absolute; left: 128px; width: 1052px; top: 42px; bottom: 22px; }
+.in-grid i { position: absolute; top: 0; bottom: 0; width: 1px; background: var(--paper-rule); }
+.in-grid i.hr { background: var(--paper-hour); }
+.in-rows { position: absolute; left: 20px; right: 20px; top: 50px; bottom: 22px; }
+.in-row { position: absolute; left: 0; right: 0; display: flex; gap: 16px; }
+.in-name { width: 92px; flex: none; text-align: right; font-family: "Geist Mono", monospace; font-size: 11px; color: var(--teal); padding-top: 15px; }
+.in-name--conflict { color: var(--red); }
+.in-name--dim { color: var(--dim-p); padding-top: 2px; }
+.in-track { position: relative; flex: 1; }
+.in-about-label { position: absolute; left: 108px; font-size: 12.5px; color: var(--dim-p); border-top: 1px dashed var(--paper-hour); right: 0; padding-top: 4px; }
+.in-trace { position: absolute; left: 0; top: 0; overflow: visible; }
+.in-trace polyline { fill: none; stroke: var(--teal); stroke-width: 1; }
+.in-trace .in-trace--red { stroke: var(--red); stroke-width: 1.5; }
+
+.in-bar { position: absolute; display: block; box-sizing: border-box; }
+.in-supported { background: var(--teal); }
+.in-indeterminate { border: 1px solid var(--teal); }
+.in-cov { position: absolute; top: 0; bottom: 0; background: var(--teal); }
+.in-contradicted { background: var(--red); }
+.in-strike { position: absolute; left: 0; right: 0; top: calc(50% - 1px); height: 2px; background: var(--paper); }
+.in-hearsay { border: 1px solid var(--ochre); background: repeating-linear-gradient(45deg, var(--ochre) 0 2px, transparent 2px 6px); }
+.in-unsupported { border: 1px dashed var(--dim-p); }
+.in-sel { outline: 1px solid var(--teal); outline-offset: 3px; }
+.in-bracket { position: absolute; box-sizing: content-box; height: 4px; border: 2px solid var(--red); border-top: 0; }
+
+.in-pen { position: absolute; top: 34px; bottom: 14px; width: 3px; background: var(--body); }
+.in-pen-head { position: absolute; top: -26px; left: -9px; width: 21px; height: 22px; background: var(--body); }
+.in-pen-head::after { content: ""; position: absolute; left: 7px; top: 6px; width: 7px; height: 7px; background: var(--red-d); }
+
+.in-deck { position: absolute; left: 40px; right: 40px; top: 706px; bottom: 14px; display: flex; gap: 36px; align-items: flex-start; }
+.in-keys { display: flex; gap: 8px; align-items: center; flex: none; }
+.in-key { width: 48px; height: 48px; border: 1px solid var(--line); background: var(--panel); color: var(--ink-d); display: grid; place-items: center; cursor: pointer; padding: 0; font-family: "Geist Mono", monospace; font-size: 13px; }
+.in-key svg { width: 18px; height: 18px; fill: currentColor; }
+.in-key--on { background: var(--ink-d); color: var(--body); border-color: var(--ink-d); }
+.in-pos { font-family: "Geist Mono", monospace; font-size: 13px; color: var(--ink-d); margin-left: 12px; }
+.in-pos em { font-style: normal; color: var(--dim-d); }
+.in-trails { flex: 1; }
+.in-trails-title { font-size: 12.5px; color: var(--dim-d); margin-bottom: 3px; }
+.in-trail { display: flex; align-items: center; height: 21px; }
+.in-chip { font-family: "Geist Mono", monospace; font-size: 10.5px; color: var(--ochre); color: #b8923f; border: 1px solid #b8923f; padding: 2px 8px; }
+.in-chip--origin { color: var(--red-d); border-color: #d84a32; }
+.in-chip--void { color: var(--dim-d); border: 1px dashed var(--dim-d); }
+.in-link { width: 28px; height: 1px; background: #b8923f; }
+.in-link--dead { background: var(--line); }
+.in-trail-what { font-size: 12.5px; color: var(--text-d); margin-left: 14px; }

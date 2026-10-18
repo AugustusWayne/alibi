@@ -1,0 +1,58 @@
+/* Direction 3: the case file on a desk. */
+.cf {
+  --desk: #2d3a32; --manila: #e2c98f; --manila-edge: #c9ae72; --sheet: #f7f2e6; --rule: #e3dccb;
+  --type: #23262b; --dim: #7b766a; --red: #c0392b; --ochre: #a07a2c; --redact: #141414;
+  --card: #fbfaf5; --note: #f4e27a;
+  position: absolute; inset: 0; background: var(--desk); font-family: "Courier Prime", monospace; color: var(--type);
+}
+.cf-folder { position: absolute; left: 28px; top: 44px; width: 1000px; height: 752px; background: var(--manila); border: 1px solid var(--manila-edge); }
+.cf-tab { position: absolute; left: 36px; top: -30px; height: 30px; padding: 6px 22px; background: var(--manila); border: 1px solid var(--manila-edge); border-bottom: 0; font-family: "Special Elite", monospace; font-size: 15px; letter-spacing: 0.04em; }
+
+.cf-sheet { position: absolute; left: 60px; top: 70px; width: 860px; height: 712px; background: var(--sheet); padding: 26px 34px; transform: rotate(-0.6deg); }
+.cf-sheet-head h1 { margin: 0; font-family: "Special Elite", monospace; font-size: 30px; font-weight: 400; letter-spacing: 0.02em; }
+.cf-sheet-head p { margin: 6px 0 0; font-size: 13px; color: var(--dim); }
+.cf-hours { position: relative; height: 16px; margin: 18px 0 0 92px; width: 640px; font-size: 11px; color: var(--dim); }
+.cf-hours span { position: absolute; transform: translateX(-50%); }
+.cf-hours span:first-child { transform: none; }
+.cf-hours span:last-child { transform: translateX(-100%); }
+.cf-log { position: relative; height: 330px; margin-top: 4px; }
+.cf-row { position: absolute; left: 0; width: 732px; display: flex; border-bottom: 1px solid var(--rule); }
+.cf-name { width: 92px; flex: none; font-size: 14px; font-weight: 700; padding-top: 6px; }
+.cf-name--dim { font-weight: 400; color: var(--dim); font-size: 12px; padding-top: 0; }
+.cf-track { position: relative; width: 640px; }
+.cf-sub { position: absolute; left: 92px; font-family: "Special Elite", monospace; font-size: 12px; color: var(--dim); }
+.cf-bar { position: absolute; display: block; box-sizing: border-box; }
+.cf-supported { background: var(--type); }
+.cf-indeterminate { border: 1px solid var(--type); }
+.cf-cov { position: absolute; top: 0; bottom: 0; background: var(--type); }
+.cf-contradicted { background: var(--red); }
+.cf-strike { position: absolute; left: 0; right: 0; top: calc(50% - 1px); height: 2px; background: var(--sheet); }
+.cf-hearsay { border: 1px solid var(--ochre); background: repeating-linear-gradient(45deg, var(--ochre) 0 1.5px, transparent 1.5px 5px); }
+.cf-unsupported { border: 1px dashed var(--dim); }
+.cf-pen { position: absolute; top: -18px; bottom: 0; width: 0; border-left: 2px solid var(--red); }
+.cf-pen span { position: absolute; top: -26px; left: -22px; font-family: Caveat, cursive; font-size: 22px; color: var(--red); transform: rotate(-4deg); }
+.cf-ring { position: absolute; overflow: visible; }
+.cf-ring path { fill: none; stroke: var(--red); stroke-width: 2.2; stroke-linecap: round; }
+
+.cf-memory { margin-top: 6px; border-top: 2px solid var(--type); padding-top: 10px; }
+.cf-memory h2 { margin: 0 0 6px; font-family: "Special Elite", monospace; font-size: 14px; font-weight: 400; }
+.cf-memory p { margin: 4px 0; font-size: 13.5px; }
+.cf-redact { display: inline-block; height: 13px; background: var(--redact); vertical-align: -1px; }
+
+.cf-tally { margin-top: 14px; display: grid; gap: 4px; }
+.cf-tally-row { display: grid; grid-template-columns: 130px 120px 40px 1fr; align-items: center; font-size: 12.5px; }
+.cf-tally-sample { position: relative; height: 9px; }
+.cf-tally-n { text-align: right; padding-right: 14px; }
+.cf-marks { font-family: Caveat, cursive; font-size: 20px; line-height: 1; color: #5b5a54; letter-spacing: 0.08em; }
+
+.cf-card { position: absolute; left: 960px; top: 96px; width: 290px; height: 400px; background: var(--card); padding: 30px 22px 18px; transform: rotate(2.2deg); }
+.cf-clip { position: absolute; left: 34px; top: -18px; width: 22px; height: 64px; border: 3px solid #9aa0a3; border-radius: 11px; }
+.cf-card-name { font-family: "Special Elite", monospace; font-size: 28px; margin-bottom: 10px; }
+.cf-card-line { font-size: 14px; line-height: 1.6; }
+.cf-stamp { position: absolute; font-family: "Special Elite", monospace; letter-spacing: 0.12em; border: 3px double currentColor; padding: 4px 10px; }
+.cf-stamp--red { color: var(--red); font-size: 22px; right: 18px; top: 150px; transform: rotate(-9deg); }
+.cf-stamp--ochre { color: var(--ochre); font-size: 16px; left: 18px; bottom: 16px; transform: rotate(4deg); }
+.cf-trail { margin-top: 74px; font-size: 12.5px; line-height: 1.55; }
+.cf-trail div:first-child { font-family: "Special Elite", monospace; font-size: 13px; margin-bottom: 2px; }
+
+.cf-note { position: absolute; left: 990px; top: 548px; width: 250px; min-height: 190px; background: var(--note); padding: 20px 18px; font-family: Caveat, cursive; font-size: 25px; line-height: 1.15; color: #2b2a26; transform: rotate(-3.5deg); }

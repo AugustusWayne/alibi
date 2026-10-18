@@ -1,0 +1,69 @@
+/* The page, the HUD and the windows. Every edge is hard: no radius, no
+   shadow, no blur (brief 7, project rules rule 10). */
+
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: var(--black); }
+body { color: var(--cream); font-family: var(--text); -webkit-font-smoothing: none; }
+
+/* The board is laid out at 1280x820 and never reflows. It is scaled as one
+   piece to whatever the window gives — down on a small window, up on a large
+   one — by `--fit`, which `App` measures (brief 10). The default is 1, so a
+   browser without `zoom` gets the board at its own size and scrolls to it. */
+:root { --fit: 1; }
+/* The fitted board fills one axis exactly, so the page needs no scrollbars —
+   and with none, none can steal the width that decides the fit. Whatever is
+   left on the other axis is split evenly, which keeps the board centred on
+   the screen rather than hung from the top. */
+.page { height: 100vh; display: grid; place-items: center; overflow: hidden; background: var(--black); }
+/* Where `zoom` is not supported nothing scales, so the board keeps its own
+   size and the page scrolls to it, as it did before. */
+@supports not (zoom: 1) {
+  .page { height: auto; min-height: 100vh; display: block; overflow: auto; }
+}
+.board { position: relative; width: 1280px; height: 820px; margin: 0 auto; background: var(--black); zoom: var(--fit); }
+
+:focus-visible { outline: 2px solid var(--yellow); outline-offset: 2px; }
+
+/* -- HUD -------------------------------------------------------------------- */
+.hud {
+  position: absolute; left: 16px; right: 20px; top: 12px; height: 44px;
+  display: flex; align-items: center; gap: 22px;
+  font-family: var(--pixel); font-size: 10px; color: var(--silver);
+}
+.hud > span { display: flex; align-items: center; gap: 10px; }
+/* The title's red offset is a second copy of the word, not a text-shadow. */
+.hud__title { position: relative; isolation: isolate; margin: 0 8px 0 0; font-family: var(--pixel); font-weight: 400; font-size: 26px; line-height: 1; color: var(--cream); letter-spacing: 2px; }
+.hud__title::before { content: attr(data-text); position: absolute; left: 4px; top: 4px; z-index: -1; color: var(--red); }
+.hud__clock { color: var(--yellow); font-size: 14px; }
+.hud__clock i { position: relative; display: inline-block; width: 14px; height: 14px; border: 2px solid var(--yellow); }
+.hud__clock i::before { content: ""; position: absolute; left: 4px; top: 1px; width: 2px; height: 5px; background: var(--yellow); }
+.hud__clock i::after { content: ""; position: absolute; left: 6px; top: 4px; width: 2px; height: 2px; background: var(--yellow); }
+.hud__meter { display: inline-block; width: 90px; height: 12px; border: 2px solid var(--silver); padding: 1px; }
+.hud__meter i { display: block; height: 100%; background: repeating-linear-gradient(to right, var(--lime) 0 6px, transparent 6px 8px); }
+.hud__right { margin-left: auto; }
+
+/* -- windows ------------------------------------------------------------------ */
+.win { position: absolute; background: var(--night); border: 4px solid var(--cream); outline: 4px solid var(--black); }
+.win__rule { position: absolute; inset: 0; border: 4px solid var(--black); pointer-events: none; z-index: 4; }
+.win__rule::after { content: ""; position: absolute; inset: 0; border: 2px solid var(--lav); }
+.win__title {
+  position: absolute; left: 14px; top: -14px; z-index: 5; margin: 0;
+  background: var(--black); padding: 4px 8px;
+  font-family: var(--pixel); font-weight: 400; font-size: 10px; line-height: 12px; color: var(--yellow);
+}
+.win__body { position: absolute; inset: 0; }
+
+.win--house { left: 16px; top: 72px; width: 776px; height: 500px; }
+.win--log { left: 808px; top: 72px; width: 456px; height: 380px; }
+.win--log .win__body { padding: 24px 22px 14px; }
+.win--level { left: 16px; top: 584px; width: 776px; height: 224px; }
+.win--level .win__body { padding: 22px 18px 8px; }
+
+/* -- the code -------------------------------------------------------------- */
+.party .who .sprite { animation: hop 0.3s steps(1, end) infinite; }
+@keyframes hop { 0% { transform: translateY(0); } 50% { transform: translateY(-10px); } 100% { transform: translateY(-10px); } }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; }
+  .dither--b { display: none; }
+}

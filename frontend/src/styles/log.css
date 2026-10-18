@@ -1,0 +1,69 @@
+/* The case log (brief 5.4 to 5.6). */
+
+.log { display: flex; flex-direction: column; height: 100%; }
+.log .slots { margin-top: auto; }
+
+.portrait { display: flex; gap: 14px; }
+.portrait__frame {
+  width: 74px; height: 92px; flex: none; display: grid; place-items: center;
+  background: var(--black); border: 4px solid var(--lav);
+}
+.portrait__text { min-width: 0; }
+.portrait__name { font-family: var(--pixel); font-size: 16px; line-height: 20px; color: var(--cream); margin: 2px 0 6px; }
+
+.log__line { margin: 0; font-family: var(--text); font-size: 19px; line-height: 1; color: var(--silver); }
+.log__line b { font-weight: 400; color: var(--cream); }
+.log__line--dim { margin-top: 12px; }
+.log__sub { font-family: var(--pixel); font-size: 7px; line-height: 10px; color: var(--yellow); margin: 8px 0 4px; }
+.log__more { margin: 6px 0 0; font-family: var(--pixel); font-size: 6px; color: var(--silver); }
+
+.badge {
+  display: inline-flex; align-items: center; gap: 8px; margin-top: 7px;
+  background: var(--black); border: 2px solid var(--cream); padding: 4px 8px;
+  font-family: var(--pixel); font-size: 8px; color: var(--cream);
+}
+.badge--contradicted { border-color: var(--red); color: var(--red); }
+.badge--hearsay { border-color: var(--orange); color: var(--orange); }
+.badge--unsupported { border-style: dashed; border-color: var(--silver); color: var(--silver); }
+.badge__fill { position: relative; width: 26px; height: 12px; }
+
+.seen, .trail {
+  display: flex; align-items: center; gap: 8px; width: 100%;
+  background: none; border: 0; border-radius: 0; padding: 0; margin: 0; cursor: pointer; text-align: left;
+  font-family: var(--text); font-size: 18px; line-height: 1; color: var(--cream);
+}
+.seen { margin-top: 8px; }
+.seen__fill { position: relative; width: 26px; height: 12px; flex: none; }
+.trail { height: 26px; }
+.trail__what { color: var(--silver); white-space: nowrap; overflow: hidden; text-overflow: clip; }
+
+.chip {
+  font-family: var(--pixel); font-size: 7px; line-height: 9px; padding: 4px 5px; flex: none;
+  background: var(--black); border: 2px solid var(--cream); color: var(--cream);
+}
+.chip--heard { border-color: var(--orange); color: var(--orange); }
+.chip--origin-ungrounded { border-color: var(--red); color: var(--red); }
+.chip--origin-grounded { border-color: var(--cream); color: var(--cream); }
+.chip--unresolved { border-style: dashed; border-color: var(--silver); color: var(--silver); }
+.arrow { fill: var(--orange); flex: none; }
+
+.log__idle { display: flex; gap: 18px; align-items: flex-start; }
+.log__idle .lens { fill: var(--yellow); flex: none; }
+.log__direct { margin: 0 0 12px; font-family: var(--pixel); font-size: 9px; line-height: 16px; color: var(--cream); }
+
+.slots { display: flex; gap: 10px; }
+.slot { width: 74px; display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.slot__well { position: relative; width: 64px; height: 40px; background: var(--black); border: 3px solid var(--lav); }
+.slot__fill { position: absolute; left: 8px; right: 8px; top: 9px; height: 14px; }
+.slot__bracket { position: absolute; left: 29px; right: 8px; top: 25px; height: 4px; border: 2px solid var(--red); border-top: 0; }
+.slot__n { font-family: var(--text); font-size: 20px; line-height: 1; color: var(--cream); }
+.slot__l { font-family: var(--pixel); font-size: 6px; color: var(--silver); }
+
+/* -- the records of the speaker's own memory (brief 5.4, 6.2) -------------- */
+/* A record's standing is its fill, which `ClaimBar` owns; this only places it. */
+.mems { list-style: none; margin: 0; padding: 0; }
+.mem { display: flex; align-items: center; gap: 6px; height: 20px; }
+.mem__id { width: 28px; flex: none; font-family: var(--pixel); font-size: 6px; line-height: 10px; color: var(--silver); }
+.mem__fill { position: relative; width: 26px; height: 12px; flex: none; }
+.mem__says { font-family: var(--text); font-size: 18px; line-height: 1; color: var(--cream); white-space: nowrap; }
+.mem__bears { margin-left: auto; flex: none; font-family: var(--pixel); font-size: 6px; line-height: 10px; color: var(--silver); }

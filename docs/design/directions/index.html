@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Case board directions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500&family=Press+Start+2P&family=VT323&family=Silkscreen:wght@400;700&family=DotGothic16&family=Special+Elite&family=Courier+Prime:wght@400;700&family=Caveat:wght@500;700&display=swap">
+<link rel="stylesheet" href="instrument.css">
+<link rel="stylesheet" href="toy.css">
+<link rel="stylesheet" href="casefile.css">
+<link rel="stylesheet" href="pixel.css">
+<link rel="stylesheet" href="device.css">
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: #16181a; color: #d8dcdc; font-family: Archivo, sans-serif; }
+  .wrap { padding: 28px 32px 48px; }
+  .intro { display: flex; align-items: baseline; gap: 24px; margin-bottom: 20px; }
+  .intro h1 { margin: 0; font-size: 22px; font-weight: 500; }
+  .intro p { margin: 0; font-size: 13px; color: #8d9696; }
+  .grid { display: grid; grid-template-columns: repeat(2, 640px); gap: 28px 32px; }
+  .tile { width: 640px; }
+  .tile__frame { width: 640px; height: 410px; overflow: hidden; position: relative; outline: 1px solid #2a2e30; }
+  .tile__frame > .artboard { transform: scale(0.5); transform-origin: 0 0; }
+  .tile__meta { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding-top: 10px; }
+  .tile__name { font-size: 15px; font-weight: 500; }
+  .tile__note { font-size: 12.5px; color: #8d9696; line-height: 1.5; margin-top: 4px; max-width: 520px; }
+  .tile button { font: inherit; font-size: 12.5px; background: none; color: #d8dcdc; border: 1px solid #3a4042; padding: 6px 12px; cursor: pointer; white-space: nowrap; }
+  .tile button:hover { border-color: #d8dcdc; }
+  .artboard { width: 1280px; height: 820px; position: relative; overflow: hidden; }
+  .focus { position: fixed; inset: 0; background: #0c0d0e; overflow: auto; display: none; z-index: 10; }
+  .focus.on { display: block; }
+  .focus__bar { position: sticky; top: 0; display: flex; gap: 12px; align-items: center; padding: 10px 16px; background: #0c0d0e; z-index: 2; font-size: 13px; }
+  .focus__bar button { font: inherit; background: none; color: #d8dcdc; border: 1px solid #3a4042; padding: 5px 12px; cursor: pointer; }
+  .focus__stage { padding: 8px 16px 32px; }
+  .error { color: #ff6b57; font-family: "Geist Mono", monospace; padding: 24px; }
+  .featured { display: flex; gap: 32px; align-items: flex-start; margin-bottom: 40px; padding-bottom: 32px; border-bottom: 1px solid #2a2e30; }
+  .featured .tile__frame { width: 960px; height: 615px; }
+  .featured .tile__frame > .artboard { transform: scale(0.75); }
+  .featured .tile { width: 960px; }
+  .featured__side { width: 300px; padding-top: 4px; }
+  .featured__side h2 { margin: 0 0 8px; font-size: 18px; font-weight: 500; }
+  .featured__side p, .featured__side li { font-size: 13px; line-height: 1.55; color: #a7b0b0; }
+  .featured__side ul { padding-left: 18px; margin: 10px 0; }
+  .featured__side button { font: inherit; font-size: 12.5px; background: none; color: #d8dcdc; border: 1px solid #3a4042; padding: 6px 12px; cursor: pointer; }
+  .section-label { font-size: 13px; color: #8d9696; margin: 0 0 14px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="intro">
+    <h1>Four directions for the case board</h1>
+    <p>Same seed, same moment: 19:52, inside the incident. Every mark is the real audit output for seed 7777.</p>
+  </div>
+  <div class="featured" id="featured"></div>
+  <p class="section-label">The four explorations it came from</p>
+  <div class="grid" id="grid"></div>
+</div>
+<div class="focus" id="focus" role="dialog" aria-label="Full size">
+  <div class="focus__bar"><button type="button" id="close">Back to all four</button><span id="focus-title"></span></div>
+  <div class="focus__stage" id="stage"></div>
+</div>
+
+<script type="module">
+  import { load } from "./shared.js";
+  import * as instrument from "./instrument.js";
+  import * as toy from "./toy.js";
+  import * as casefile from "./casefile.js";
+  import * as pixel from "./pixel.js";
+
+  const combined = {
+    mod: { render: (el, d) => pixel.render(el, d, { device: true }) },
+    name: "5. The 8-bit house, with the pocket recorder",
+    note: "Direction 4, plus the hardware toy redrawn as a pixel-art pocket cassette recorder the operator holds.",
+  };
+  const directions = [
+    { mod: instrument, name: "1. Living instrument",
+      note: "A pale chart-paper roll with teal ink running through a dark machine body; needles that jitter into the gaps; a deadpan headline. Bends brief sections 3 and 6." },
+    { mod: toy, name: "2. Hardware toy",
+      note: "The recorder as a playful device: silk-screen labels, a key per suspect, a dot-matrix clock, a REC lamp. Breaks section 7 (caps labels, mono keys, round knobs)." },
+    { mod: casefile, name: "3. Case file on a desk",
+      note: "Typed statement log in a manila folder, private memory as redaction bars, verdicts as rubber stamps, a pencilled note. Breaks sections 7 and 9 (themed dressing, new colours)." },
+    { mod: pixel, name: "4. 8-bit mystery",
+      note: "A top-down pixel house at 19:52 with every suspect where they say they were, a case log in an RPG window, and the recorder as a level strip with fog over the unplayed minutes." },
+  ];
+
+  const grid = document.getElementById("grid");
+  try {
+    const data = await load();
+    const all = [...directions, combined];
+    const featured = document.getElementById("featured");
+    featured.innerHTML = `
+      <div class="tile"><div class="tile__frame"><div class="artboard"></div></div></div>
+      <div class="featured__side">
+        <h2>${combined.name}</h2>
+        <p>${combined.note}</p>
+        <ul>
+          <li>The reels turn, and each tape pack is sized from the replay position.</li>
+          <li>The tape label is the seed. Same tape, same evening.</li>
+          <li>The counter is the tick. The RX lamp blinks as claims arrive.</li>
+          <li>The polygraph slip feeds under a jittering needle; the pips are the detective's two traces.</li>
+          <li>The keys and the speed knob work. Pause stops the whole machine.</li>
+          <li>The house breathes: sprites bob, the ghost flickers, the fog boils.</li>
+          <li>Try the Konami code.</li>
+        </ul>
+        <button type="button">Full size</button>
+      </div>`;
+    combined.mod.render(featured.querySelector(".artboard"), data);
+    featured.querySelector("button").addEventListener("click", () => open(4));
+    directions.forEach((dir, i) => {
+      const tile = document.createElement("div");
+      tile.className = "tile";
+      tile.innerHTML = `
+        <div class="tile__frame"><div class="artboard"></div></div>
+        <div class="tile__meta">
+          <div><div class="tile__name">${dir.name}</div><div class="tile__note">${dir.note}</div></div>
+          <button type="button">Full size</button>
+        </div>`;
+      grid.appendChild(tile);
+      dir.mod.render(tile.querySelector(".artboard"), data);
+      tile.querySelector("button").addEventListener("click", () => open(i));
+    });
+
+    const focus = document.getElementById("focus");
+    const stage = document.getElementById("stage");
+    function open(i) {
+      stage.innerHTML = '<div class="artboard"></div>';
+      all[i].mod.render(stage.firstChild, data);
+      document.getElementById("focus-title").textContent = all[i].name;
+      focus.classList.add("on");
+      location.hash = String(i + 1);
+    }
+    document.getElementById("close").addEventListener("click", () => {
+      focus.classList.remove("on");
+      history.replaceState(null, "", location.pathname);
+    });
+    const n = Number(location.hash.slice(1));
+    if (n >= 1 && n <= 5) open(n - 1);
+  } catch (err) {
+    grid.innerHTML = `<div class="error">${err.message}</div>`;
+    throw err;
+  }
+</script>
+</body>
+</html>
