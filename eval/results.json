@@ -1,0 +1,387 @@
+{
+  "chain_root": {
+    "actual_positive": "that agent is who first held the memory, per the plan",
+    "fn": 0,
+    "fp": 0,
+    "predicted_positive": "the chain named an agent",
+    "question": "chain root identification",
+    "tn": 0,
+    "tp": 498
+  },
+  "claims": 3086,
+  "confusion": {
+    "CONTRADICTED|DELIBERATE_FABRICATION": 24,
+    "CONTRADICTED|HONEST_ERROR": 0,
+    "CONTRADICTED|RELAYED_FALSEHOOD": 7,
+    "CONTRADICTED|TRUE_CLAIM": 0,
+    "HEARSAY|DELIBERATE_FABRICATION": 0,
+    "HEARSAY|HONEST_ERROR": 0,
+    "HEARSAY|RELAYED_FALSEHOOD": 12,
+    "HEARSAY|TRUE_CLAIM": 486,
+    "INDETERMINATE|DELIBERATE_FABRICATION": 0,
+    "INDETERMINATE|HONEST_ERROR": 1,
+    "INDETERMINATE|RELAYED_FALSEHOOD": 0,
+    "INDETERMINATE|TRUE_CLAIM": 169,
+    "SUPPORTED|DELIBERATE_FABRICATION": 0,
+    "SUPPORTED|HONEST_ERROR": 0,
+    "SUPPORTED|RELAYED_FALSEHOOD": 0,
+    "SUPPORTED|TRUE_CLAIM": 2387,
+    "UNSUPPORTED|DELIBERATE_FABRICATION": 0,
+    "UNSUPPORTED|HONEST_ERROR": 0,
+    "UNSUPPORTED|RELAYED_FALSEHOOD": 0,
+    "UNSUPPORTED|TRUE_CLAIM": 0
+  },
+  "falkordb": "localhost:6380",
+  "falsehood": {
+    "actual_positive": "the claim did not match the world",
+    "fn": 13,
+    "fp": 0,
+    "predicted_positive": "verdict in (UNSUPPORTED, CONTRADICTED)",
+    "question": "falsehood detection",
+    "tn": 3042,
+    "tp": 31
+  },
+  "full_coverage": {
+    "actual_positive": "the speaker's own witnessed memory does not fully account for the claim",
+    "fn": 668,
+    "fp": 0,
+    "predicted_positive": "verdict in (UNSUPPORTED, CONTRADICTED)",
+    "question": "full-coverage detection (memory does not fully cover the claim)",
+    "tn": 2387,
+    "tp": 31
+  },
+  "gap_precision": {
+    "at_claimed_place": 181,
+    "elsewhere": 0,
+    "in_transit": 1,
+    "total": 182
+  },
+  "gaps": 182,
+  "generator_yield": {
+    "fabrications": 24,
+    "rejected": 0,
+    "relayed_fabrications": 22,
+    "seeds": 24,
+    "seeds_without_relay": [
+      10148,
+      10851
+    ],
+    "without_relayed_fabrication": 2
+  },
+  "grounding_strict": {
+    "actual_positive": "the speaker holds nothing overlapping about the subject, or witnessed memory places them elsewhere",
+    "fn": 0,
+    "fp": 0,
+    "predicted_positive": "verdict in (UNSUPPORTED, CONTRADICTED)",
+    "question": "grounding detection (what UNSUPPORTED and CONTRADICTED mean)",
+    "tn": 3055,
+    "tp": 31
+  },
+  "label_tally": {
+    "DELIBERATE_FABRICATION": 24,
+    "HONEST_ERROR": 1,
+    "RELAYED_FALSEHOOD": 19,
+    "TRUE_CLAIM": 3042
+  },
+  "origin": {
+    "chain_broken": 0,
+    "chain_temporal_violation": 0,
+    "chains_total": 498,
+    "correct": 12,
+    "misnamed": 0,
+    "resolved": 12,
+    "subset": 12,
+    "terminals": {
+      "ORIGIN_CONTRADICTED": 12,
+      "ORIGIN_WITNESSED": 486
+    },
+    "unresolved": 0
+  },
+  "per_seed": [
+    {
+      "chains": 20,
+      "claims": 125,
+      "culprit": "p7",
+      "fabrications": 1,
+      "gaps": 8,
+      "rejected": 0,
+      "relayed_fabrications": 1,
+      "seed": 10037
+    },
+    {
+      "chains": 23,
+      "claims": 134,
+      "culprit": "p4",
+      "fabrications": 1,
+      "gaps": 6,
+      "rejected": 0,
+      "relayed_fabrications": 1,
+      "seed": 10074
+    },
+    {
+      "chains": 20,
+      "claims": 129,
+      "culprit": "p4",
+      "fabrications": 1,
+      "gaps": 8,
+      "rejected": 0,
+      "relayed_fabrications": 1,
+      "seed": 10111
+    },
+    {
+      "chains": 25,
+      "claims": 124,
+      "culprit": "p5",
+      "fabrications": 1,
+      "gaps": 8,
+      "rejected": 0,
+      "relayed_fabrications": 0,
+      "seed": 10148
+    },
+    {
+      "chains": 23,
+      "claims": 131,
+      "culprit": "p4",
+      "fabrications": 1,
+      "gaps": 8,
+      "rejected": 0,
+      "relayed_fabrications": 1,
+      "seed": 10185
+    },
+    {
+      "chains": 19,
+      "claims": 120,
+      "culprit": "p6",
+      "fabrications": 1,
+      "gaps": 9,
+      "rejected": 0,
+      "relayed_fabrications": 1,
+      "seed": 10222
+    },
+    {
+      "chains": 20,
+      "claims": 133,
+      "culprit": "p6",
+      "fabrications": 1,
+      "gaps": 6,
+      "rejected": 0,
+      "relayed_fabrications": 1,
+      "seed": 10259
+    },
+    {
+      "chains": 20,
+      "claims": 127,
+      "culprit": "p5",
+      "fabrications": 1,
+      "gaps": 9,
+      "rejected": 0,
+      "relayed_fabrications": 1,
+      "seed": 10296
+    },
+    {
+      "chains": 23,
+      "claims": 134,
+      "culprit": "p4",
+      "fabrications": 1,
+      "gaps": 10,
+      "rejected": 0,
+      "relayed_fabrications": 1,
+      "seed": 10333
+    },
+    {
+      "chains": 19,
+      "claims": 117,
+      "culprit": "p6",
+      "fabrications": 1,
+      "gaps": 7,
+      "rejected": 0,
+      "relayed_fabrications": 1,
+      "seed": 10370
+    },
+    {
+      "chains": 22,
+      "claims": 135,
+      "culprit": "p2",
+      "fabrications": 1,
+      "gaps": 6,
+      "rejected": 0,
+      "relayed_fabrications": 1,
+      "seed": 10407
+    },
+    {
+      "chains": 16,
+      "claims": 124,
+      "culprit": "p6",
+      "fabrications": 1,
+      "gaps": 11,
+      "rejected": 0,
+      "relayed_fabrications": 1,
+      "seed": 10444
+    },
+    {
+      "chains": 19,
+      "claims": 135,
+      "culprit": "p5",
+      "fabrications": 1,
+      "gaps": 7,
+      "rejected": 0,
+      "relayed_fabrications": 1,
+      "seed": 10481
+    },
+    {
+      "chains": 21,
+      "claims": 137,
+      "culprit": "p3",
+      "fabrications": 1,
+      "gaps": 9,
+      "rejected": 0,
+      "relayed_fabrications": 1,
+      "seed": 10518
+    },
+    {
+      "chains": 22,
+      "claims": 136,
+      "culprit": "p6",
+      "fabrications": 1,
+      "gaps": 5,
+      "rejected": 0,
+      "relayed_fabrications": 1,
+      "seed": 10555
+    },
+    {
+      "chains": 23,
+      "claims": 116,
+      "culprit": "p4",
+      "fabrications": 1,
+      "gaps": 10,
+      "rejected": 0,
+      "relayed_fabrications": 1,
+      "seed": 10592
+    },
+    {
+      "chains": 19,
+      "claims": 135,
+      "culprit": "p5",
+      "fabrications": 1,
+      "gaps": 6,
+      "rejected": 0,
+      "relayed_fabrications": 1,
+      "seed": 10629
+    },
+    {
+      "chains": 15,
+      "claims": 134,
+      "culprit": "p7",
+      "fabrications": 1,
+      "gaps": 8,
+      "rejected": 0,
+      "relayed_fabrications": 1,
+      "seed": 10666
+    },
+    {
+      "chains": 18,
+      "claims": 135,
+      "culprit": "p4",
+      "fabrications": 1,
+      "gaps": 8,
+      "rejected": 0,
+      "relayed_fabrications": 1,
+      "seed": 10703
+    },
+    {
+      "chains": 23,
+      "claims": 135,
+      "culprit": "p2",
+      "fabrications": 1,
+      "gaps": 6,
+      "rejected": 0,
+      "relayed_fabrications": 1,
+      "seed": 10740
+    },
+    {
+      "chains": 25,
+      "claims": 129,
+      "culprit": "p1",
+      "fabrications": 1,
+      "gaps": 3,
+      "rejected": 0,
+      "relayed_fabrications": 1,
+      "seed": 10777
+    },
+    {
+      "chains": 19,
+      "claims": 126,
+      "culprit": "p5",
+      "fabrications": 1,
+      "gaps": 9,
+      "rejected": 0,
+      "relayed_fabrications": 1,
+      "seed": 10814
+    },
+    {
+      "chains": 25,
+      "claims": 119,
+      "culprit": "p1",
+      "fabrications": 1,
+      "gaps": 6,
+      "rejected": 0,
+      "relayed_fabrications": 0,
+      "seed": 10851
+    },
+    {
+      "chains": 19,
+      "claims": 116,
+      "culprit": "p3",
+      "fabrications": 1,
+      "gaps": 9,
+      "rejected": 0,
+      "relayed_fabrications": 1,
+      "seed": 10888
+    }
+  ],
+  "seeds": [
+    10037,
+    10074,
+    10111,
+    10148,
+    10185,
+    10222,
+    10259,
+    10296,
+    10333,
+    10370,
+    10407,
+    10444,
+    10481,
+    10518,
+    10555,
+    10592,
+    10629,
+    10666,
+    10703,
+    10740,
+    10777,
+    10814,
+    10851,
+    10888
+  ],
+  "seeds_file": "eval/seeds.json",
+  "spec": {
+    "exchanges": 14,
+    "incident_length": 20,
+    "n_people": 7,
+    "n_places": 11,
+    "plan_seed": null,
+    "plant_broken_chain": false,
+    "plant_temporal_violation": false,
+    "with_accomplice": true,
+    "witness_miss_probability": 0.1
+  },
+  "verdict_tally": {
+    "CONTRADICTED": 31,
+    "HEARSAY": 498,
+    "INDETERMINATE": 170,
+    "SUPPORTED": 2387,
+    "UNSUPPORTED": 0
+  }
+}

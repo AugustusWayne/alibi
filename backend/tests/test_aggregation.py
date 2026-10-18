@@ -16,7 +16,7 @@ board because they were alone all evening.
 from __future__ import annotations
 
 from backend.app.case.graph import CaseGraph, case_graph_name
-from backend.app.case.scoreboard import rank_suspects
+from backend.app.case.scoreboard import SCORED_TERMS, load_weights, rank_suspects
 
 
 def _case(db, seed, graphs) -> CaseGraph:
@@ -112,6 +112,7 @@ def test_a_suspect_with_nothing_scores_zero(db, scratch_seed, graphs):
     assert rows["quiet"] == {
         "suspect": "quiet", "claims": 0, "self_contradictions": 0,
         "other_contradictions": 0, "gaps": 0,
+        "originated_ungrounded": 0, "carried_ungrounded": 0,
     }
 
 
@@ -216,9 +217,11 @@ def test_ranking_weights_self_contradiction_above_being_disputed():
     """
     ranked = rank_suspects([
         {"suspect": "disputed", "claims": 3, "self_contradictions": 0,
-         "other_contradictions": 1, "gaps": 0},
+         "other_contradictions": 1, "gaps": 0,
+         "originated_ungrounded": 0, "carried_ungrounded": 0},
         {"suspect": "inconsistent", "claims": 3, "self_contradictions": 1,
-         "other_contradictions": 0, "gaps": 0},
+         "other_contradictions": 0, "gaps": 0,
+         "originated_ungrounded": 0, "carried_ungrounded": 0},
     ])
     assert [r["suspect"] for r in ranked] == ["inconsistent", "disputed"]
     assert ranked[0]["score"] > ranked[1]["score"]
@@ -228,26 +231,34 @@ def test_ranking_exposes_the_breakdown_not_just_a_total():
     """The UI shows how a score was reached, so every term is reported."""
     ranked = rank_suspects([
         {"suspect": "s1", "claims": 4, "self_contradictions": 1,
-         "other_contradictions": 2, "gaps": 3},
+         "other_contradictions": 2, "gaps": 3,
+         "originated_ungrounded": 1, "carried_ungrounded": 4},
     ])
     row = ranked[0]
+    w = load_weights()
     assert row["breakdown"] == {
-        "self_contradictions": 1 * 5.0,
-        "other_contradictions": 2 * 2.0,
-        "gaps": 3 * 1.0,
+        "originated_ungrounded": 1 * w["originated_ungrounded"],
+        "self_contradictions": 1 * w["self_contradictions"],
+        "other_contradictions": 2 * w["other_contradictions"],
+        "gaps": 3 * w["gaps"],
+        "carried_ungrounded": 4 * w["carried_ungrounded"],
     }
     assert row["score"] == sum(row["breakdown"].values())
+    assert set(row["breakdown"]) == set(SCORED_TERMS), "every term is reported"
 
 
 def test_ranking_is_stable_for_equal_scores():
     """Ties break on suspect id, so the board never reorders between runs."""
     rows = [
         {"suspect": "s3", "claims": 1, "self_contradictions": 0,
-         "other_contradictions": 0, "gaps": 0},
+         "other_contradictions": 0, "gaps": 0,
+         "originated_ungrounded": 0, "carried_ungrounded": 0},
         {"suspect": "s1", "claims": 1, "self_contradictions": 0,
-         "other_contradictions": 0, "gaps": 0},
+         "other_contradictions": 0, "gaps": 0,
+         "originated_ungrounded": 0, "carried_ungrounded": 0},
         {"suspect": "s2", "claims": 1, "self_contradictions": 0,
-         "other_contradictions": 0, "gaps": 0},
+         "other_contradictions": 0, "gaps": 0,
+         "originated_ungrounded": 0, "carried_ungrounded": 0},
     ]
     assert [r["suspect"] for r in rank_suspects(rows)] == ["s1", "s2", "s3"]
     assert [r["suspect"] for r in rank_suspects(list(reversed(rows)))] == ["s1", "s2", "s3"]

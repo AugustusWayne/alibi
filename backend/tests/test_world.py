@@ -178,20 +178,61 @@ def test_the_fabrication_reaches_an_honest_mind_as_hearsay():
         assert fact.src == "hearsay", "a relayed fabrication arrives as hearsay"
 
 
-def test_the_culprit_has_no_memory_backing_its_own_fabrication():
-    """The culprit's mind is truthful about where the culprit was.
+def test_the_culprits_fabrication_is_cited_but_unwitnessed():
+    """The culprit's *witnessed* memory stays truthful about where it was.
 
-    The fabrication exists in what the culprit *says* and in what it passes
-    on, never as a memory it holds. So the chain the referee walks terminates
-    at a source fact that was never recorded, and the culprit's own claim has
-    nothing in its own memory to ground it.
+    Rewritten for M2. M1 had the relay cite a fact id that existed in no
+    mind, which the referee can only ever report as CHAIN_BROKEN — a state
+    spec 5.7 calls ambiguous and says is not an origin. A world whose sole
+    fabrication is unattributable cannot exercise the three ORIGIN states at
+    all, so the cited fact now exists in the culprit's own mind as `inferred`.
+
+    An inferred memory neither grounds nor refutes (5.5's last row), so the
+    chain reaches the culprit and finds the record present but unbacked,
+    while the culprit's witnessed memory of the incident room conflicts with
+    it. The assertion is stricter than M1's, not weaker: the fact must exist,
+    must belong to the culprit, must not be witnessed, and must sit at a
+    different place from where the culprit really was.
     """
     plan = plan_world(SEED)
-    fact_ids = {f.id for f in plan.facts}
+    by_id = {f.id: f for f in plan.facts}
+    culprit = next(p for p in plan.people if p.role == "culprit")
+
+    for fab in (f for f in plan.fabrications if f.pathology == "none"):
+        cited = by_id.get(fab.src_fact_id)
+        assert cited is not None, "a traceable fabrication must cite a real record"
+        assert cited.owner == culprit.id
+        assert cited.src == "inferred", "the culprit is never given a memory it could not have"
+        assert cited.place != plan.incident.place
+
+    # No witnessed memory anywhere places the culprit at the alibi room then.
     for fab in plan.fabrications:
-        assert fab.src_fact_id not in fact_ids, (
-            f"fabrication cites {fab.src_fact_id}, which exists as a real memory"
-        )
+        for fact in plan.facts:
+            if fact.src != "witnessed" or fact.subject != culprit.id:
+                continue
+            if fact.place == fab.place:
+                assert not overlaps(fact.t0, fact.t1, fab.t0, fab.t1), (
+                    f"witnessed fact {fact.id} backs the fabricated alibi"
+                )
+
+
+def test_pathological_chains_are_planted_only_when_asked_for():
+    """The default world has one clean, traceable fabrication and no others.
+
+    The broken and early-telling chains exist so the referee's detection of
+    each is tested rather than assumed, which means they must not leak into
+    the default world and skew the verdict mix.
+    """
+    default = plan_world(SEED)
+    assert [f.pathology for f in default.fabrications] == ["none"]
+
+    both = plan_world(
+        SEED,
+        WorldSpec(plant_broken_chain=True, plant_temporal_violation=True),
+    )
+    assert sorted(f.pathology for f in both.fabrications) == [
+        "broken_chain", "none", "temporal_violation",
+    ]
 
 
 def test_generate_writes_the_world_and_is_reproducible(db, scratch_seed, graphs):
@@ -459,3 +500,36 @@ def test_a_withheld_window_leaves_a_gap_rather_than_a_conflict(db, scratch_seed,
     suspect = build_suspects(db, seed, plan=plan)[0].with_policy(evasive(window))
     for claim in suspect.testify(limit=None):
         assert not overlaps(claim.t0, claim.t1, *window)
+
+
+def test_claims_are_identical_across_two_independent_generations(db, scratch_seed, graphs):
+    """The same world written into two separate graph sets yields the same claims.
+
+    `test_testimony_is_deterministic` only re-reads one written world, so it
+    could not catch order-dependence introduced by the *write* path — if
+    `generate` wrote facts in a different order, ids would shift and testimony
+    would diverge while that test stayed green. This regenerates from scratch
+    into a different seed's graphs and compares the claims themselves.
+    """
+    from backend.app.agents.scripted import build_suspects
+    from backend.app.case.graph import case_graph_name
+    from backend.app.minds.access import mind_graph_name
+    from backend.app.world.generator import world_graph_name
+
+    plan = plan_world(SEED)
+
+    def testimony(seed: int):
+        graphs(world_graph_name(seed))
+        graphs(case_graph_name(seed))
+        for person in plan.people:
+            graphs(mind_graph_name(seed, person.id))
+        generate(db, seed, spec=WorldSpec(plan_seed=SEED))
+        return [
+            (s.id, s.testify(limit=None)) for s in build_suspects(db, seed, plan=plan)
+        ]
+
+    first = testimony(scratch_seed)
+    second = testimony(scratch_seed + 700)
+
+    assert first == second
+    assert any(claims for _, claims in first), "nobody testified, so this proves nothing"

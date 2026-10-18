@@ -6,75 +6,78 @@ lines — delete detail that no longer matters.
 
 ## Current state
 
-- **Milestone:** M1 — world generator, mind writer, audit engine. **Gate passed.**
-- **Last verified by:** 2026-10-16, `make verify` → ruff clean, **61 passed**, `VERIFY OK`.
-- Zero LLM calls in M1. No xfail, no skip, no mocked graph in the suite.
-- FalkorDB `v4.22.1`, `falkordb 1.8.0`, Python 3.12.1, host port **6380**. Next: M2.
+- **M6 gate closed**, tagged `m6`: the harness runs the 24 frozen seeds and the
+  numbers below were reviewed and signed off.
+- **Tags that exist are `m2`, `m5`, `m6`.** `m0` and `m1` have never existed as
+  refs in this repo, despite what earlier notes here claimed. Candidates, if
+  they get cut: `ca13855` ("M0: infrastructure and the nine FalkorDB assumption
+  spikes") and `b23a03f` ("M1 gate: PROGRESS.md and AI-USE.md").
+- **Last verified:** 2026-10-18, `make verify` → ruff clean, **131 passed**.
+- **M5 is committed and tagged `m5`** (`3e1f452` on `adoring-wright`): the case
+  board, `scripts/dump_case.py` and `docs/design/directions/`. It did **not**
+  go through a gate review — no show-me-the-raw-output pass, unlike M2 and M6 —
+  and that review is still open.
+- FalkorDB `v4.22.1`, `falkordb 1.8.0`, Python 3.12.1, host port **6380**.
 
-## What M1 built
+## What M6 is
 
-`audit/` — `time_contract`, `coverage` (5.4 verbatim, merges before summing),
-`verdicts`, `decide` (the 5.5 table), `engine` (gather → decide → materialize).
-`minds/` — Q1 writes, Q2 gather, recall; `MindAccess` binds one mind at
-construction, so a suspect cannot express a request for another's memory.
-`case/` — Q4–Q8, 5.6 materialization, SPpaths matrix, `scoreboard.py` (the one
-ranking function). `world/` — `plan_world` (pure data) + `generate` (writes
-world/minds/case). `agents/scripted.py` — `ScriptedSuspect` +
-`FabricationPolicy`, no LLM.
+eval/seeds.json: 24 frozen seeds (10000+37k), rule-generated, never
+rewritten. backend/app/eval/: harness.py, metrics.py, report.py, seeds.py.
+referee/ground_truth.py gained spec 8.1 labels + PlanTruth. No LLM.
 
-All Cypher is in `**/queries.py`: 42 named constants, each with a one-line
-comment. No `LIMIT` in any query. The deception vocabulary appears nowhere
-outside `referee/` (which does not exist yet).
+## M6 numbers (full detail: eval/results.json, this session's chat log)
 
-Seed 7777 (11 places, 7 people, 146 facts, 42 transmissions) gives **SUPPORTED
-95, HEARSAY 23, INDETERMINATE 6, CONTRADICTED 1** over 125 claims, with 6
-exclusive-presence and 4 impossible-travel pairs. The innocent-repeater moment
-is asserted by a test: `p2 says p4 at hall [102,122) heard from p4` → `HEARSAY`.
-
-## Two findings M2 must know
-
-1. **The scoreboard's top row is not an accusation, and here it is often not the
-   culprit.** On seed 7777 the honest repeater `p2` outscores the culprit `p4`
-   (16.0 vs 15.0): repeating the fabrication in good faith genuinely leaves `p2`
-   with testimony its own memory cannot account for. Correct for a grounding
-   measure, and **not** to be fixed by retuning weights — that is the rigged
-   benchmark spec 8.4 warns against. Telling "carries a contradiction" from
-   "originated it" is what the provenance trace (5.7) is for, and this is now the
-   strongest argument for building it. The ranking docstring says so; keep it.
-2. **`UNSUPPORTED` does not arise in a generated world**, since every scripted
-   claim derives from some memory. It is demonstrated against a hand-built graph
-   in `test_audit.py` and is reachable in the engine. LLM suspects (M3) would
-   produce it naturally; if M3 is cut, the eval should say so rather than imply
-   the state is dead.
+Falsehood detection: 100% precision, 70.5% recall, 24 seeds / 3086 claims,
+scripted, no LLM. Zero false accusations. The 13 misses are specifically
+falsehoods relayed secondhand with no contradicting witnessed account — not
+a general miss rate. Origin ID 12/12, chain root 498/498. Gap precision is
+a structural null (0.00%/0.55%) under scripted-only worlds — see next
+action. Weights frozen, untouched, never read by eval.
 
 ## Decisions made (do not re-litigate)
 
-- **`Gap` nodes go to the partial-support row only** (5.5 literal). An
-  `UNSUPPORTED` claim records `uncovered` but gets no `Gap` nodes — it is already
-  its own signal, so Q8's gaps mean "holes in claims that had some backing".
-- **Hearsay support is materialized as `SUPPORTED_BY`** with `src='hearsay'` on
-  the Evidence shadow, carrying `heard_from` and the transmission tick. That
-  keeps a HEARSAY verdict walkable without the case graph holding a fact.
-- **`plan_world` is pure data, `generate` writes it**, so determinism is provable
-  by diffing two plans. `generate` cross-checks its own Floyd-Warshall matrix
-  against the graph's `algo.SPpaths` matrix and raises on disagreement.
-- **The claim cap samples the evening evenly, it does not truncate it.** Taking
-  the earliest N dropped the back half of every suspect's evening and was
-  silently losing the innocent-repeater claim. `testify(window=…)` is never
-  capped — an interview about a span deserves every claim bearing on it.
-- Q8 splits `self_contradictions` / `other_contradictions`, weighted 5.0 / 2.0 /
-  1.0 (gaps). The fixture M0 recorded is now a test.
+- **`TRACED_TO` is materialized only for claims the detective polygraphed**, and
+  **the eval materializes nothing either** — it scores from `Chain` objects in
+  memory, so a run cannot put the referee's conclusions into a case graph.
+- **A seed's graphs are dropped before a run as well as after.**
+  `CREATE_PRESENCE` and `ingest_claim` append, so generating into an inherited
+  `case:{seed}` silently doubles the world and every count is wrong by a
+  plausible factor. It happened on the first 7777 run: 252 claims, not 126.
+- **The answer key takes hearsay in `(t0, id)` order, as the referee does.** A
+  claim can rest on several secondhand memories with different true origins and
+  `trace_claim` walks the first; any other order named the root of a chain the
+  referee did not follow and manufactured 9 disagreements out of two right
+  answers (seen on 10074).
+- **The budget counts distinct claims, not calls.** **A suspect id in a tool is
+  not a mind selector.** **An interview repeating known testimony ingests
+  nothing.**
+- **A zero-length or inverted claim window raises.** **Standing check: wherever
+  the engine takes a ratio over a span, ask what an empty span does.**
+- **The culprit's relayed fabrication cites a real `inferred` fact**, or the
+  three ORIGIN states would be unreachable from a generated world.
+- **`Gap` nodes go to the partial-support row only.** **Hearsay support is
+  `SUPPORTED_BY`** with `src='hearsay'`. **`plan_world` is pure data, `generate`
+  writes it**, cross-checking Floyd-Warshall against `algo.SPpaths`.
+- **M1's open finding is resolved by structure, not tuning**: the origin/carrier
+  split ranks culprit `p4` above honest repeater `p2` on seed 7777. The weights
+  were frozen before that run and none has changed since (8.4).
+- **The board is the 8-bit direction**; strip rows hold a suspect's claims about
+  themselves, an unresolved trail shows no origin chip.
 
 ## Known issues
 
 - A bare `pytest` dials 6379 and hits another project's redis. Use `make test`;
-  `conftest.py` fails with that instruction rather than skipping.
-- `scripts/{seed,run_case,run_eval,record_demo}.py` do not exist; `make eval`
-  and `make demo` fail until M4/M5.
-- This branch was fast-forwarded onto M0's branch (tag `m0`) at the start of M1.
+  run the scripts with `FALKOR_PORT=6380`.
+- `make up` fails in a worktree when another checkout's container is up — same
+  container name, different compose project. Nothing to fix.
+- `hypothesis==6.140.3` would not resolve from a sandboxed pip in a fresh
+  worktree; installs normally with unrestricted network.
+- `scripts/{seed,record_demo}.py` do not exist; `make demo` fails until M5.
 
 ## Next action
 
-Start M2 (case graph API + detective tools, spec 5.7 and section 7). Read
-`PROJECT_RULES.md` and this file, then only the spec sections M2 needs. The provenance
-trace is the priority — see finding 1.
+M4 (detective loop + API routes) — M3 stays cut by decision (suspects
+remain scripted; the detective is the only LLM agent). The gap-precision
+null result above is an argument for reopening M3 later, not a default:
+reopening it needs a deliberate decision in chat with the operator, same as
+the original cut. Spec 8.3's three-arm comparison needs M4 and isn't started.

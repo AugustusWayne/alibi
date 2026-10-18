@@ -14,8 +14,8 @@ The audit is audited against the speaker's *own* memory. That is the whole
 idea: the question is never "is this true" but "does this agent's own record
 account for what it said".
 
-**The audit never invents a link** (PROJECT_RULES.md rule 5). Every edge written here
-corresponds to a fact the gather step actually returned.
+**The audit never invents a link** (project rules, rule 5). Every edge written
+here corresponds to a fact the gather step actually returned.
 """
 
 from __future__ import annotations
@@ -64,7 +64,7 @@ class AuditEngine:
 
         The engine is part of the referee's trust boundary, not an agent tool:
         it is the one component that legitimately opens a mind by name, and it
-        is never exposed to a suspect (PROJECT_RULES.md rule 6).
+        is never exposed to a suspect (project rules, rule 6).
         """
         if agent not in self._minds:
             self._minds[agent] = MindAccess(self._db, self._seed, agent)
@@ -152,6 +152,29 @@ class AuditEngine:
             coverage=decision.coverage_fraction,
             uncovered=decision.uncovered_minutes,
         )
+
+    def evaluate_in_mind(
+        self,
+        *,
+        agent: str,
+        subject: str,
+        place: str,
+        t0: int,
+        t1: int,
+        modality: str,
+    ) -> Decision:
+        """Audit a claim against one agent's memory, writing nothing.
+
+        The referee's chain walk needs the verdict a claim would get in each
+        agent's mind along the way, without those intermediate answers
+        overwriting the claim's own verdict in the case graph — the claim
+        belongs to its speaker, not to whoever they heard it from. So this
+        gathers and decides, and deliberately does not materialize.
+        """
+        evidence = self._mind(agent).gather_evidence(
+            subject=subject, place=place, t0=t0, t1=t1
+        )
+        return decide(claim_t0=t0, claim_t1=t1, modality=modality, evidence=evidence)
 
     def audit_all(self) -> list[AuditResult]:
         """Audit every claim in the case, in turn order."""

@@ -6,10 +6,10 @@ the repo as `--scripted` mode for CI and as insurance against the LLM path.
 
 **What a scripted suspect can and cannot do.** It answers from `recall` over
 its own mind — and only its own mind, because `MindAccess` is bound at
-construction and `recall` takes no agent parameter (PROJECT_RULES.md rule 6). What it
-is *permitted to say beyond its memory* is the `FabricationPolicy`: a small set
-of explicit knobs, each of which corresponds to something a real testimony
-might do.
+construction and `recall` takes no agent parameter (project rules, rule 6).
+What it is *permitted to say beyond its memory* is the `FabricationPolicy`: a
+small set of explicit knobs, each of which corresponds to something a real
+testimony might do.
 
 **The policy describes testimony behaviour, not character.** A suspect running
 `evasive` is not thereby concealing wrongdoing; it declines to account for a

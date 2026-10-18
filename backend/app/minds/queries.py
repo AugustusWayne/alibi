@@ -2,8 +2,9 @@
 
 Every query here runs inside exactly one `mind:{seed}:{agent}` graph. None of
 them takes a graph name or an agent id as a parameter — the graph is chosen by
-`MindAccess` before the query is ever seen (PROJECT_RULES.md rule 6). `src_agent` on a
-Transmission is data about who spoke, not a selector for whose mind to read.
+`MindAccess` before the query is ever seen (project rules, rule 6).
+`src_agent` on a Transmission is data about who spoke, not a selector for
+whose mind to read.
 """
 
 # Q1. Write a fact into this mind: who it is about, where, and when it was learned.

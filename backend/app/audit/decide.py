@@ -88,7 +88,22 @@ def decide(
     same-place and different-place together. It must be the whole set; passing
     a filtered or truncated set is the one way to make this function return a
     verdict the evidence did not earn.
+
+    Raises `ValueError` unless `claim_t0 < claim_t1`. Under the half-open
+    contract `[t, t)` is the empty interval, so a zero-length claim is about
+    no ticks at all and there is nothing for evidence to ground. Judging one
+    anyway is not harmless: the THROUGHOUT check `covered >= duration`
+    collapses to `0 >= 0`, so any straddling memory would return SUPPORTED
+    over zero examined minutes. That is the same vacuous arithmetic as
+    summing unmerged spans. A malformed window is a data error, not an
+    epistemic state, so it is raised loudly rather than given one of the five
+    verdicts (project rules, rule 8).
     """
+    if claim_t0 >= claim_t1:
+        raise ValueError(
+            f"claim window [{claim_t0}, {claim_t1}) is zero-length or inverted; "
+            f"a claim must satisfy t0 < t1 to be about any tick at all"
+        )
     witnessed = [e for e in evidence if e["src"] == WITNESSED]
     supporting = [e for e in witnessed if e["same_place"]]
     conflicting = [e for e in witnessed if not e["same_place"]]

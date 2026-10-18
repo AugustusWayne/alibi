@@ -163,6 +163,33 @@ CREATE (g:Gap {t0:$g0, t1:$g1})
 CREATE (c)-[:HAS_GAP]->(g)
 """
 
+# 5.7. Record where a traced chain ended, and in what role. The referee's
+# conclusion only — which agent, which terminal state — never the private
+# facts it read to get there. Same privacy seam as the Evidence shadows.
+MATERIALIZE_TRACE = """
+MATCH (c:Claim {id:$claim_id})
+MERGE (s:Suspect {id:$agent})
+MERGE (c)-[r:TRACED_TO {role:$role}]->(s)
+SET r.terminal = $terminal, r.ungrounded = $ungrounded, r.depth = $depth
+"""
+
+# The chain conclusions recorded for one claim — written only when the
+# detective spends a polygraph on it, so an absence here means "not asked".
+TRACES_FOR_CLAIM = """
+MATCH (c:Claim {id:$claim_id})-[r:TRACED_TO]->(s:Suspect)
+RETURN s.id AS agent, r.role AS role, r.terminal AS terminal,
+       r.ungrounded AS ungrounded, r.depth AS depth
+ORDER BY r.role, s.id
+"""
+
+# Every traced chain conclusion in the case, for the operator's board.
+ALL_TRACES = """
+MATCH (c:Claim)-[r:TRACED_TO]->(s:Suspect)
+RETURN c.id AS claim_id, s.id AS agent, r.role AS role,
+       r.terminal AS terminal, r.ungrounded AS ungrounded, r.depth AS depth
+ORDER BY c.id, r.role, s.id
+"""
+
 # 5.6. Write the verdict back. The only statement in the system that sets it.
 SET_VERDICT = """
 MATCH (c:Claim {id:$claim_id})
@@ -205,6 +232,14 @@ RETURN collect(DISTINCT se.id) AS supported_by,
 # The rule, stated once: **a contradiction counts once per suspect who made
 # either claim.** Both speakers in a contradicting pair carry it.
 #
+# `originated_ungrounded` and `carried_ungrounded` come from the referee's
+# provenance trace (5.7), materialized as TRACED_TO. They are counted by the
+# traced claim's id, so one claim contributes at most one of each per suspect.
+# The distinction is the whole point: a suspect the chain *ends* at is the
+# origin of the ungrounded account as far as the referee can see, while a
+# suspect that merely passed it on is a link. Separating them is what stops
+# an honest repeater being scored like a source.
+#
 # `self_contradictions` is split out from `contradictions` because spec 5.12's
 # anonymous `(c)-[x:CONTRADICTS]-(:Claim)` scores a suspect who contradicts
 # themselves identically to one contradicted by someone else, and internal
@@ -217,17 +252,25 @@ MATCH (s:Suspect)
 OPTIONAL MATCH (c:Claim)-[:BY]->(s)
 OPTIONAL MATCH (c)-[x:CONTRADICTS]-(o:Claim)-[:BY]->(os:Suspect)
 OPTIONAL MATCH (c)-[:HAS_GAP]->(g:Gap)
+OPTIONAL MATCH (tc:Claim)-[t:TRACED_TO]->(s)
 WITH s,
      collect(DISTINCT c.id) AS claim_ids,
      collect(DISTINCT CASE WHEN os.id  = s.id THEN x.pair_id END) AS self_ids,
      collect(DISTINCT CASE WHEN os.id <> s.id THEN x.pair_id END) AS other_ids,
-     collect(DISTINCT id(g)) AS gap_ids
+     collect(DISTINCT id(g)) AS gap_ids,
+     collect(DISTINCT CASE WHEN t.role = 'origin'  AND t.ungrounded = true
+                           THEN tc.id END) AS originated_ids,
+     collect(DISTINCT CASE WHEN t.role = 'carrier' AND t.ungrounded = true
+                           THEN tc.id END) AS carried_ids
 RETURN s.id AS suspect,
-       size(claim_ids) AS claims,
-       size(self_ids)  AS self_contradictions,
-       size(other_ids) AS other_contradictions,
-       size(gap_ids)   AS gaps
-ORDER BY self_contradictions DESC, other_contradictions DESC, gaps DESC, suspect
+       size(claim_ids)     AS claims,
+       size(self_ids)      AS self_contradictions,
+       size(other_ids)     AS other_contradictions,
+       size(gap_ids)       AS gaps,
+       size(originated_ids) AS originated_ungrounded,
+       size(carried_ids)    AS carried_ungrounded
+ORDER BY originated_ungrounded DESC, self_contradictions DESC,
+         other_contradictions DESC, gaps DESC, suspect
 """
 
 # How each verdict is represented across the case, for the eval summary.
@@ -246,4 +289,101 @@ RETURN x.pair_id AS pair_id, x.kind AS kind, a.id AS a, b.id AS b,
        sa.id AS speaker_a, sb.id AS speaker_b, p.id AS subject,
        x.gap AS gap, x.needed AS needed
 ORDER BY x.pair_id
+"""
+
+# -- readers the case board needs --------------------------------------------
+# These answer display questions the audit itself never asks. They read the
+# public case graph only; nothing here can reach a mind or `world:{seed}`.
+
+# Every suspect in the case file, with the name to print.
+ALL_SUSPECTS = """
+MATCH (s:Suspect)
+RETURN s.id AS id, s.name AS name
+ORDER BY s.id
+"""
+
+# Every corridor on the public floor plan, once per pair, with its walk in minutes.
+ALL_ADJACENCY = """
+MATCH (a:Place)-[r:ADJACENT_TO]->(b:Place)
+WHERE a.id < b.id
+RETURN a.id AS a, b.id AS b, r.minutes AS minutes
+ORDER BY a.id, b.id
+"""
+
+# The incident under investigation: where it happened and over which window.
+INCIDENT = """
+MATCH (i:Incident)
+RETURN i.id AS id, i.place AS place, i.t0 AS t0, i.t1 AS t1
+ORDER BY i.id
+"""
+
+# Every supporting evidence shadow in the case, with the slice of the claim it covers.
+ALL_SUPPORT_SHADOWS = """
+MATCH (c:Claim)-[r:SUPPORTED_BY]->(e:Evidence)
+RETURN c.id AS claim_id, e.id AS id, e.fact_id AS fact_id, e.src AS src,
+       e.place AS place, e.agent AS agent, e.t0 AS t0, e.t1 AS t1,
+       r.covers_t0 AS covers_t0, r.covers_t1 AS covers_t1
+ORDER BY c.id, r.covers_t0, e.id
+"""
+
+# Every conflicting evidence shadow in the case.
+ALL_CONFLICT_SHADOWS = """
+MATCH (c:Claim)-[:CONFLICTS_WITH]->(e:Evidence)
+RETURN c.id AS claim_id, e.id AS id, e.fact_id AS fact_id, e.src AS src,
+       e.place AS place, e.agent AS agent, e.t0 AS t0, e.t1 AS t1
+ORDER BY c.id, e.t0, e.id
+"""
+
+# Every span of a claim that nothing in its speaker's memory accounted for.
+ALL_GAPS = """
+MATCH (c:Claim)-[:HAS_GAP]->(g:Gap)
+RETURN c.id AS claim_id, g.t0 AS t0, g.t1 AS t1
+ORDER BY c.id, g.t0, g.t1
+"""
+
+# -- readers the detective's tools need --------------------------------------
+# All over the public case graph. None of them can reach a mind, and none takes
+# a graph name: the seed is bound when `CaseGraph` is constructed.
+
+# Which spans of which claims did a suspect's own memory not account for?
+# `$suspect` is optional — null asks it of every suspect at once. This is
+# `list_gaps`, the tool that hands the detective spans worth asking about.
+GAPS_BY_SPEAKER = """
+MATCH (c:Claim)-[:HAS_GAP]->(g:Gap), (c)-[:BY]->(s:Suspect),
+      (c)-[:ABOUT]->(p:Suspect), (c)-[:AT]->(l:Place)
+WHERE $suspect IS NULL OR s.id = $suspect
+RETURN s.id AS speaker, c.id AS claim_id, p.id AS subject, l.id AS place,
+       g.t0 AS t0, g.t1 AS t1
+ORDER BY s.id, g.t0, g.t1, c.id
+"""
+
+# Which spans of this one claim went unaccounted for?
+GAPS_FOR_CLAIM = """
+MATCH (c:Claim {id:$claim_id})-[:HAS_GAP]->(g:Gap)
+RETURN g.t0 AS t0, g.t1 AS t1
+ORDER BY g.t0, g.t1
+"""
+
+# Which redacted shadows support this one claim, and what do they cover of it?
+SUPPORT_SHADOWS_FOR_CLAIM = """
+MATCH (c:Claim {id:$claim_id})-[r:SUPPORTED_BY]->(e:Evidence)
+RETURN e.id AS id, e.fact_id AS fact_id, e.src AS src, e.place AS place,
+       e.agent AS agent, e.t0 AS t0, e.t1 AS t1,
+       r.covers_t0 AS covers_t0, r.covers_t1 AS covers_t1
+ORDER BY r.covers_t0, e.id
+"""
+
+# Which redacted shadows conflict with this one claim?
+CONFLICT_SHADOWS_FOR_CLAIM = """
+MATCH (c:Claim {id:$claim_id})-[:CONFLICTS_WITH]->(e:Evidence)
+RETURN e.id AS id, e.fact_id AS fact_id, e.src AS src, e.place AS place,
+       e.agent AS agent, e.t0 AS t0, e.t1 AS t1
+ORDER BY e.t0, e.id
+"""
+
+# What is the latest turn recorded in the case? A follow-up interview's claims
+# are numbered after it, so turn order stays the order things were said in.
+LATEST_TURN = """
+MATCH (c:Claim)
+RETURN max(c.turn) AS turn
 """

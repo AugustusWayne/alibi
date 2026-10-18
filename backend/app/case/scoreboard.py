@@ -12,29 +12,54 @@ term put a suspect where it did.
 
 from __future__ import annotations
 
-# Weights, all in one place.
+import json
+from functools import lru_cache
+from pathlib import Path
+
+# The weights live in `eval/weights.json`, not here. Two reasons: a frozen
+# file can carry a written rationale per weight, and it makes a change to the
+# ranking a visible diff in a data file rather than an edit buried in code
+# that every eval number silently depends on.
 #
-# `self_contradictions` outweighs `other_contradictions` because the two are
-# different kinds of finding. A suspect contradicted by *someone else* may
-# simply have been misremembered by that someone: the pair tells you the two
-# accounts disagree, not which one is wrong. A suspect whose own two claims
-# cannot both hold needs no second witness — the inconsistency is internal and
-# self-evident, so it is the stronger signal and weighs more.
-#
-# A gap is the weakest term: it means nothing accounted for a span, which is
-# routine for anyone who was briefly alone.
-W_SELF_CONTRADICTION = 5.0
-W_OTHER_CONTRADICTION = 2.0
-W_GAP = 1.0
+# They were set from reasoning about what each signal can establish, and are
+# deliberately not fitted to any seed's outcome — see the note in the file.
+WEIGHTS_PATH = Path(__file__).resolve().parents[3] / "eval" / "weights.json"
+
+SCORED_TERMS = (
+    "originated_ungrounded",
+    "self_contradictions",
+    "other_contradictions",
+    "gaps",
+    "carried_ungrounded",
+)
+"""Every term the score is made of. A Q8 row missing one of these is a bug,
+not a zero: it would mean the scoreboard silently stopped counting something."""
+
+
+@lru_cache(maxsize=1)
+def load_weights(path: Path | None = None) -> dict[str, float]:
+    """Read the frozen weights.
+
+    Raises if a term is missing rather than defaulting it to zero. A weight
+    that quietly vanished would drop a whole signal out of the ranking while
+    every score still looked plausible (project rules, rule 8).
+    """
+    source = path or WEIGHTS_PATH
+    data = json.loads(source.read_text())["weights"]
+    missing = [term for term in SCORED_TERMS if term not in data]
+    if missing:
+        raise ValueError(f"{source} is missing weights for {missing}")
+    return {term: float(data[term]["value"]) for term in SCORED_TERMS}
 
 
 def score_suspect(row: dict) -> tuple[float, dict[str, float]]:
-    """Return `(score, breakdown)` for one Q8 row."""
-    breakdown = {
-        "self_contradictions": row["self_contradictions"] * W_SELF_CONTRADICTION,
-        "other_contradictions": row["other_contradictions"] * W_OTHER_CONTRADICTION,
-        "gaps": row["gaps"] * W_GAP,
-    }
+    """Return `(score, breakdown)` for one Q8 row.
+
+    The breakdown is every term, including the zeros, so the UI can show how a
+    score was reached rather than only what it came to.
+    """
+    weights = load_weights()
+    breakdown = {term: row[term] * weights[term] for term in SCORED_TERMS}
     return sum(breakdown.values()), breakdown
 
 
