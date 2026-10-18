@@ -493,25 +493,103 @@ def test_dropping_a_seed_leaves_nothing_behind(db, scratch_seed, graphs):
 # -- the project rules, rule 2, as a test ------------------------------------
 
 
+SHIPPED_SUFFIXES = (
+    ".py",
+    ".json",
+    ".ts",
+    ".tsx",
+    ".js",
+    ".jsx",
+    ".css",
+    ".html",
+    ".sql",
+    ".txt",
+    ".yaml",
+    ".yml",
+)
+"""File types this repo ships code or data in.
+
+An allow-list rather than "everything that is not binary", so a new kind of
+file is not silently exempted the day it is added."""
+
+VOCABULARY_ROOTS = (Path("backend/app"), Path("scripts"), Path("frontend/src"))
+"""Where shipped code and data live. `frontend/src` is scanned when the branch
+has it; the backend branches do not, and a missing root is not a pass."""
+
+VOCABULARY_EXCEPTIONS = (
+    Path("backend/app/referee"),
+    Path("backend/app/agents/intent_vocabulary.json"),
+)
+"""The only two places the vocabulary may appear, and why each one may.
+
+`referee/` is scoring: spec 8.1's labels are computed there and rule 2 permits
+them there and nowhere else. `intent_vocabulary.json` is the opposite case —
+it lists the words so that `agents/loop.py` can refuse to publish any of them
+in an accusation's rationale. Defining a word in order to forbid it is not the
+thing rule 2 prohibits, and the guard cannot work without the list.
+
+Nothing else is exempt. In particular this is a path list, not a suffix list:
+a second JSON file carrying the vocabulary would fail, which is the point.
+"""
+
+VOCABULARY_DOCS_NOTE = """Markdown is deliberately not scanned. `ALIBI_SPEC.md`
+says "never the word 'lie'", and the brief, the rules and this repo's progress
+notes all have to discuss the rule in order to state it. Scanning prose would
+fail on text that is correct."""
+
+
 def test_the_scoring_vocabulary_does_not_escape_the_referee_package():
     """Deception vocabulary lives only in `backend/app/referee/` (rule 2).
 
-    The eval reports a label *computed* in the referee package and may name it,
-    but no module outside `referee/` may define that vocabulary or call a claim
-    a lie. This checks the four words rule 2 names, on word boundaries, so
-    "believe" does not trip on "lie".
+    The eval reports a label *computed* in the referee package and may name
+    it, but nothing else the repo ships may define that vocabulary or call a
+    claim a lie. This checks the four words rule 2 names, on word boundaries,
+    so "believe" does not trip on "lie".
+
+    **Every shipped code and data file, not only Python.** The earlier form of
+    this test globbed `*.py`, which left a JSON, a stylesheet or a `.tsx`
+    component free to carry the words. That was theoretical until M4 added
+    `intent_vocabulary.json`; it is a precedent now, so the scan follows the
+    files rather than one language, and the two places the vocabulary is
+    allowed are named paths rather than a pattern anything could match.
     """
     forbidden = re.compile(r"\b(lie|lies|liar|liars|lying|deception|deceptive)\b", re.I)
-    roots = [Path("backend/app"), Path("scripts")]
     offenders = []
-    for root in roots:
-        for path in sorted(root.rglob("*.py")):
-            if "referee" in path.parts:
+    scanned = 0
+    for root in VOCABULARY_ROOTS:
+        if not root.exists():
+            continue
+        for path in sorted(root.rglob("*")):
+            if not path.is_file() or path.suffix not in SHIPPED_SUFFIXES:
                 continue
+            if any(path == e or e in path.parents for e in VOCABULARY_EXCEPTIONS):
+                continue
+            scanned += 1
             for n, line in enumerate(path.read_text().splitlines(), start=1):
                 if forbidden.search(line):
                     offenders.append(f"{path}:{n}: {line.strip()}")
+    assert scanned > 0, f"scanned nothing; {VOCABULARY_ROOTS} found no shipped files"
     assert not offenders, "deception vocabulary outside referee/:\n" + "\n".join(offenders)
+
+
+def test_the_vocabulary_scan_covers_more_than_python():
+    """The guard above is only worth its name if a data file would fail it.
+
+    Written because the previous form of the test passed a JSON file silently.
+    This asserts the scan's reach directly rather than trusting the glob.
+    """
+    assert ".json" in SHIPPED_SUFFIXES
+    assert {".ts", ".tsx", ".css", ".html"} <= set(SHIPPED_SUFFIXES)
+    assert ".md" not in SHIPPED_SUFFIXES, VOCABULARY_DOCS_NOTE
+
+
+def test_only_two_paths_may_hold_the_vocabulary():
+    """Both exceptions are named paths, so neither can widen by accident."""
+    assert VOCABULARY_EXCEPTIONS == (
+        Path("backend/app/referee"),
+        Path("backend/app/agents/intent_vocabulary.json"),
+    )
+    assert Path("backend/app/agents/intent_vocabulary.json").exists()
 
 
 def test_the_eval_package_contains_no_inline_cypher():
