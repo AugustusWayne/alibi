@@ -209,9 +209,11 @@ RETURN c.id AS id, s.id AS speaker, p.id AS subject, l.id AS place,
 ALL_CLAIMS = """
 MATCH (c:Claim)-[:BY]->(s:Suspect),
       (c)-[:ABOUT]->(p:Suspect), (c)-[:AT]->(l:Place)
+OPTIONAL MATCH (c)-[:RELAYED_FROM]->(r:Suspect)
 RETURN c.id AS id, s.id AS speaker, p.id AS subject, l.id AS place,
        c.t0 AS t0, c.t1 AS t1, c.turn AS turn, c.modality AS modality,
-       c.verdict AS verdict, c.coverage AS coverage, c.uncovered AS uncovered
+       c.verdict AS verdict, c.coverage AS coverage, c.uncovered AS uncovered,
+       r.id AS relayed_from
 ORDER BY c.turn, c.id
 """
 

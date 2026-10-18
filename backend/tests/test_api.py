@@ -35,6 +35,7 @@ from backend.tests.conftest import ScriptedCompleter
 
 READ_ROUTES = (
     "",
+    "/board",
     "/claims",
     "/contradictions",
     "/gaps",

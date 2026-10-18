@@ -15,6 +15,10 @@ import type { Replay } from "../lib/replay";
 import { TICK_MAX, tickToClock } from "../lib/time";
 
 const U = 4;
+
+/** Spec 7 rations `polygraph` to two per case. The board shows the budget
+ *  because the budget is the point: a trail appears only where one was spent. */
+const POLYGRAPH_BUDGET = 2;
 const W = 114;
 const H = 88;
 
@@ -195,6 +199,10 @@ interface Props {
 }
 
 export function PocketRecorder({ replay, marquee, onParty }: Props) {
+  // The detective's remaining looks into a mind. A live case reports it; a
+  // dumped fixture carries none, so the board shows the full budget — the
+  // fixture is a case nobody has investigated yet.
+  const polygraphsLeft = caseFile.meta.polygraphs_left ?? POLYGRAPH_BUDGET;
   const [message, setMessage] = useState<string | null>(null);
   const timer = useRef<number>();
   const now = Math.floor(replay.tick);
@@ -261,7 +269,16 @@ export function PocketRecorder({ replay, marquee, onParty }: Props) {
         <span key={i} className="rec__digit" style={{ left: (78 + i * 8) * U }}>{d}</span>
       ))}
       <span className="rec__lbl" style={{ left: 5 * U, top: 52 * U + 2 }}>POLYGRAPH</span>
-      <span className="rec__lbl" style={{ left: 56 * U, top: 52 * U + 2 }}>2 LEFT</span>
+      {[0, 1].map((i) => (
+        <span
+          key={i}
+          className={`rec__pip${i < polygraphsLeft ? " rec__pip--on" : ""}`}
+          style={{ left: (46 + i * 5) * U, top: 53 * U, width: 3 * U, height: 3 * U }}
+        />
+      ))}
+      <span className="rec__lbl" style={{ left: 56 * U, top: 52 * U + 2 }}>
+        {polygraphsLeft} LEFT
+      </span>
       {(["1X", "2X", "4X"] as const).map((t, i) => (
         <span key={t} className={`rec__lbl${`${replay.speed}X` === t ? " rec__lbl--on" : ""}`} style={{ left: [84, 93, 103][i] * U, top: [55, 52, 55][i] * U }}>{t}</span>
       ))}

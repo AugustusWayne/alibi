@@ -263,6 +263,14 @@ class CaseRegistry:
 
     def __init__(self, cache_path: str | None = None) -> None:
         self._lock = threading.Lock()
+        # Held across a whole open, which the registry lock is not: generating
+        # a world takes about a second and the registry must stay readable
+        # throughout. Without it, two opens of one seed both pass the "is it
+        # already open" check and both run `drop_seed` then `generate` over
+        # the same graphs — interleaved, that writes a world neither of them
+        # describes. A browser in development double-invokes effects, so this
+        # is a race that happens on the first page load, not a rare one.
+        self._opening = threading.Lock()
         self._cases: dict[int, CaseSession] = {}
         self._cache_path = cache_path
         self._cache: LLMCache | None = None
@@ -287,6 +295,23 @@ class CaseRegistry:
     def get(self, seed: int) -> CaseSession | None:
         with self._lock:
             return self._cases.get(seed)
+
+    def open_exclusive(
+        self, seed: int, *, spec: WorldSpec | None = None, db: Any = None
+    ) -> CaseSession:
+        """Generate and register one case, or raise if it is already open.
+
+        The check and the registration happen under one lock, so exactly one
+        caller generates. A second caller that arrives mid-generate waits,
+        then sees the case and is refused — rather than quietly generating a
+        second world over the first one's graphs.
+        """
+        with self._opening:
+            if self.get(seed) is not None:
+                raise ValueError(f"case {seed} is already open")
+            session = open_case(seed, spec=spec, db=db)
+            self.add(session)
+            return session
 
     def seeds(self) -> list[int]:
         with self._lock:

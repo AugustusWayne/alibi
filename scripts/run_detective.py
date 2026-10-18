@@ -32,9 +32,11 @@ scoring tool, and it is the one that may print labels.
 from __future__ import annotations
 
 import argparse
+import json
 import sys
 import tempfile
 from pathlib import Path
+from typing import Any
 
 from backend.app.agents.detective import DetectiveTools
 from backend.app.agents.llm_cache import CachedLLM, LLMCache, load_completer
@@ -77,6 +79,96 @@ class ScriptedPlan:
             "content": [{"type": "tool_use", "id": f"toolu_{n}", "name": name, "input": args}],
             "usage": {"input_tokens": 0, "output_tokens": 0},
         }
+
+
+class ReactivePlan:
+    """A scripted detective that reads its own tool results.
+
+    The same shape as the fixed plan above, but it picks *which* suspect and
+    *which* claim from what the tools actually returned, so it works on any
+    seed without being handed the answers. It parses the JSON this system
+    writes into `tool_result` blocks — its own structured output, never prose
+    — so there is no NLU here and no model.
+
+    It exists so the board can be driven end to end with no credential and no
+    cost. It is a transport, not a judgement: every verdict it reads was
+    computed by Cypher and the decision table before it ever saw it.
+    """
+
+    def __init__(self) -> None:
+        self.calls = 0
+        self.top: str | None = None
+        self.claim: str | None = None
+
+    def _last_result(self, request: dict) -> Any:
+        """The most recent tool result in the conversation, decoded."""
+        for message in reversed(request.get("messages", [])):
+            content = message.get("content")
+            if not isinstance(content, list):
+                continue
+            for block in reversed(content):
+                if isinstance(block, dict) and block.get("type") == "tool_result":
+                    if block.get("is_error"):
+                        return None
+                    try:
+                        return json.loads(block.get("content") or "null")
+                    except json.JSONDecodeError:
+                        return None
+        return None
+
+    def __call__(self, request: dict) -> dict:
+        n = self.calls
+        self.calls += 1
+        result = self._last_result(request)
+
+        if n == 0:
+            step = ("rank_suspects", {})
+        elif n == 1:
+            # The scoreboard, highest unaccounted-for score first.
+            self.top = result[0]["suspect"] if result else None
+            step = ("list_gaps", {"suspect": self.top})
+        elif n == 2:
+            # A gap row names the claim it was found on, which is the claim
+            # worth spending a look at.
+            if result:
+                self.claim = result[0]["claim_id"]
+            step = ("list_contradictions", {})
+        elif n == 3 and self.claim and self.top:
+            step = ("polygraph", {"suspect": self.top, "claim_id": self.claim})
+        elif self.top:
+            step = (
+                "accuse",
+                {
+                    "suspect": self.top,
+                    "rationale": (
+                        f"{self.top} tops the board on how much of what they said "
+                        f"their own memory does not account for, and those spans "
+                        f"overlap the incident window."
+                    ),
+                },
+            )
+        else:
+            return {
+                "stop_reason": "end_turn",
+                "content": [{"type": "text", "text": "Nothing to go on."}],
+                "usage": {"input_tokens": 0, "output_tokens": 0},
+            }
+
+        name, args = step
+        return {
+            "stop_reason": "tool_use",
+            "content": [{"type": "tool_use", "id": f"toolu_{n}", "name": name, "input": args}],
+            "usage": {"input_tokens": 0, "output_tokens": 0},
+        }
+
+
+def scripted_completer() -> ReactivePlan:
+    """Factory for `ALIBI_COMPLETER=scripts.run_detective:scripted_completer`.
+
+    Lets the orchestrator drive a whole case with no credential, which is how
+    the board is exercised end to end before a real model is in the loop.
+    """
+    return ReactivePlan()
 
 
 class NoTransport:

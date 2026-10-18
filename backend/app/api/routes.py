@@ -38,6 +38,7 @@ from fastapi.responses import JSONResponse, StreamingResponse
 from pydantic import BaseModel, Field
 
 from backend.app.api import runner
+from backend.app.api.board import board_payload
 from backend.app.case.scoreboard import rank_suspects
 from backend.app.config import settings
 from backend.app.world.generator import WorldSpec
@@ -92,20 +93,22 @@ def _session(seed: int) -> runner.CaseSession:
 @router.post("", status_code=201)
 def open_case(body: OpenCaseRequest) -> JSONResponse:
     """Generate a world, take the first statements, audit them, hold the case open."""
-    if runner.registry.get(body.seed) is not None:
-        raise HTTPException(
-            status_code=409,
-            detail=(
-                f"case {body.seed} is already open; its graphs are keyed by seed, "
-                f"so a second case on it would share them. DELETE it first."
-            ),
-        )
     spec = WorldSpec(
         plant_broken_chain=body.pathologies,
         plant_temporal_violation=body.pathologies,
     )
-    session = runner.open_case(body.seed, spec=spec)
-    runner.registry.add(session)
+    try:
+        session = runner.registry.open_exclusive(body.seed, spec=spec)
+    except ValueError as exc:
+        # Raised from inside the open lock, so this is authoritative: the case
+        # exists and this caller did not generate anything.
+        raise HTTPException(
+            status_code=409,
+            detail=(
+                f"{exc}; its graphs are keyed by seed, so a second case on it "
+                f"would share them. DELETE it first."
+            ),
+        ) from exc
     return JSONResponse(status_code=201, content=session.summary())
 
 
@@ -161,6 +164,20 @@ def case_traces(seed: int) -> dict:
     budget: `polygraph` is the only writer of `TRACED_TO` in the application.
     """
     return {"traces": _session(seed).case.traces()}
+
+
+@router.get("/{seed}/board")
+def case_board(seed: int) -> dict:
+    """Everything the board draws, in one read, public information only.
+
+    One request rather than six, because the board redraws from a whole case
+    and a half-applied update would show a claim beside a tally that does not
+    count it. The SSE stream says when to ask again.
+    """
+    session = _session(seed)
+    return board_payload(
+        session.case, seed, polygraphs_left=session.tools.polygraphs_left
+    )
 
 
 @router.get("/{seed}/events")

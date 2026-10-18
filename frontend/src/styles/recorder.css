@@ -10,6 +10,10 @@
 .rec__brand span { font-size: 6px; color: var(--night); }
 .rec__lbl { position: absolute; font-size: 6px; line-height: 12px; color: var(--night); white-space: nowrap; }
 .rec__lbl--on { color: var(--black); text-decoration: underline; text-underline-offset: 2px; }
+/* A polygraph budget pip. Unlit is a dead bulb in its black housing; lit is
+   the same lime as every other live indicator on the chassis. */
+.rec__pip { position: absolute; background: var(--stone); }
+.rec__pip--on { background: var(--lime); }
 
 .rec__tape { position: absolute; left: 50px; top: 92px; width: 172px; height: 24px; padding: 1px 6px 0 14px; color: var(--night); white-space: nowrap; }
 .rec__tape b { display: block; font-family: var(--text); font-weight: 400; font-size: 18px; line-height: 14px; }

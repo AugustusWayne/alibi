@@ -11,9 +11,84 @@ import { Hud, Window } from "./components/Frame";
 import { House } from "./components/House";
 import { Level } from "./components/Level";
 import { PocketRecorder } from "./components/PocketRecorder";
-import { caseFile, claimOf, memoryLine, nameOf, walkOf } from "./lib/case";
+import { caseFile, claimOf, memoryLine, nameOf, setCaseFile, walkOf } from "./lib/case";
+import { fetchBoard, investigate, openCase, openStream, shouldRedraw } from "./lib/live";
 import { useReplay } from "./lib/replay";
 import { tickToClock } from "./lib/time";
+
+/**
+ * Live mode, opted into with `?seed=7777`. Without it the board shows the
+ * dumped fixture, which is what makes it work with no server at all.
+ *
+ * `?investigate=1` also starts the detective, so the board can be opened on
+ * an empty case and watched filling in. The orchestrator runs the loop on a
+ * worker thread and publishes a turn at a time; this only reads.
+ */
+function liveSeed(): number | null {
+  const raw = new URLSearchParams(window.location.search).get("seed");
+  if (raw === null) return null;
+  const seed = Number.parseInt(raw, 10);
+  return Number.isFinite(seed) ? seed : null;
+}
+
+/**
+ * Attach to a live case: open it if it is not open, read the whole board
+ * once, then redraw on the events that can change what is drawn.
+ *
+ * The stream says *when* to read, never *what* — every number on the board
+ * still comes from the one board read, so a half-applied update cannot show
+ * a claim beside a tally that does not count it.
+ */
+function useLiveCase(seed: number | null) {
+  const [state, setState] = useState<"off" | "loading" | "ready" | "failed">(
+    seed === null ? "off" : "loading",
+  );
+  const [error, setError] = useState<string | null>(null);
+  const [version, setVersion] = useState(0);
+  const [last, setLast] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (seed === null) return;
+    let live = true;
+    let closeStream: (() => void) | null = null;
+
+    const redraw = async () => {
+      const board = await fetchBoard(seed);
+      if (!live) return;
+      setCaseFile(board);
+      setVersion((v) => v + 1);
+    };
+
+    (async () => {
+      try {
+        await openCase(seed);
+        await redraw();
+        if (!live) return;
+        setState("ready");
+        if (new URLSearchParams(window.location.search).get("investigate") === "1") {
+          await investigate(seed);
+        }
+        closeStream = openStream(seed, (e) => {
+          setLast(e.type);
+          if (shouldRedraw(e.type)) void redraw();
+        });
+      } catch (err) {
+        if (!live) return;
+        // Reported, not swallowed: a board that quietly showed the fixture
+        // while claiming to be live would be the worst outcome here.
+        setState("failed");
+        setError(err instanceof Error ? err.message : String(err));
+      }
+    })();
+
+    return () => {
+      live = false;
+      closeStream?.();
+    };
+  }, [seed]);
+
+  return { state, error, version, last };
+}
 
 /**
  * Fit the whole board to the window (brief 10).
@@ -56,6 +131,8 @@ function useFitToWindow(board: React.RefObject<HTMLElement>) {
 export function App() {
   const board = useRef<HTMLElement>(null);
   useFitToWindow(board);
+  const [seed] = useState(liveSeed);
+  const feed = useLiveCase(seed);
   const replay = useReplay();
   // `?claim=p4-c7` opens with that claim selected, if the case has it.
   const [selected, setSelected] = useState<string | null>(() =>
@@ -88,9 +165,24 @@ export function App() {
     return () => document.removeEventListener("keydown", onKey);
   }, [toggle]);
 
-  const marquee = claim
-    ? `${nameOf(claim.speaker)} SAYS ${claim.subject === claim.speaker ? "" : `${nameOf(claim.subject)} IN THE `}${claim.place.toUpperCase()} ${tickToClock(claim.t0)}-${tickToClock(claim.t1)}. ${memoryLine(claim)}. ${claim.verdict}.`
-    : `${caseFile.meta.claims} CLAIMS. ${caseFile.audit_summary.uncovered_minutes} MIN UNACCOUNTED. SELECT A CLAIM.`;
+  const status =
+    feed.state === "failed"
+      ? `LIVE CASE ${seed} UNREACHABLE: ${feed.error}`
+      : feed.state === "loading"
+        ? `OPENING CASE ${seed}...`
+        : feed.last
+          ? `LIVE ${caseFile.meta.case_id} - ${feed.last.toUpperCase().replace(/[._]/g, " ")}`
+          : null;
+
+  const marquee = status
+    ? status
+    : claim
+      ? `${nameOf(claim.speaker)} SAYS ${claim.subject === claim.speaker ? "" : `${nameOf(claim.subject)} IN THE `}${claim.place.toUpperCase()} ${tickToClock(claim.t0)}-${tickToClock(claim.t1)}. ${memoryLine(claim)}. ${claim.verdict}.`
+      : `${caseFile.meta.claims} CLAIMS. ${caseFile.audit_summary.uncovered_minutes} MIN UNACCOUNTED. SELECT A CLAIM.`;
+
+  // The board redraws whole when the live case advances: `version` is the
+  // only thing tying a React render to a module-level case swap.
+  void feed.version;
 
   return (
     <div className="page">

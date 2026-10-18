@@ -1,9 +1,16 @@
-/** The fixture, and the readings the board takes from it.
+/** The case, and the readings the board takes from it.
  *
- *  `frontend/fixtures/case-7777.json` is a dump of a real seed-7777 run
- *  (`scripts/dump_case.py`), so every verdict, gap, shadow and trail here was
- *  computed by the audit engine and the referee. Nothing in this module decides
- *  anything about a claim; it only selects and arranges what was proved.
+ *  Two sources, one shape. `frontend/fixtures/case-7777.json` is a dump of a
+ *  real seed-7777 run (`scripts/dump_case.py`) and is what the board shows
+ *  with no server. `setCaseFile` swaps in a live case read from the
+ *  orchestrator's `/cases/{seed}/board`, which is assembled from the same
+ *  readers. Either way every verdict, gap, shadow and trail here was computed
+ *  by the audit engine and the referee: nothing in this module decides
+ *  anything about a claim, it only selects and arranges what was proved.
+ *
+ *  The live payload carries no chain hops — a hop names a fact inside a
+ *  private mind — so `trailOf` names the cited speaker from the claim's own
+ *  public `relayed_from` when hops are absent.
  */
 import fixture from "../../fixtures/case-7777.json";
 import { tickToClock } from "./time";
@@ -106,6 +113,9 @@ export interface CaseFixture {
     claims: number;
     audited: number;
     interviews: number;
+    /** Live cases only: the detective's remaining polygraphs. A dumped
+     *  fixture has no investigation behind it and carries none. */
+    polygraphs_left?: number | null;
   };
   suspects: Suspect[];
   incident: { id: string; place: string; t0: number; t1: number };
@@ -125,17 +135,35 @@ export interface CaseFixture {
   audit_summary: { uncovered_minutes: number; claims_with_gaps: number };
 }
 
-export const caseFile = fixture as unknown as CaseFixture;
+export let caseFile = fixture as unknown as CaseFixture;
 
-const claimById = new Map(caseFile.claims.map((c) => [c.id, c]));
-const chainByClaim = new Map(caseFile.chains.map((c) => [c.claim_id, c]));
-const conflictByClaim = new Map<string, Shadow[]>();
-for (const s of caseFile.evidence.conflict) {
-  conflictByClaim.set(s.claim_id, [...(conflictByClaim.get(s.claim_id) ?? []), s]);
+let claimById = new Map<string, Claim>();
+let chainByClaim = new Map<string, Chain>();
+let conflictByClaim = new Map<string, Shadow[]>();
+let supportByClaim = new Map<string, Shadow[]>();
+
+/** The lookups every reader below goes through. Rebuilt whenever the case is
+ *  replaced, because they are derived state and a stale index would answer
+ *  about the previous case while the bars drew the new one. */
+function reindex(): void {
+  claimById = new Map(caseFile.claims.map((c) => [c.id, c]));
+  chainByClaim = new Map(caseFile.chains.map((c) => [c.claim_id, c]));
+  conflictByClaim = new Map<string, Shadow[]>();
+  for (const s of caseFile.evidence.conflict) {
+    conflictByClaim.set(s.claim_id, [...(conflictByClaim.get(s.claim_id) ?? []), s]);
+  }
+  supportByClaim = new Map<string, Shadow[]>();
+  for (const s of caseFile.evidence.support) {
+    supportByClaim.set(s.claim_id, [...(supportByClaim.get(s.claim_id) ?? []), s]);
+  }
+  unaccountedByTick = Array.from({ length: 300 }, (_, t) => unaccountedAt(t).length);
 }
-const supportByClaim = new Map<string, Shadow[]>();
-for (const s of caseFile.evidence.support) {
-  supportByClaim.set(s.claim_id, [...(supportByClaim.get(s.claim_id) ?? []), s]);
+
+/** Point the board at another case. The caller re-renders; this only swaps
+ *  the data and its indexes. */
+export function setCaseFile(next: CaseFixture): void {
+  caseFile = next;
+  reindex();
 }
 
 export const claimOf = (id: string | null) => (id ? (claimById.get(id) ?? null) : null);
@@ -226,7 +254,7 @@ export function unaccountedAt(tick: number): string[] {
 }
 
 /** How many suspects have no account at each minute. Drives the polygraph needle. */
-export const unaccountedByTick: number[] = Array.from({ length: 300 }, (_, t) => unaccountedAt(t).length);
+export let unaccountedByTick: number[] = [];
 
 const BUBBLE_ORDER: Verdict[] = ["CONTRADICTED", "HEARSAY", "INDETERMINATE", "UNSUPPORTED", "SUPPORTED"];
 
@@ -261,7 +289,7 @@ export function memoryLine(c: Claim): string {
     case "INDETERMINATE":
       return `OWN MEMORY COVERS ${mins - c.uncovered} OF ${mins} MIN`;
     case "HEARSAY": {
-      const from = chainOf(c.id)?.hops[1]?.agent;
+      const from = chainOf(c.id)?.hops[1]?.agent ?? c.relayed_from;
       return from ? `OWN MEMORY: HEARD FROM ${nameOf(from)}` : "OWN MEMORY: HEARD IT";
     }
     case "UNSUPPORTED":
@@ -348,7 +376,10 @@ export interface Trail {
 export function trailOf(c: Claim): Trail | null {
   const ch = chainOf(c.id);
   if (!ch) return null;
-  const cited = ch.hops[1]?.agent ?? null;
+  // Hop 1 is who the speaker cited. A live case carries no hops, so the
+  // claim's own `relayed_from` stands in: it is the same fact, and it is
+  // public because the speaker said it out loud.
+  const cited = ch.hops[1]?.agent ?? c.relayed_from ?? null;
   const origin = ch.origin_agent;
   const base = { claim: c, carrier: c.speaker };
   switch (ch.terminal) {
@@ -473,3 +504,5 @@ export function walkOf(claim: Claim): Walk | null {
     more: pairs.length - 1,
   };
 }
+
+reindex();
